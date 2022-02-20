@@ -59,7 +59,7 @@ function net2ftp_module_printJavascript() {
 
 	echo "<script type=\"text/javascript\"><!--\n";
 
-	// IronBASE
+	// Personal WebBase
 	echo "document.location.href = '../';\n// -->\n</script>";
 	exit;
 

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   if (function_exists('show_modul_search'))
     echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'suchbegriff\').focus();"', $header);
@@ -11,7 +11,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 
   if ((!isset($onlyupdates)) || (!$onlyupdates))
   {
-    echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+    echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
     if (function_exists('show_modul_search')) show_modul_search($modul, $seite);
 
@@ -25,7 +25,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
   }
   else
   {
-    echo '<h1>'.htmlentities($modulueberschrift).' (nur Updates)</h1>';
+    echo '<h1>'.my_htmlentities($modulueberschrift).' (nur Updates)</h1>';
     gfx_begintable();
 
     // gfx_tablecontent('', '<b>Name</b>', '', '<b>Aktionen</b>', '', '', '', '');

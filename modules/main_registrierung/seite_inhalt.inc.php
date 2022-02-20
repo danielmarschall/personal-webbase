@@ -1,11 +1,11 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'rusername\').focus();"', $header);
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
 $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `creator_ip` = '".$_SERVER['REMOTE_ADDR']."' AND `created_database` >= DATE_SUB(NOW(), INTERVAL ".db_escape($konfiguration[$modul]['sperrdauer'])." MINUTE)");
 if (db_num($res))
@@ -40,7 +40,7 @@ if ($konfiguration[$modul]['enable_userreg'])
         else
         {
           db_query("INSERT INTO `".$mysql_zugangsdaten['praefix']."users` (`username`, `personenname`, `passwort`, `email`, `created_database`, `creator_ip`) VALUES ('".db_escape($rusername)."', '".db_escape($rpersonenname)."', '".md5($rpasswort)."', '".db_escape($remail)."', NOW(), '".$_SERVER["REMOTE_ADDR"]."')");
-          echo '<b>Sie haben Ihr Konto auf diesem IronBASE-Server erfolgreich registriert.</b><br><br>Das Konto ist sofort verwendbar. Wir w&uuml;nschen Ihnen viel Freude mit IronBASE!';
+          echo '<b>Sie haben Ihr Konto auf diesem Personal WebBase-Server erfolgreich registriert.</b><br><br>Das Konto ist sofort verwendbar. Wir w&uuml;nschen Ihnen viel Freude mit Personal WebBase!';
         }
       }
     }
@@ -54,7 +54,7 @@ if ($konfiguration[$modul]['enable_userreg'])
     if (!isset($rpasswort2)) $rpasswort2 = '';
     if (!isset($remail)) $remail = '';
 
-    echo '<b>Hier k&ouml;nnen Sie sich ein Konto auf diesem IronBASE-Server errichten.</b><br><br>
+    echo '<b>Hier k&ouml;nnen Sie sich ein Konto auf diesem Personal WebBase-Server errichten.</b><br><br>
 
 Die Angabe einer E-Mail-Adresse ist optional.<br><br>
 
@@ -98,7 +98,7 @@ Die Angabe einer E-Mail-Adresse ist optional.<br><br>
 }
 else
 {
-  echo '<font color="#FF0000">Das Registrieren bei IronBASE wurde von dem Administrator nicht aktiviert.</font>';
+  echo '<font color="#FF0000">Das Registrieren bei Personal WebBase wurde von dem Administrator nicht aktiviert.</font>';
 }
 
   echo $footer;

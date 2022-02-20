@@ -1,15 +1,15 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
 echo '<b>Information</b><br><br>
 
-Um schneller auf Ihre IronBASE-Datenbank zugreifen zu k&ouml;nnen,
+Um schneller auf Ihre Personal WebBase-Datenbank zugreifen zu k&ouml;nnen,
 haben Sie hier die M&ouml;glichkeit, eine Schnellanmeldungs-URL anzulegen.
 Es handelt sich hierbei um eine lange URL, die in verschl&uuml;sselter Form
 Ihre Zugangsdaten enth&auml;lt und Ihnen das Einloggen erleichert. Sie k&ouml;nnen
@@ -21,7 +21,7 @@ da diese sich nach dem Anklicken in den Browserverlauf des Computers einspeicher
 Dritten Person m&ouml;glicherweise den Zugriff auf Ihre Daten erm&ouml;glicht.<br><br>
 
 Sollte die URL versehentlich an Dritte Personen gelangt sein, m&uuml;ssen Sie dringenst Ihr
-IronBASE-Passwort &auml;ndern bzw. eine neue Schnellanmelde-URL einrichten. Dadurch
+Personal WebBase-Passwort &auml;ndern bzw. eine neue Schnellanmelde-URL einrichten. Dadurch
 verliert Ihre alte Schnellanmelde-URL ihre G&uuml;ltigkeit.<br><br>
 
 Aktivieren Sie diese Funktionalit&auml;t daher nur, wenn Sie die Schnellanmelde-URL tats&auml;chlich nutzen.<br><br>

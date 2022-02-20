@@ -1,13 +1,13 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
-echo '<b>Informationen &uuml;ber diese IronBASE-Schnittstelle</b><br><br>
+echo '<b>Informationen &uuml;ber diese Personal WebBase-Schnittstelle</b><br><br>
 
 Version des Systems: Version '.$revision.' ('.$rev_datum.')<br>';
 
@@ -29,7 +29,7 @@ else
 
 echo '<br><br>';
 
-echo 'Es sind '.count($module).' IronBASE-Module installiert:<br><br>';
+echo 'Es sind '.count($module).' Personal WebBase-Module installiert:<br><br>';
 
 $mod = '';
 foreach ($module as $m1 => $m2)
@@ -59,7 +59,7 @@ $des = substr($des, 0, strlen($des)-2);
 
 $des .= '</code>';
 
-echo 'Es sind '.$desi.' IronBASE-Designs installiert:<br><br>'.$des.'<br><br>';
+echo 'Es sind '.$desi.' Personal WebBase-Designs installiert:<br><br>'.$des.'<br><br>';
 
 echo 'E-Mail-Adresse des Serveradministrators: ';
 
@@ -70,16 +70,16 @@ else
 
 echo '<br><br>';
 
-echo '<b>Informationen &uuml;ber IronBASE</b><br><br>
+echo '<b>Informationen &uuml;ber Personal WebBase</b><br><br>
 
-IronBASE ist ein Datenbankprojekt von <a href="http://www.viathinksoft.de/" target="_blank">ViaThinkSoft</a>. Leider ist es aus Performance-
-und Entwicklungsgr&uuml;nden nicht m&ouml;glich, eine Verschl&uuml;sselung zur
-Verf&uuml;gung zu stellen. Daher k&ouml;nnen wir nicht garantieren, dass Ihre Daten auf
-Nicht-ViaThinkSoft-Servern sicher behandelt werden.<br><br>
+Personal WebBase ist ein Datenbankprojekt von <a href="https://www.viathinksoft.de/" target="_blank">ViaThinkSoft</a>.
+Wichtig: Benutzerdaten werden serverseitig NICHT verschl&uuml;sselt, daher ist es
+sehr zu empfehlen, Personal WebBase nur auf nicht-&ouml;ffentlichen Webservern auszuf&uuml;hren (z.B. im Intranet oder auf dem
+Localhost).<br><br>
 
-Weitere Informationen, Module und Designs sowie die aktuelle Publikation finden Sie im <a href="http://www.ironbase-portal.de.vu/" target="_blank">IronBASE Webportal</a>.<br><br>';
+Weitere Informationen, Module und Designs sowie die aktuelle Softwareversion finden Sie im <a href="https://www.personal-webbase.de/" target="_blank">Personal WebBase Webportal</a>.<br><br>';
 
-echo '<a href="handbuch.pdf" target="_blank"><b>IronBASE-Handbuch &ouml;ffnen (PDF)</b></a>';
+echo '<a href="handbuch.pdf" target="_blank"><b>Personal WebBase-Handbuch &ouml;ffnen (PDF)</b></a>';
 
   echo $footer;
 

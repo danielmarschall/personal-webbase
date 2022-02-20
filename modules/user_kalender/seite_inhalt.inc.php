@@ -1,11 +1,11 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
   echo '<center><b>Wochenauflistung</b> - <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=auflistung"><b>Terminauflistung</b></a> - <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=edit&amp;aktion=new&amp;herkunft='.$seite.'"><b>Neuer Eintrag</b></a><br><br></center>';
 

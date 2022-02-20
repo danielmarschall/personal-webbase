@@ -72,7 +72,7 @@
 
   if ((isset($lock)) && ($lock))
   {
-    die('<h1>IronBASE ist gesperrt</h1>Die Variable &quot;$lock&quot; in &quot;includes/config.inc.php&quot; steht auf 1 bzw. true. Setzen Sie diese Variable erst auf 0, wenn das Hochladen der Dateien beim Installations- bzw. Updateprozess beendet ist. Wenn Sie IronBASE freigeben, bevor der Upload abgeschlossen ist, kann es zu einer Besch&auml;digung der Kundendatenbank kommen!');
+    die('<h1>Personal WebBase ist gesperrt</h1>Die Variable &quot;$lock&quot; in &quot;includes/config.inc.php&quot; steht auf 1 bzw. true. Setzen Sie diese Variable erst auf 0, wenn das Hochladen der Dateien beim Installations- bzw. Updateprozess beendet ist. Wenn Sie Personal WebBase freigeben, bevor der Upload abgeschlossen ist, kann es zu einer Besch&auml;digung der Kundendatenbank kommen!');
   }
 
   //@ini_set('session.auto_start', 0);
@@ -196,7 +196,7 @@
   {
   die('<script language="JavaScript">
   <!--
-    alert("Sie sind nicht mehr in IronBASE eingeloggt!");
+    alert("Sie sind nicht mehr in Personal WebBase eingeloggt!");
     parent.window.close();
   // -->
   </script>');

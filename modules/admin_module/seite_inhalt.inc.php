@@ -1,44 +1,51 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // Funktioniert FTP-Zugang?
 
-$conn_id = @ftp_connect($konfiguration['core_directftp']['ftp-server'], $konfiguration['core_directftp']['ftp-port']);
-$login_result = @ftp_login ($conn_id, $konfiguration['core_directftp']['ftp-username'], $konfiguration['core_directftp']['ftp-passwort']);
+if ($konfiguration['core_directftp']['ftp-server'] == '') {
+	$fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
+	$verhindere_loeschen = 1;
+	$conn_id = null;
+	$login_result = false;
+} else {
+	$conn_id = @ftp_connect($konfiguration['core_directftp']['ftp-server'], $konfiguration['core_directftp']['ftp-port']);
+	$login_result = @ftp_login ($conn_id, $konfiguration['core_directftp']['ftp-username'], $konfiguration['core_directftp']['ftp-passwort']);
+}
 
 $fehler = '';
 
 if ((!$conn_id) || (!$login_result))
 {
-  $fehler = 'IronBASE ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
+  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
   $verhindere_loeschen = 1;
 }
 
 if (($fehler == '') && ((substr($konfiguration['core_directftp']['ftp-verzeichnis'], 0, 1) != '/') || (substr($konfiguration['core_directftp']['ftp-verzeichnis'], strlen($konfiguration['core_directftp']['ftp-verzeichnis'])-1, 1) != '/')))
 {
-  $fehler = 'Die Verzeichnissyntax ist falsch. Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf IronBASE-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
+  $fehler = 'Die Verzeichnissyntax ist falsch. Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
   $verhindere_loeschen = 1;
 }
 
 if (($fehler == '') && (@ftp_size($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/moddir.txt') == -1))
 {
-  $fehler = 'IronBASE ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf IronBASE-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
+  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
   $verhindere_loeschen = 1;
 }
 
-@ftp_quit($conn_id);
+if ($conn_id) @ftp_quit($conn_id);
 
   echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
-    echo 'Hier k&ouml;nnen Sie die Module von IronBASE verwalten. Ist ein Modul nicht
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
+    echo 'Hier k&ouml;nnen Sie die Module von Personal WebBase verwalten. Ist ein Modul nicht
     korrekt geschrieben worden, so k&ouml;nnen trotz Deinstallation des Moduls noch Datenbest&auml;nde in der
-    Datenbank zur&uuml;ckbleiben. Wenn das Modul als &quot;IronBASE-Core&quot; eingestuft wurde, dann
-    ist der Autor des Moduls der Meinung, dass es wichtig f&uuml;r die Ausf&uuml;hrung von IronBASE oder anderen
-    Modulen verantwortlich ist. Entfernen Sie ein solches Modul, so kann IronBASE besch&auml;digt und Kundendaten
-    verloren gehen! In dem Feld &quot;Daten&quot; k&ouml;nnen Sie sehen, wie viele IronBASE-Konfigurationswerte (C) und wie viele
+    Datenbank zur&uuml;ckbleiben. Wenn das Modul als &quot;Personal WebBase-Core&quot; eingestuft wurde, dann
+    ist der Autor des Moduls der Meinung, dass es wichtig f&uuml;r die Ausf&uuml;hrung von Personal WebBase oder anderen
+    Modulen verantwortlich ist. Entfernen Sie ein solches Modul, so kann Personal WebBase besch&auml;digt und Kundendaten
+    verloren gehen! In dem Feld &quot;Daten&quot; k&ouml;nnen Sie sehen, wie viele Personal WebBase-Konfigurationswerte (C) und wie viele
     MySQL-Tabellen (T) das jeweilige Modul benutzt.<br><br>';
 
     gfx_begintable();
@@ -81,9 +88,9 @@ echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
       else if ($license == '2')
         $license = 'Private Secured';
       else if ($license == '3')
-        $license = 'IronBASE-Core';
+        $license = 'Personal WebBase-Core';
       else if ($license == '4')
-        $license = 'IronBASE-Enclosure';
+        $license = 'Personal WebBase-Enclosure';
       else
         $license = 'Unbekannt';
       $ca = ($cdaten == 0) ? '' : '<a href="'.$_SERVER['PHP_SELF'].'?modul=admin_konfig&amp;seite=konfig&amp;only='.$m2.'&amp;vonmodul='.$modul.'&amp;vonseite='.$seite.'" class="menu">';
@@ -96,7 +103,7 @@ echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
       else
         $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.$modul.'&amp;aktion=delete&amp;entfernen='.$m2.'\');" class="menu">Entfernen</a>';
 
-      gfx_tablecontent('', htmlentities($m2), '', htmlentities($modulueberschrift), '', htmlentities($autor), '', $license, '', $menuevisible, '',  htmlentities($version), '', $ca.$cdaten.'C'.$cb.' / '.$ta.$mdaten.'T'.$tb, '', $aktionen);
+      gfx_tablecontent('', my_htmlentities($m2), '', my_htmlentities($modulueberschrift), '', my_htmlentities($autor), '', $license, '', $menuevisible, '',  my_htmlentities($version), '', $ca.$cdaten.'C'.$cb.' / '.$ta.$mdaten.'T'.$tb, '', $aktionen);
     }
 
     unset($m1);
@@ -108,7 +115,7 @@ echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
     if ($fehler != '')
       echo '<font color="#FF0000">'.$fehler.'</font>';
     else
-      echo 'Achtung: IronBASE &uuml;berl&auml;sst den Modulen die komplette Handlungsfreiheit bez&uuml;glich der Datenbank und der PHP-Codeausf&uuml;hrung. Ein Modul kann bei dem Installationsprozess b&ouml;sartigen Code ausf&uuml;hren und das System oder den Datenbestand gef&auml;hrden. Installieren Sie daher nur Module, bei denen Sie sicherstellen k&ouml;nnen, dass sie keinen b&ouml;sartigen Code enthalten. Wenn Sie ein Modul updaten m&ouml;chten, deinstallieren Sie die alte Version des Modules zuerst. Maximale Dateigr&ouml;&szlig;e: '.ini_get('post_max_size').'B<br><br>
+      echo 'Achtung: Personal WebBase &uuml;berl&auml;sst den Modulen die komplette Handlungsfreiheit bez&uuml;glich der Datenbank und der PHP-Codeausf&uuml;hrung. Ein Modul kann bei dem Installationsprozess b&ouml;sartigen Code ausf&uuml;hren und das System oder den Datenbestand gef&auml;hrden. Installieren Sie daher nur Module, bei denen Sie sicherstellen k&ouml;nnen, dass sie keinen b&ouml;sartigen Code enthalten. Wenn Sie ein Modul updaten m&ouml;chten, deinstallieren Sie die alte Version des Modules zuerst. Maximale Dateigr&ouml;&szlig;e: '.ini_get('post_max_size').'B<br><br>
 
 <form enctype="multipart/form-data" action="'.$_SERVER['PHP_SELF'].'" method="POST">
 <input type="hidden" name="seite" value="kraftsetzung">
@@ -119,7 +126,7 @@ echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
 <input name="dfile" type="file"><br><br>
 
 <input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Modul installieren">
-</form><a href="http://www.viathinksoft.de/info/ironbase/module.php" target="_blank">Weitere Module im offiziellen IronBASE-Portal</a>';
+</form><a href="https://www.personal-webbase.de/module.html" target="_blank">Weitere Module im offiziellen Personal WebBase-Portal</a>';
 
       echo $footer;
 

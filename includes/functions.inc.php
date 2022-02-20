@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 //////////////////////////////////////////////////////////////////////////////
 // CODIERUNGSFUNKTIONEN                                                     //
@@ -29,7 +29,7 @@ function undo_transamp_replace_spitze_klammern($inp)
 function ausfuehrbarer_html_code($inp)
 {
   // Wenn der Benutzer z.B. ä im HTML-Formular eingegeben hat, würde hier aufgrund von Unicode quatsch rauskommen
-  $inp = htmlentities($inp, ENT_COMPAT, 'UTF-8');
+  $inp = my_htmlentities($inp);
 
   $inp = undo_transamp_replace_spitze_klammern($inp);
 
@@ -255,7 +255,7 @@ function decode_header ( $str )
             $v = $v[1];
         }
 
-        if ($k == '') break; // Zusatz von IronBASE
+        if ($k == '') break; // Zusatz von Personal WebBase
 
         if ( $k == 'set-cookie' )
         {
@@ -389,10 +389,10 @@ function my_get_contents($url, $show_errors = false, $ignore_status_code = false
   }
   if ($req == '') $req = '/';
 
-  // User-Agent = IronBASE
+  // User-Agent = Personal WebBase
   $revision = '???';
   if (file_exists('includes/rev.inc.php')) include('includes/rev.inc.php');
-  $uagent = 'ViaThinkSoft-IronBASE/'.$revision;
+  $uagent = 'ViaThinkSoft-Personal WebBase/'.$revision;
 
   // Anfrage starten
   $fp = @fsockopen($ssl.$host, $port, $errno, $errstr, $time_out);
@@ -499,7 +499,7 @@ function my_get_contents($url, $show_errors = false, $ignore_status_code = false
     $tmp = '';
     for ($i=1; isset($con[$i]); $i++)
     {
-      $tmp .= $con[$i]."\r\n\r\n";
+      $tmp .= $con[$i];
       if (isset($con[$i+1])) $tmp .= "\r\n\r\n";
     }
 
@@ -507,7 +507,7 @@ function my_get_contents($url, $show_errors = false, $ignore_status_code = false
   }
 }
 
-function my_htmlentities($inp, $charset = 'utf-8')
+function my_htmlentities($inp, $charset = 'iso-8859-1')
 {
   // http://www.php.net/manual/de/function.htmlspecialchars.php
   // PHP-Version wird nicht kontrolliert...
@@ -547,24 +547,26 @@ function my_htmlentities($inp, $charset = 'utf-8')
 
 function check_email($email_adresse)
 {
-  if(eregi("^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,4}$",$email_adresse))
-    return true;
-  else
-    return false;
+  return preg_match("/^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,4}$/",$email_adresse);
 }
 
 function return_bytes($val)
 {
   $val = trim($val);
-  $last = strtolower($val{strlen($val)-1});
+  if (is_numeric($val)) return $val;
+  $last = strtolower($val[strlen($val)-1]);
+  $val = substr($val,0,strlen($val)-1);
   switch($last)
   {
     case 'g':
       $val *= 1024;
+      /* ... falls through ... */
     case 'm':
       $val *= 1024;
+      /* ... falls through ... */
     case 'k':
       $val *= 1024;
+      /* ... falls through ... */
   }
   return $val;
 }
@@ -591,41 +593,45 @@ function runden($inp, $nachkommastellen = 0)
   return number_format($inp, $nachkommastellen, ",", ".");
 }
 
+// PHP-AntiSpam-Funktion "secure_email", Version 3.0
+// von Daniel Marschall [www.daniel-marschall.de]
+
 function secure_email($email, $linktext, $crypt_linktext)
 {
+  if (!function_exists('alas_js_crypt'))
+  {
+    function alas_js_crypt($text)
+    {
+      $tmp = '';
+      for ($i=0; $i<strlen($text); $i++)
+      {
+        $tmp .= 'document.write("&#'.ord(substr($text, $i, 1)).';");';
+      }
+      return $tmp;
+    }
+  }
+
+  if (!function_exists('alas_js_write'))
+  {
+    function alas_js_write($text)
+    {
+      $text = str_replace('\\', '\\\\', $text);
+      $text = str_replace('"', '\"', $text);
+      return 'document.write("'.$text.'");';
+    }
+  }
+
   $aus = '';
   if ($email != '')
   {
-    $aus .= '<script language="JavaScript" type="text/javascript">
-<!--
-  document.write("<a href=\"");'."\n";
-
-  $gesamttext = 'mailto:'.$email;
-  for ($i=0; $i<strlen($gesamttext); $i++)
-    $aus .= '  document.write("&#'.ord(substr($gesamttext, $i, 1)).';");'."\n";
-
-  $aus .= '  document.write("\">");'."\n";
-
-  if ($crypt_linktext == '1')
-  {
-    $gesamttext = $linktext;
-    for ($i=0; $i<strlen($gesamttext); $i++)
-      $aus .= '  document.write("&#'.ord(substr($gesamttext, $i, 1)).';");'."\n";
+    $aus .= '<script language="JavaScript" type="text/javascript"><!--'."\n";
+    $aus .= alas_js_write('<a href="');
+    $aus .= alas_js_crypt('mailto:'.$email);
+    $aus .= alas_js_write('">');
+    $aus .= $crypt_linktext ? alas_js_crypt($linktext) : alas_js_write($linktext);
+    $aus .= alas_js_write('</a>').'// --></script>';
   }
-  else
-  {
-    $gesamttext = str_replace('"', '\"', $linktext);
-    $aus .= '  document.write("'.$gesamttext.'");';
-  }
-
-  $aus .= '  document.write("<\/a>");
-// -->
-</script>';
-
-  }
-
-return $aus;
-
+  return $aus;
 }
 
 function de_convertmysqldatetime($datum, $zeige_sekunden = false)
@@ -743,7 +749,7 @@ function oop_link_to_modul($modul, $seite = 'inhalt', $titelzeile_modul = '')
   else
     $g = 'design/spacer.gif';
 
-  return "javascript:oop('".$modul."', '".$seite."', '".htmlentities($titel)."', '".$g."');";
+  return "javascript:oop('".$modul."', '".$seite."', '".my_htmlentities($titel)."', '".$g."');";
 }
 
 function liste_items($modul, $table, $append, $dir = 0)

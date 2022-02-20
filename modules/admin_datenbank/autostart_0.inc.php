@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // Auslesen der Datenbanktabellen und deren Felder
 
@@ -15,6 +15,18 @@ while ($qr = db_fetch($qs))
   }
 }
 
+// Important, must exist
+
+if (!array_key_exists($mysql_zugangsdaten['praefix'].'module', $datenbanktabellen)) {
+	$tabellen = array();
+	ib_newdatabasetable('module', 'admin_module', 'modul', "varchar(255) NOT NULL default ''",
+									   'table', "varchar(255) NOT NULL default ''");
+}
+
+if (function_exists('set_searchable')) set_searchable($m2, 'module', 0);
+
+my_add_key($mysql_zugangsdaten['praefix'].'module', 'table', true, 'table');
+
 // Array $tabellen erstellen und dabei ungültige Einträge der Modultabelle entfernen...
 
 $tabellen = array();
@@ -23,13 +35,13 @@ while ($row = db_fetch($res))
 {
   if (!isset($datenbanktabellen[$mysql_zugangsdaten['praefix'].$row['table']]))
   {
-    db_query("DELETE FROM `".$mysql_zugangsdaten['praefix']."module` WHERE `table` = '".$row['table']."'");
-    if (db_affected_rows() > 0)
-      db_query("OPTIMIZE TABLE `".$mysql_zugangsdaten['praefix']."module`");
+	db_query("DELETE FROM `".$mysql_zugangsdaten['praefix']."module` WHERE `table` = '".$row['table']."'");
+	if (db_affected_rows() > 0)
+	  db_query("OPTIMIZE TABLE `".$mysql_zugangsdaten['praefix']."module`");
   }
   else
   {
-    $tabellen[] = $row['table'];
+	$tabellen[] = $row['table'];
   }
 }
 

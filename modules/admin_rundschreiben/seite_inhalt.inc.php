@@ -1,11 +1,11 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'message\').focus();"', $header);
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
  echo 'M&ouml;chten Sie Ihren Mitgliedern etwas mitteilen? Dies k&ouml;nnen Sie hier tun.<br><br>';
 

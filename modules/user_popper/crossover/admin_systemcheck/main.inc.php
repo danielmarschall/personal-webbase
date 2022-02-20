@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $meldung = '';
 
@@ -10,7 +10,7 @@ if (!inetconn_ok())
 }
 else
 {
-  $cont = my_get_contents('http://www.viathinksoft.de/info/ironbase/module.php');
+  $cont = my_get_contents('https://www.personal-webbase.de/module_version.txt');
 
   if ($cont == '')
   {
@@ -18,13 +18,13 @@ else
   }
   else
   {
-    if (strpos($cont, '<!-- UpdateSection: '.$m2.' '.$version.' -->') !== false)
+    if (strpos($cont, '['.$m2.' '.$version.']') !== false)
     {
       $meldung .= 'Es sind keine Updates f&uuml;r das Modul verf&uuml;gbar.';
     }
     else
     {
-      $meldung .= '<font color="#00BB00">Das Modul ist in einer neuen Version erschienen!</font> <a href="http://www.viathinksoft.de/info/ironbase/downloads/'.$m2.'.zip" target="_blank">Download</a>';
+      $meldung .= '<font color="#00BB00">Das Modul ist in einer neuen Version erschienen!</font> <a href="https://www.personal-webbase.de/" target="_blank">Download</a>';
     }
   }
 }

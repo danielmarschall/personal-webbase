@@ -1,10 +1,10 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'username\').focus();"', $header);
 
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>
 
 <form action="index.php" target="_parent" method="POST" name="frm">
 <input type="hidden" name="login_process" value="1">

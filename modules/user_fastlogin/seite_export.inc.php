@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if ($ib_user_type == 0)
 {
@@ -14,7 +14,7 @@ if (($konfiguration['core_fastlogin_access']['enabled']) && (isset($benutzer['fa
   if (!headers_sent()) header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
   if (!headers_sent()) header("Cache-Control: private",false);
   if (!headers_sent()) header("Content-type: application/octet-stream");
-  if (!headers_sent()) header("Content-Disposition: attachment; filename=\"IronBASE-Direktzugang.url\"");
+  if (!headers_sent()) header("Content-Disposition: attachment; filename=\"Personal WebBase-Direktzugang.url\"");
   if (!headers_sent()) header("Content-Transfer-Encoding: binary");
 
   $secret_key  = $ib_user_username."\n";

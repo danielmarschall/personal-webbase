@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
@@ -13,7 +13,7 @@ function dreinull($inp)
 }
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
 echo '[<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=newkat">Neue Kategorie</a>] [<a href="?modul='.$modul.'&amp;seite=newdisk">Neuer Eintrag</a>] [<a href="?modul='.$modul.'&amp;seite=newinhalt">Neuer Inhalt</a>]<br><br>';
 

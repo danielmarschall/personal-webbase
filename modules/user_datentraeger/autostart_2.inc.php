@@ -1,13 +1,13 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 ib_newdatabasetable('datentraeger_eintraege', $m2, 'user', "bigint(21) NOT NULL default '0'",
                                                    'nr', "bigint(21) NOT NULL default '0'",
                                                    'kategorie', "varchar(255) NOT NULL default '0'",
                                                    'name', "varchar(255) NOT NULL default ''",
                                                    'medium', "enum('CD','DVD') NOT NULL default 'CD'",
-                                                   'einstellungsdatum', "datetime NOT NULL default '0000-00-00 00:00:00'",
+                                                   'einstellungsdatum', "datetime NULL",
                                                    'gebrannt', "enum('1','0') NOT NULL default '1'",
                                                    'aussortiert', "enum('1','0') NOT NULL default '0'");
 
@@ -40,5 +40,3 @@ ib_newdatabasetable('datentraeger_kategorien', $m2, 'user', "bigint(21) NOT NULL
 my_add_key($mysql_zugangsdaten['praefix'].'datentraeger_kategorien', 'spalte_and_nummer', true, 'spalte', 'nummer');
 
 if (function_exists('set_searchable')) set_searchable($m2, 'datentraeger_kategorien', 0);
-
-?>

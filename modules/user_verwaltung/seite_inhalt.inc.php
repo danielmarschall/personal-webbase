@@ -1,11 +1,11 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
   if (isset($fertig) && ($fertig))
   {
     echo 'Die &Auml;nderung wurde &uuml;bernommen.';
@@ -55,7 +55,7 @@ Hier k&ouml;nnen Sie Ihr Benutzerkonto verwalten.<br><br>';
 <input type="hidden" name="aktion" value="acc_dele">
 <input type="hidden" name="modul" value="'.$seite.'">
 
-Bitte geben Sie zum L&ouml;schen des IronBASE-Accounts das Wort &quot;OK&quot; in das Sicherheitsfeld ein.<br><br>
+Bitte geben Sie zum L&ouml;schen des Personal WebBase-Accounts das Wort &quot;OK&quot; in das Sicherheitsfeld ein.<br><br>
 
 <table cellspacing="0" cellpadding="2" border="0">
 <tr>

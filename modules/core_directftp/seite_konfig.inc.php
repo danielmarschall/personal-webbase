@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
 
@@ -10,11 +10,16 @@ if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
   if (!isset($vonseite)) $vonseite = 'inhalt';
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-    echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
-    echo 'Damit einige Module korrekt funktionieren k&ouml;nnen, wird ein g&uuml;ltiger FTP-Zugang mit Schreibzugriff auf das IronBASE-Verzeichnis ben&ouml;tigt. Das Verzeichnis muss mit abschlie&szlig;endem Slash angegeben werden (z.B. /html/ironbase/ bei Confixx-Systemen oder /ironbase/ bei Nicht-Confixx-Systemen).<br><br>';
+    echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
+    echo 'Damit einige Module korrekt funktionieren k&ouml;nnen, wird ein g&uuml;ltiger FTP-Zugang mit Schreibzugriff auf das Personal WebBase-Verzeichnis ben&ouml;tigt. Das Verzeichnis muss mit abschlie&szlig;endem Slash angegeben werden (z.B. /html/webbase/ bei Confixx-Systemen oder /webbase/ bei Nicht-Confixx-Systemen).<br><br>';
 
-    $conn_id = @ftp_connect($konfiguration[$modul]['ftp-server'], $konfiguration[$modul]['ftp-port']);
-	$login_result = @ftp_login ($conn_id, $konfiguration[$modul]['ftp-username'], $konfiguration[$modul]['ftp-passwort']);
+	if ($konfiguration[$modul]['ftp-server'] == '') {
+		$conn_id = null;
+		$login_result = false;
+	} else {
+		$conn_id = @ftp_connect($konfiguration[$modul]['ftp-server'], $konfiguration[$modul]['ftp-port']);
+		$login_result = @ftp_login ($conn_id, $konfiguration[$modul]['ftp-username'], $konfiguration[$modul]['ftp-passwort']);
+	}
 
 	$fehler = false;
 
@@ -38,13 +43,13 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
 
 	if ((!$fehler) && (@ftp_size($conn_id, $konfiguration[$modul]['ftp-verzeichnis'].'modules/moddir.txt') == -1))
 	{
-	  echo '<font color="#FF0000">Kann modules/moddir.txt nicht finden. Zeigt das FTP-Verzeichnis wirklich auf IronBASE?</font>';
+	  echo '<font color="#FF0000">Kann modules/moddir.txt nicht finden. Zeigt das FTP-Verzeichnis wirklich auf Personal WebBase?</font>';
 	  $fehler = true;
 	}
 
 	if ((!$fehler) && (@ftp_size($conn_id, $konfiguration[$modul]['ftp-verzeichnis'].'design/desdir.txt') == -1))
 	{
-	  echo '<font color="#FF0000">Kann design/desdir.txt nicht finden. Zeigt das FTP-Verzeichnis wirklich auf IronBASE?</font>';
+	  echo '<font color="#FF0000">Kann design/desdir.txt nicht finden. Zeigt das FTP-Verzeichnis wirklich auf Personal WebBase?</font>';
 	  $fehler = true;
 	}
 
@@ -55,7 +60,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
 
 	echo '<br><br>';
 
-	@ftp_quit($conn_id);
+	if ($conn_id) @ftp_quit($conn_id);
 
   echo '<script language="JavaScript" type="text/javascript">
 <!--

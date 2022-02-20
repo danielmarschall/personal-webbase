@@ -52,7 +52,7 @@ function net2ftp_module_printJavascript() {
 
 //	global $net2ftp_settings, $net2ftp_globals, $net2ftp_messages, $net2ftp_result;
 
-// IronBASE
+// Personal WebBase
 echo "<script type=\"text/javascript\"><!--\n";
 echo "window.close();\n";
 echo "//--></script>\n";

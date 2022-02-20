@@ -6,7 +6,7 @@ require 'includes/main.inc.php';
 
 <html>
 <head>
-   <title>ViaThinkSoft IronBASE</title>
+   <title>ViaThinkSoft Personal WebBase</title>
    <link href="style.css.php" rel="stylesheet" type="text/css">
 </head>
 

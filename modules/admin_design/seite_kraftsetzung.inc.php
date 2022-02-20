@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
 
@@ -24,8 +24,13 @@ function ftp_rmdir_rec($handle, $path)
   {
     // Funktioniert FTP-Zugang?
 
-    $conn_id = @ftp_connect($konfiguration['core_directftp']['ftp-server'], $konfiguration['core_directftp']['ftp-port']);
-    $login_result = @ftp_login ($conn_id, $konfiguration['core_directftp']['ftp-username'], $konfiguration['core_directftp']['ftp-passwort']);
+	if ($konfiguration['core_directftp']['ftp-server'] == '') {
+		$conn_id = null;
+		$login_result = false;
+	} else {
+	    $conn_id = @ftp_connect($konfiguration['core_directftp']['ftp-server'], $konfiguration['core_directftp']['ftp-port']);
+	    $login_result = @ftp_login ($conn_id, $konfiguration['core_directftp']['ftp-username'], $konfiguration['core_directftp']['ftp-passwort']);
+	}
 
     $fehler = 0;
 
@@ -49,7 +54,7 @@ function ftp_rmdir_rec($handle, $path)
 
     // Nun Design über FTP löschen!
     @ftp_rmdir_rec($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'design/'.$entfernen);
-    @ftp_quit($conn_id);
+    if ($conn_id) @ftp_quit($conn_id);
 
     // Info: MySQL-Daten löschen sich über Autostart automatisch
     if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul);
@@ -63,7 +68,7 @@ function ftp_rmdir_rec($handle, $path)
       // Datei in unser Verzeichnis kopieren, sodass wir darauf zugreifen können (für Safe-Mode)
       if (!@ftp_put($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'.zip', $_FILES['dfile']['tmp_name'], FTP_BINARY))
       {
-        @ftp_quit($conn_id);
+        if ($conn_id) @ftp_quit($conn_id);
         die($header.'<b>Fehler</b><br><br>Konnte ZIP-Datei nicht in tempor&auml;res Verzeichnis des Modules hineinkopieren (FTP)!.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
       }
       @ftp_site($conn_id, 'CHMOD 0644 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'.zip');
@@ -73,7 +78,7 @@ function ftp_rmdir_rec($handle, $path)
       @ftp_mkdir($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'/');
       @ftp_site($conn_id, 'CHMOD 0755 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'/');
 
-      // Entpacken zum IronBASE-Temp-Verzeichnis
+      // Entpacken zum Personal WebBase-Temp-Verzeichnis
       if (file_exists('modules/'.$modul.'/dUnzip2.inc.php'))
         include('modules/'.$modul.'/dUnzip2.inc.php');
 	  $zip = new dUnzip2('modules/'.$modul.'/temp/'.$uid.'.zip');
@@ -88,7 +93,7 @@ function ftp_rmdir_rec($handle, $path)
       if (count($verzinh) == 0)
       {
         @ftp_rmdir_rec($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'/');
-        @ftp_quit($conn_id);
+        if ($conn_id) @ftp_quit($conn_id);
         die($header.'<b>Fehler</b><br><br>Dekompression entweder komplett misslungen oder ZIP-Datei war leer.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
       }
 
@@ -96,7 +101,7 @@ function ftp_rmdir_rec($handle, $path)
 	  if (!@ftp_rename($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'/', $konfiguration['core_directftp']['ftp-verzeichnis'].'design/'.$uid.'/'))
 	  {
         @ftp_rmdir_rec($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.'/');
-        @ftp_quit($conn_id);
+        if ($conn_id) @ftp_quit($conn_id);
         die($header.'<b>Fehler</b><br><br>Das Verschieben des Verzeichnisses ist misslungen!<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
 	  }
 
@@ -114,7 +119,7 @@ function ftp_rmdir_rec($handle, $path)
         // Schutzverletzung im Ordnernamen?
         if (strpos($inhalt, '..'))
         {
-          @ftp_quit($conn_id);
+          if ($conn_id) @ftp_quit($conn_id);
           die($header.'<b>Fehler</b><br><br>Das Design konnte zwar installiert werden, jedoch gab es bei der Umbenennung des Ordners eine Schutzverletzung!'.$footer);
         }
 
@@ -140,7 +145,7 @@ function ftp_rmdir_rec($handle, $path)
         $erfolg = @ftp_rename ($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'design/'.$uid, $konfiguration['core_directftp']['ftp-verzeichnis'].'design/'.$inhalt.$zusatz);
 
         // FTP-Verbindung trennen
-        @ftp_quit($conn_id);
+        if ($conn_id) @ftp_quit($conn_id);
 
         // Wurde der Ordner nicht umbenannt? (z.B. Wenn der Ordnertitel nicht für Dateisystem zulässig war)
         if (!$erfolg)
@@ -153,7 +158,7 @@ function ftp_rmdir_rec($handle, $path)
       else
       {
         // Kein Dateiname angegeben?
-        @ftp_quit($conn_id);
+        if ($conn_id) @ftp_quit($conn_id);
         die($header.'<b>Information</b><br><br>Das Design wurde unter dem Namen &quot;'.$uid.'&quot; angelegt, da in der Designdatei keine Namensangabe vorhanden war.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
       }
 

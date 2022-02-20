@@ -1,6 +1,6 @@
 <?
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // 15/07/2006 (2.6)
 // - Changed the algorithm to parse the ZIP file.. Now, the script will try to mount the compressed
@@ -53,7 +53,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 #
 ##############################################################
 
-// IronBASE Zusatz für Kompatibilität mit Safe-Mode-Restriktion
+// Personal WebBase Zusatz für Kompatibilität mit Safe-Mode-Restriktion
 
 function my_mkdir($dr)
 {
@@ -102,7 +102,7 @@ function file_put_contents_precreate($file, $data)
 	return false;
 }
 
-// Ende - IronBASE Zusatz
+// Ende - Personal WebBase Zusatz
 
 class dUnzip2{
 	Function getVersion(){
@@ -244,7 +244,7 @@ class dUnzip2{
 		}
 		if(!$fdetails['uncompressed_size']){
 			$this->debugMsg(1, "File '<b>$compressedFileName</b>' is empty.");
-			// Verändert für IronBASE
+			// Verändert für Personal WebBase
 			if ($targetFileName)
 			{
 			  $x = file_put_contents_precreate($targetFileName, "");

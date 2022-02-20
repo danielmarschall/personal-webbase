@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (($aktion == 'new') || ($aktion == 'edit'))
 {
@@ -19,7 +19,7 @@ if (($aktion == 'new') || ($aktion == 'edit'))
     for ($i = 0; isset($n[1][$i]); $i++)
     {
       if ($n[2][$i] == 'deutschland') $s = ' selected'; else $s = '';
-      $laenderliste .= '<option value="'.$n[2][$i].'"'.$s.'>'.htmlentities($n[4][$i]).'</option>';
+      $laenderliste .= '<option value="'.$n[2][$i].'"'.$s.'>'.my_htmlentities($n[4][$i]).'</option>';
     }
     $laenderliste .= '</select>';
   }

@@ -22,15 +22,15 @@
 
 // Enter your email address
 // This is used as "from" address when sending files in attachment
-$net2ftp_settings["email_feedback"] = $_SERVER["SERVER_ADMIN"]; // IronBASE
+$net2ftp_settings["email_feedback"] = $_SERVER["SERVER_ADMIN"]; // Personal WebBase
 
 // Default language and skin (look in /languages and /skins to see which are available)
-$net2ftp_settings["default_language"] = "de"; // IronBASE
+$net2ftp_settings["default_language"] = "de"; // Personal WebBase
 $net2ftp_settings["default_skin"]     = "blue";
 
 // Password encryption is done using a random hexadecimal string
 // Change it to improve security - but use only numbers and capital letters from A to F!
-// $net2ftp_settings["encryption_string"] = sha1($mysql_zugangsdaten["passwort"]).sha1($mysql_zugangsdaten["username"]); // IronBASE
+// $net2ftp_settings["encryption_string"] = sha1($mysql_zugangsdaten["passwort"]).sha1($mysql_zugangsdaten["username"]); // Personal WebBase
 
 // Enter the address of your help pages, support forum or ticket system
 // This will add a link in the footer; leave empty if you don't have this

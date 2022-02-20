@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
@@ -15,7 +15,7 @@ else
 
 if (!inetconn_ok())
 {
-  // Kann auftreten, wenn IronBASE von localhost aufgerufen wird
+  // Kann auftreten, wenn Personal WebBase von localhost aufgerufen wird
   echo '<font color="#FF0000"><b>Fehler!</b> Es gibt derzeit ein Problem mit der Internetkonnektivit&auml;t des Systems.</font>';
 }
 else

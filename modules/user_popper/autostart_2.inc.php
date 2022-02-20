@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 ib_newdatabasetable('popper_konten', $m2, 'user', "bigint(21) NOT NULL default '0'",
                                           'folder', "bigint(21) NOT NULL default '0'",

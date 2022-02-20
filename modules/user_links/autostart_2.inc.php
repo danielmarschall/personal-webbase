@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 ib_newdatabasetable('links', $m2, 'user', "bigint(21) NOT NULL default '0'",
                                   'folder', "bigint(21) NOT NULL default '0'",
@@ -10,7 +10,7 @@ ib_newdatabasetable('links', $m2, 'user', "bigint(21) NOT NULL default '0'",
                                   'update_checkurl', "varchar(255) NOT NULL default ''",
                                   'update_text_begin', "longtext NOT NULL",
                                   'update_text_end', "longtext NOT NULL",
-                                  'update_lastchecked', "datetime NOT NULL default '0000-00-00 00:00:00'",
+                                  'update_lastchecked', "datetime NULL",
                                   'update_lastcontent', "varchar(255) NOT NULL default ''",
                                   'neu_flag', "enum('0','1') NOT NULL default '0'",
                                   'kaputt_flag', "enum('0','1') NOT NULL default '0'");

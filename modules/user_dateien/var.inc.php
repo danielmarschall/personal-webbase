@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $modulueberschrift = 'Dateimanager';
 $modulpos = 1;
@@ -17,8 +17,8 @@ $menuevisible = 1;
 // 0 = Public Freeware
 // 1 = Public Shareware
 // 2 = Private Secured
-// 3 = IronBASE-Core
-// 4 = IronBASE-Enclosure
+// 3 = Personal WebBase-Core
+// 4 = Personal WebBase-Enclosure
 $license = 4;
 
 ?>

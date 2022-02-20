@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $res4 = db_query("SELECT `email` FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `id` = '".db_escape($inp_user)."' AND `gesperrt` = '0'");
 $row4 = db_fetch($res4);
@@ -20,14 +20,14 @@ if (($email != '') && (check_email($email)))
 
   $skey = ib_encrypt($row3['id'].'@'.$erw, '@ibs');
 
-  $betreff    = 'IronBASE - Linkaktualisierung!';
-  $nachricht  = "Sehr geehrter IronBASE-Nutzer\n\n";
-  $nachricht .= "Das IronBASE-System hat soeben festgestellt, dass die Webseite \"".utf8_decode($row3['name'])."\", die Sie beobachten, sich verändert hat.\n\n";
-  $nachricht .= "Klicken Sie auf folgenden Link, um die Webseite zu öffnen und den Inhalt mit dem IronBASE-Datenbankeintrag neu zu synchronisieren:\n\n";
-  $nachricht .= $konfiguration[$x2]['ib_system_url']."modulseite.php?modul=$x2&seite=view&skey=".urlencode($skey)."#\n\n";
-  $nachricht .= "Durch das Anklicken des Links wird der IronBASE-Datenbankeintrag mit dem neuen Webseiteninhalt synchronisert. Sie erhalten diese E-Mail-Benachrichtigung danach erneut, sobald sich die Webseite ein weiteres Mal ändert.\n\n";
-  $nachricht .= "Der Link ist so lange gültig, bis der dazugehörige Datenbankeintrag auf dem IronBASE-System gelöscht wird oder Sie Ihr Passwort ändern bzw. Ihr Benutzerkonto löschen.\n\n";
-  $nachricht .= "Wenn Sie keine automatische Synchronisierung wünschen, können Sie die Webseite auch direkt aufrufen. Bitte beachten Sie, dass Sie diese E-Mail dann erst wieder erhalten, nachdem Sie die Webseite über IronBASE aufgerufen und somit synchronisiert haben.\n\n";
+  $betreff    = 'Personal WebBase - Linkaktualisierung!';
+  $nachricht  = "Sehr geehrter Personal WebBase-Nutzer\n\n";
+  $nachricht .= "Das Personal WebBase-System hat soeben festgestellt, dass die Webseite \"".utf8_decode($row3['name'])."\", die Sie beobachten, sich verändert hat.\n\n";
+  $nachricht .= "Klicken Sie auf folgenden Link, um die Webseite zu öffnen und den Inhalt mit dem Personal WebBase-Datenbankeintrag neu zu synchronisieren:\n\n";
+  $nachricht .= $konfiguration[$x2]['ib_system_url']."modulseite.php?modul=$x2&seite=view&skey=".urlencode($skey)."\n\n";
+  $nachricht .= "Durch das Anklicken des Links wird der Personal WebBase-Datenbankeintrag mit dem neuen Webseiteninhalt synchronisert. Sie erhalten diese E-Mail-Benachrichtigung danach erneut, sobald sich die Webseite ein weiteres Mal ändert.\n\n";
+  $nachricht .= "Der Link ist so lange gültig, bis der dazugehörige Datenbankeintrag auf dem Personal WebBase-System gelöscht wird oder Sie Ihr Passwort ändern bzw. Ihr Benutzerkonto löschen.\n\n";
+  $nachricht .= "Wenn Sie keine automatische Synchronisierung wünschen, können Sie die Webseite auch direkt aufrufen. Bitte beachten Sie, dass Sie diese E-Mail dann erst wieder erhalten, nachdem Sie die Webseite über Personal WebBase aufgerufen und somit synchronisiert haben.\n\n";
   $nachricht .= "Direkte URL: ".$row3['url']."\n";
 
   if ($row3['url'] != $update_checkurl)

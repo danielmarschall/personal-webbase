@@ -56,7 +56,7 @@ if (function_exists("session_name") == false) {
 
 
 
-// IronBASE: Auskommentierung
+// Personal WebBase: Auskommentierung
 
 /*
 
@@ -111,7 +111,7 @@ $_SESSION["net2ftp_remote_addr_new"] = $_SERVER["REMOTE_ADDR"];
 
 
 
-// IronBASE-Spezifischer Session-Abschnitt
+// Personal WebBase-Spezifischer Session-Abschnitt
 
 
 
@@ -165,7 +165,7 @@ $_SESSION["net2ftp_remote_addr_new"] = $_SERVER["REMOTE_ADDR"];
 
  if ((isset($lock)) && ($lock))
  {
-   die('<h1>IronBASE ist gesperrt</h1>Die Variable &quot;$lock&quot; in &quot;includes/config.inc.php&quot; steht auf 1 bzw. true. Setzen Sie diese Variable erst auf 0, wenn das Hochladen der Dateien beim Installations- bzw. Updateprozess beendet ist. Wenn Sie IronBASE freigeben, bevor der Upload abgeschlossen ist, kann es zu einer Besch&auml;digung der Kundendatenbank kommen!');
+   die('<h1>Personal WebBase ist gesperrt</h1>Die Variable &quot;$lock&quot; in &quot;includes/config.inc.php&quot; steht auf 1 bzw. true. Setzen Sie diese Variable erst auf 0, wenn das Hochladen der Dateien beim Installations- bzw. Updateprozess beendet ist. Wenn Sie Personal WebBase freigeben, bevor der Upload abgeschlossen ist, kann es zu einer Besch&auml;digung der Kundendatenbank kommen!');
  }
 
  //@ini_set('session.auto_start', 0);
@@ -272,7 +272,7 @@ $_SESSION["net2ftp_remote_addr_new"] = $_SERVER["REMOTE_ADDR"];
         $ib_conn = @mysql_connect($mysql_zugangsdaten['server'], $mysql_zugangsdaten['username'], $mysql_zugangsdaten['passwort']);
         $ib_selc = @mysql_select_db($mysql_zugangsdaten['datenbank'], $ib_conn);
 
-        mysql_query("DELETE FROM `".$mysql_zugangsdaten['praefix']."sessions` WHERE UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`LastUpdated`) > ".mysql_real_escape_string($aMaxLifeTime));
+        mysql_query("DELETE FROM `".$mysql_zugangsdaten['praefix']."sessions` WHERE UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`LastUpdated`) > '".mysql_real_escape_string($aMaxLifeTime)."'");
         if (mysql_affected_rows() > 0)
           mysql_query("OPTIMIZE TABLE `".$mysql_zugangsdaten['praefix']."sessions`");
 
@@ -291,7 +291,7 @@ $_SESSION["net2ftp_remote_addr_new"] = $_SERVER["REMOTE_ADDR"];
 
  die('<script language="JavaScript">
  <!--
-   alert("Sie sind nicht mehr in IronBASE eingeloggt!");
+   alert("Sie sind nicht mehr in Personal WebBase eingeloggt!");
    parent.window.close();
  // -->
  </script>');
@@ -374,7 +374,7 @@ function fetchip()
 }
 
 
-// Ende IronBASE-Abschnitt
+// Ende Personal WebBase-Abschnitt
 
 
 
@@ -632,7 +632,7 @@ if ($net2ftp_globals["state"] == "logout") {
 //         if the password is blank
 // -------------------------------------------------------------------------
 
-// IronBASE-Auskommentierung
+// Personal WebBase-Auskommentierung
 
 /* if ($net2ftp_globals["state"] != "login" && $net2ftp_globals["state"] != "login_small" &&
 	$_SESSION["net2ftp_session_id_old"] != $_SESSION["net2ftp_session_id_new"]) {

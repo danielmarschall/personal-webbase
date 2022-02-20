@@ -78,7 +78,7 @@ if ($menue == '')
             $k = 'design/spacer.gif';
 
           if (!isset($men[$modulpos][$modulsekpos])) $men[$modulpos][$modulsekpos] = '';
-          $men[$modulpos][$modulsekpos] .= gfx_zeichnemenuepunkt($m2, 'inhalt', htmlentities($modulueberschrift), $k, $g);
+          $men[$modulpos][$modulsekpos] .= gfx_zeichnemenuepunkt($m2, 'inhalt', my_htmlentities($modulueberschrift), $k, $g);
         }
         if (isset($prv_modul) && ($m2 == $prv_modul) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
         {
@@ -91,7 +91,7 @@ if ($menue == '')
 
           $endjs = '<script language="JavaScript" type="text/javascript">
 		  <!--
-		    oop(\''.$m2.'\', \''.$prv_seite.'\', \''.htmlentities($modulueberschrift).'\', \''.$g.'\');
+		    oop(\''.$m2.'\', \''.$prv_seite.'\', \''.my_htmlentities($modulueberschrift).'\', \''.$g.'\');
 		  // -->
 </script>'."\n\n";
           $startgefunden = true;
@@ -109,7 +109,7 @@ if ($menue == '')
 
             $endjs = '<script language="JavaScript" type="text/javascript">
 		  <!--
-		    oop(\''.$m2.'\', \'inhalt\', \''.htmlentities($modulueberschrift).'\', \''.$g.'\');
+		    oop(\''.$m2.'\', \'inhalt\', \''.my_htmlentities($modulueberschrift).'\', \''.$g.'\');
 		  // -->
 </script>'."\n\n";
             $startgefunden = true;

@@ -1,12 +1,12 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   if (isset($_POST['sent']) && ($_POST['sent'] == '1'))
   {
     echo $header;
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
     if ($mailaddr == '')
     {
@@ -60,9 +60,9 @@ Zu der angegebenen E-Mail-Adresse existiert kein Benutzer.<br><br>
             $protokoll = 'http';
 
           // In der E-Mail keine HTML-Sonderzeichenkonvertierung
-          $mail = "Jemand hat IronBASE auf dem Server \"".$_SERVER['HTTP_HOST']."\" angewiesen, ein neues Passwort für die Konten, die auf die E-Mail-Adresse $mailaddr registriert sind, zu generieren. Wenn Sie mehrere Konten besitzen, aber nur das Passwort eines Kontos vergessen haben, bearbeiten Sie nur die relevanten Aktivierungs-E-Mails. Diese E-Mail behandelt das Konto $un.\n\nHier sind Ihre neuen Zugangsdaten:\n\nBenutzername: $un\nPasswort: $pw\n\nBitte beachten Sie, dass diese Änderungen erst gültig werden, wenn Sie folgenden Aktivierungslink anklicken:\n$protokoll://".$_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]."?modul=$modul&seite=activate&id=$id&code=$ac\n\nWenn Sie kein neues Passwort angefordert haben, dann ignorieren Sie diese E-Mail einfach.";
+          $mail = "Jemand hat Personal WebBase auf dem Server \"".$_SERVER['HTTP_HOST']."\" angewiesen, ein neues Passwort für die Konten, die auf die E-Mail-Adresse $mailaddr registriert sind, zu generieren. Wenn Sie mehrere Konten besitzen, aber nur das Passwort eines Kontos vergessen haben, bearbeiten Sie nur die relevanten Aktivierungs-E-Mails. Diese E-Mail behandelt das Konto $un.\n\nHier sind Ihre neuen Zugangsdaten:\n\nBenutzername: $un\nPasswort: $pw\n\nBitte beachten Sie, dass diese Änderungen erst gültig werden, wenn Sie folgenden Aktivierungslink anklicken:\n$protokoll://".$_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"]."?modul=$modul&seite=activate&id=$id&code=$ac\n\nWenn Sie kein neues Passwort angefordert haben, dann ignorieren Sie diese E-Mail einfach.";
 
-          $betreff = 'IronBASE Passwortgenerierung';
+          $betreff = 'Personal WebBase Passwortgenerierung';
 
           $header = '';
 		  if (($konfiguration['main_ueber']['admin_mail'] != '') && (check_email($konfiguration['main_ueber']['admin_mail'])))
@@ -103,9 +103,9 @@ Zu der angegebenen E-Mail-Adresse existiert kein Benutzer.<br><br>
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'mailaddr\').focus();"', $header);
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-  echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+  echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
-echo 'Geben Sie hier Ihre E-Mail-Adresse ein, die Sie bei der Registrierung bei IronBASE angegeben haben.
+echo 'Geben Sie hier Ihre E-Mail-Adresse ein, die Sie bei der Registrierung bei Personal WebBase angegeben haben.
 Wenn Sie keine E-Mail-Adresse angegeben haben, k&ouml;nnen Sie kein neues Passwort &uuml;ber dieses
 Formular generieren. Kontaktieren Sie in diesem Fall den Administrator.<br><br>
 

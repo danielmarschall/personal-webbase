@@ -1,13 +1,15 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $meldung = '';
 
 // -------------------------------------
 
+/*
 if (!ini_get('safe_mode'))
   $meldung .= '- PHP sollte mit Safe_Mode ausgef&uuml;hrt werden.<br>';
+*/
 
 // -------------------------------------
 
@@ -31,7 +33,7 @@ if ($konfiguration['core_directftp']['ftp-verzeichnis'] != '/')
   else
     $ok = false;
 }
-if (!$ok) $meldung .= '- IronBASE besitzt m&ouml;glicherweise keinen eigenen FTP-Account!<br>';
+if (!$ok) $meldung .= '- Personal WebBase besitzt m&ouml;glicherweise keinen eigenen FTP-Account!<br>';
 
 // -------------------------------------
 
@@ -61,12 +63,12 @@ while (true)
     $path .= '../';
 }
 
-if (!$ok) $meldung .= '- IronBASE kann bei der HTTP-Server-Ebene auf das &uuml;bergeordnete Verzeichnis zugreifen!<br>';
+if (!$ok) $meldung .= '- Personal WebBase kann bei der HTTP-Server-Ebene auf das &uuml;bergeordnete Verzeichnis zugreifen!<br>';
 
 // -------------------------------------
 
 if ($mysql_zugangsdaten['username'] == 'root')
-  $meldung .= '- ACHTUNG! IronBASE verwendet den MySQL-Benutzer &quot;root&quot;!<br>';
+  $meldung .= '- ACHTUNG! Personal WebBase verwendet den MySQL-Benutzer &quot;root&quot;!<br>';
 
 $my_warnung = false;
 $db_list = db_list_dbs();
@@ -77,13 +79,13 @@ while ($row = db_fetch($db_list))
 }
 
 if ($my_warnung)
-  $meldung .= '- IronBASE kann m&ouml;glicherweise auf andere MySQL-Datenbanken zugreifen!<br>';
+  $meldung .= '- Personal WebBase kann m&ouml;glicherweise auf andere MySQL-Datenbanken zugreifen!<br>';
 
 $rx = db_list_tables($mysql_zugangsdaten['datenbank']);
 $rx2 = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."module`");
 
 if (db_num($rx) > db_num($rx2))
-  $meldung .= '- Es existieren fremde MySQL-Tabellen in der IronBASE-Datenbank, auf die IronBASE m&ouml;glicherweise Zugriff hat!<br>';
+  $meldung .= '- Es existieren fremde MySQL-Tabellen in der Personal WebBase-Datenbank, auf die Personal WebBase m&ouml;glicherweise Zugriff hat!<br>';
 
 // -------------------------------------
 

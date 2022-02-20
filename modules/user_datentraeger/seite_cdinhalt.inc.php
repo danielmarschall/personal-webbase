@@ -1,10 +1,10 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
-$ansicht = $HTTP_GET_VARS['ansicht'];
+$ansicht = $_GET['ansicht'];
 if ($ansicht == '') $ansicht = 'wurzel';
 
 // $res2 = db_query("SELECT `eintrag`, `komplett` FROM `".$mysql_zugangsdaten['praefix']."datentraeger_inhalt` WHERE `id` = '".db_escape($id)."' AND `user` = '".$benutzer['id']."'");

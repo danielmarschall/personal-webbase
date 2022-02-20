@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // $i = Die gesamte gepufferte Ausgabe
 
@@ -8,7 +8,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 
 <br><input type="submit" value="HTML-Validit&auml;t pr&uuml;fen" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';">
 
-<input type="hidden" name="fragment" value="'.htmlentities($i).'">
+<input type="hidden" name="fragment" value="'.my_htmlentities($i).'">
 
 </form>
 

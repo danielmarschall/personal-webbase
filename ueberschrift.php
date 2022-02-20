@@ -6,7 +6,7 @@ require 'includes/main.inc.php';
 
 <html>
 <head>
-   <title>IronBASE</title>
+   <title>ViaThinkSoft Personal WebBase</title>
    <link href="style.css.php" rel="stylesheet" type="text/css">
 
    <style type="text/css">
@@ -42,7 +42,7 @@ require 'includes/main.inc.php';
 <table cellspacing="0" cellpadding="0" border="0">
 <tr class="row_tab">
 <td><img src="design/spacer.gif" alt="" width="3" height="52"></td>
-<td><img src="<?php echo $design_ordner; ?>logo.gif" alt="IronBASE - Webinterface" width="210" height="52"></td>
+<td><img src="<?php echo $design_ordner; ?>logo.gif" alt="Personal WebBase - Webinterface" width="210" height="52"></td>
 <td><img src="design/spacer.gif" alt="" width="3" height="52"></td>
 </tr>
 </table>

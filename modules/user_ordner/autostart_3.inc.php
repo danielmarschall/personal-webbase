@@ -1,8 +1,8 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
-// Wir löschen ungültige Ordnerbezüge der IronBASE-Tabellen.
+// Wir löschen ungültige Ordnerbezüge der Personal WebBase-Tabellen.
 // Wenn ein Benutzer einen Ordner löscht, dann werden die Einträge und Unterordner nicht mitgelöscht
 // Je nachdem, wie viele Unterordner existiert haben, hat die Datenbank nach wenigen Durchläufen
 // dieser Funktion keine ungültigen Bezüge mehr.

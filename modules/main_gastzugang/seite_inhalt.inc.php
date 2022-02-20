@@ -1,16 +1,16 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     if ($konfiguration[$modul]['enable_gast'])
 	{
-      echo 'Hier k&ouml;nnen Sie sich in ein kostenloses, frei zug&auml;ngliches IronBASE-Konto auf diesem
+      echo 'Hier k&ouml;nnen Sie sich in ein kostenloses, frei zug&auml;ngliches Personal WebBase-Konto auf diesem
 Server einloggen. Dort k&ouml;nnen Sie die vielen M&ouml;glichkeiten von
-IronBASE beliebig testen. Vielen Dank f&uuml;r das Interesse an IronBASE. Klicken Sie auf
+Personal WebBase beliebig testen. Vielen Dank f&uuml;r das Interesse an Personal WebBase. Klicken Sie auf
 &quot;Einloggen&quot;, um Gastzugriff zu erhalten.<br><br>
 
 <form action="index.php" target="_parent" method="POST">

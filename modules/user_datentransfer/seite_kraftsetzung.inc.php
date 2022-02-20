@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   if ($aktion == 'dest')
   {
@@ -71,7 +71,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 		      if ($a12 != 'IRONBASE#1')
 		      {
 		        $falsche_rev = true;
-		        $warn .= '<b>Schwerer Fehler:</b><br><br>Dies ist keine g&uuml;ltige IronBASE-Datensicherung. Das Kopfzeilenelement &quot;IRONBASE#1&quot; wurde nicht gefunden.';
+		        $warn .= '<b>Schwerer Fehler:</b><br><br>Dies ist keine g&uuml;ltige Personal WebBase-Datensicherung. Das Kopfzeilenelement &quot;IRONBASE#1&quot; wurde nicht gefunden.';
 		      }
 		    }
 		    else if ((!$falsche_rev) && ($a12 != ''))
@@ -117,12 +117,12 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 		      }
 		      else
 		      {
-		        $warn .= 'Schutzverletzung des Typs A beim Versuch, Daten in folgende nichtexistente Tabelle einzuf&uuml;gen:<br><code>'.htmlentities(base64_decode($t)).'</code><br><br>';
+		        $warn .= 'Schutzverletzung des Typs A beim Versuch, Daten in folgende nichtexistente Tabelle einzuf&uuml;gen:<br><code>'.my_htmlentities(base64_decode($t)).'</code><br><br>';
 		      }
 		      $sql = "INSERT INTO `".$mysql_zugangsdaten['praefix'].base64_decode($t)."` ($namen`user`) VALUES ($werte'".$benutzer['id']."')";
-		      // Debug: echo htmlentities($sql).'<br><br>';
+		      // Debug: echo my_htmlentities($sql).'<br><br>';
 		      if (!db_query($sql))
-		       $warn .= 'Fehler beim Ausf&uuml;hren des Befehls:<br><code>'.htmlentities($sql).'</code><br>MySQL gab folgende Fehlermeldung aus:<br><code>'.mysql_error().'</code><br><br>';
+		       $warn .= 'Fehler beim Ausf&uuml;hren des Befehls:<br><code>'.my_htmlentities($sql).'</code><br>MySQL gab folgende Fehlermeldung aus:<br><code>'.mysql_error().'</code><br><br>';
 		    }
 		  }
 		  $m = $warn;

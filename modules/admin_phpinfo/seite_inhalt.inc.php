@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 ob_start();
 phpinfo();
@@ -16,7 +16,7 @@ $php_style = zwischen_str($inhalt, '<style', '</style>');
 echo str_replace('</head>', $php_style.'</head>', $header);
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
 $inhalt = str_replace('<a href="http://www.php.net/">', '<a href="http://www.php.net/" target="_blank">', $inhalt);
 $inhalt = str_replace('<a href="http://www.zend.com/">', '<a href="http://www.zend.com/" target="_blank">', $inhalt);

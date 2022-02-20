@@ -58,7 +58,7 @@ function ftp_openconnection() {
 	}
 
 // Login with username and password
-// IronBASE: @ hinzugefügt
+// Personal WebBase: @ hinzugefügt
 	$login_result = @ftp_login($conn_id, $net2ftp_globals["username"], $net2ftp_password);
 	if ($login_result == false) {
 		$errormessage = __("Unable to login to FTP server <b>%1\$s</b> with username <b>%2\$s</b>.<br /><br />Are you sure your username and password are correct? Please contact your ISP helpdesk or system administrator for help.<br />", $net2ftp_globals["ftpserver"], $net2ftp_globals["username"]);
@@ -127,7 +127,7 @@ function ftp_openconnection2() {
 	}
 
 // Login with username and password
-// IronBASE: @ hinzugefügt
+// Personal WebBase: @ hinzugefügt
 	$login_result = @ftp_login($conn_id, $net2ftp_globals["username2"], $net2ftp_globals["password2"]);
 	if ($login_result == false) {
 		$errormessage = __("Unable to login to the second (target) FTP server <b>%1\$s</b> with username <b>%2\$s</b>.<br /><br />Are you sure your username and password are correct? Please contact your ISP helpdesk or system administrator for help.<br />", $net2ftp_globals["ftpserver2"], $net2ftp_globals["username2"]);

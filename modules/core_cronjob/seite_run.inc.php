@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 function cron_shutdown()
 {
@@ -19,7 +19,7 @@ function cron_shutdown()
   if (($out != '') && (function_exists('fehler_melden')))
   {
     db_connect(); // Durch die übliche Shutdown-Funktion ist die DB-Verbindung bereits getrennt
-    fehler_melden($modul, '<b>Cron-Ausgabe nicht leer</b><br><br>Der Crondurchlauf ist unsauber, da ein Modul Ausgaben verursacht. Dies zeigt in der Regel eine Fehlfunktion des Systems oder eine St&ouml;rung der Cronjobs und kann sich auf das ViaThinkSoft-Promoting auswirken. Die komplette Ausgabe des Crondurchlaufes ist:<br><br>'.$out);
+    fehler_melden($modul, '<b>Cron-Ausgabe nicht leer</b><br><br>Der Crondurchlauf ist unsauber, da ein Modul Ausgaben verursacht. Dies zeigt in der Regel eine Fehlfunktion des Systems oder eine St&ouml;rung der Cronjobs<!-- und kann sich auf das ViaThinkSoft-Promoting auswirken-->. Die komplette Ausgabe des Crondurchlaufes ist:<br><br>'.$out);
     db_disconnect();
   }
 }
@@ -38,7 +38,7 @@ if (db_num($rsc) > 0)
   $row = db_fetch($res);
 
   ib_change_config('last_cronjob', $row[0], $modul);
-  ib_change_config('lastpromotor', $REMOTE_ADDR, $modul);
+  ib_change_config('lastpromotor', $_SERVER['REMOTE_ADDR'], $modul);
 
   ob_start();
 

@@ -1,11 +1,11 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
     if ($modulueberschrift == '') $modulueberschrift = $modul;
-    echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+    echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     echo 'Hier sind alle Benutzer aufgelistet.<br><br>';
 
     gfx_begintable();

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 ib_add_config('enable_gast', '0', $m2);
 ib_add_config('gast_username', 'test', $m2);
@@ -11,6 +11,6 @@ ib_add_config('wipe_uhrzeit', '03:00:00', $m2);
 
 $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = 'test'");
 if (db_num($res) == 0)
-  db_query("INSERT INTO `".$mysql_zugangsdaten['praefix']."users` (`username`, `email`, `gesperrt`, `personenname`, `passwort`, `created_database`, `last_login`) VALUES ('test', '', '0', 'IronBASE Testbenutzer', '".md5('iridium')."', NOW(), '0000-00-00 00:00:00')");
+  db_query("INSERT INTO `".$mysql_zugangsdaten['praefix']."users` (`username`, `email`, `gesperrt`, `personenname`, `passwort`, `created_database`, `last_login`) VALUES ('test', '', '0', 'Personal WebBase Testbenutzer', '".md5('iridium')."', NOW(), NULL)");
 
 ?>

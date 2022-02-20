@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
@@ -30,7 +30,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 	unset($m2);
 
     if ($modulueberschrift == '') $modulueberschrift = $modul;
-    echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+    echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
     echo '<span style="font-size:1.2em"><b>Serverdaten</b></span><br><br>';
     gfx_begintable();
@@ -120,7 +120,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
 
               echo '<a href="'.oop_link_to_modul($m2).'" class="menu">';
               echo '<img src="'.$g.'" border="0" width="32" height="32" alt="">';
-	          echo '<br>'.htmlentities($modulueberschrift).'</a></td>';
+	          echo '<br>'.my_htmlentities($modulueberschrift).'</a></td>';
 	        }
 	      }
 	    }

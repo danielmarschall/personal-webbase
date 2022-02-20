@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 /* if (!@is_writable('includes/session/'))
 {
@@ -22,7 +22,7 @@ if (version_compare(PHP_VERSION, '5.0.0', 'ge') && substr(PHP_OS, 0, 3) != 'WIN'
   @ini_set('session.hash_function', 1);
   @ini_set('session.hash_bits_per_character', 6);
 }
-@ini_set('session.save_handler', 'user');
+//@ini_set('session.save_handler', 'user'); // Auskommentiert. Geht mit aktuellen PHP Versionen nicht mehr, denn man muss session_set_save_handler() aufrufen (siehe https://bugs.php.net/bug.php?id=77384 )
 // @ini_set('session.save_path', 'includes/session/');
 //@ini_set('arg_separator.output', '&amp;');
 //@ini_set('url_rewriter.tags', 'a=href,area=href,frame=src,input=src,fieldset=');
@@ -158,7 +158,7 @@ if ($ary[count($ary)-1] == 'modulseite.php')
 
 $usedns = TRUE;
 
-$useragent = $_SERVER['HTTP_USER_AGENT'];
+$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 $host = fetchip();
 
 if ($usedns) // <- war im Originalen $global['dns']... was soll das sein?!
@@ -185,11 +185,11 @@ if ((isset($_SESSION['session_secured'])) && ($_SESSION['session_secured']))
 
 // -----------------------------------------------------------------------------------------------------
 
-$gesperrt = $header.'<h1>Fehler</h1>Sie wurden als Benutzer von IronBASE gesperrt. Bitte wenden Sie sich an den Serveradministrator.<br><br><a href="index.php">Zur&uuml;ck zum Webinterface</a>'.$footer;
+$gesperrt = $header.'<h1>Fehler</h1>Sie wurden als Benutzer von Personal WebBase gesperrt. Bitte wenden Sie sich an den Serveradministrator.<br><br><a href="index.php">Zur&uuml;ck zum Webinterface</a>'.$footer;
 
 if (!isset($ib_user_type)) $ib_user_type = -1;
 
-if (isset($HTTP_POST_VARS['login_process']) && ($HTTP_POST_VARS['login_process'] == '1'))
+if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
 {
   if ($ib_user_type == 2)
   {

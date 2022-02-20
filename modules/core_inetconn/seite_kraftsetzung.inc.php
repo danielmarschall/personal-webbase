@@ -1,13 +1,13 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
 
     if ($aktion == 'changekonfig')
     {
       ib_change_config('internet-check-url', db_escape($internet_check_url), $modul);
-      if ((isset($internet-check-port)) && (is_numeric($internet-check-port)))
+      if (isset($internet_check_port) && is_numeric($internet_check_port))
         ib_change_config('internet-check-port', db_escape($internet_check_port), $modul);
 
       if (!isset($vonmodul)) $vonmodul = 'admin_konfig';

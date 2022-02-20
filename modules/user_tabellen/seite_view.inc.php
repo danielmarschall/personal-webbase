@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   // Initialisierung
   $res = db_query("SELECT name, data FROM ".$mysql_zugangsdaten['praefix']."tabellen WHERE id = '".db_escape($id)."' AND user = '".$benutzer['id']."'");
@@ -30,7 +30,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
         $titel = base64_decode($titel);
         if (strlen($titel) > $max_laenge)
           $titel = substr($titel, 0, $max_laenge).'...';
-        $titel = htmlentities($titel);
+        $titel = my_htmlentities($titel);
         echo '<td><b>'.$titel.'</b></td>';
       }
       echo '</tr>';
@@ -56,7 +56,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
           $inhalt = base64_decode($ary2[$i]);
           if (strlen($inhalt) > $max_laenge)
             $inhalt = substr($inhalt, 0, $max_laenge).'...';
-          $inhalt = htmlentities($inhalt);
+          $inhalt = my_htmlentities($inhalt);
         }
         echo '<td>'.$inhalt.'</td>';
       }

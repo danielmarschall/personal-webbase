@@ -3,10 +3,13 @@
 //////////////////////////////////////////////////////////////////////////////
 // SICHERHEITSVARIABLE                                                      //
 //////////////////////////////////////////////////////////////////////////////
-// Ohne diese werden Modulinhalte nicht ausgeführt                          //
+// Ohne diese werden Modulinhalte nicht ausgefÃ¼hrt                          //
 //////////////////////////////////////////////////////////////////////////////
 
 define('IBLEGAL', '1');
+
+header('Content-Type: text/html; charset=ISO-8859-1');
+mb_internal_encoding("ISO-8859-1");
 
 //////////////////////////////////////////////////////////////////////////////
 // FUNKTIONEN                                                               //
@@ -15,19 +18,19 @@ define('IBLEGAL', '1');
 require 'includes/functions.inc.php';
 
 //////////////////////////////////////////////////////////////////////////////
-// PRÜFUNG VON MODDIR.TXT                                                   //
+// PRÃœFUNG VON MODDIR.TXT                                                   //
 //////////////////////////////////////////////////////////////////////////////
 
 if (!file_exists('modules/moddir.txt'))
 {
-  die('<h1>IronBASE ist gesperrt</h1>Kann Datei modules/moddir.txt, die das Modulverzeichnis idendifiziert, nicht finden. Ist diese vorhanden, sind die Zugriffsberechtigungen der Dateien falsch. Empfohlen: Ordner CHMOD 755, Dateien CHMOD 644.');
+  die('<h1>Personal WebBase ist gesperrt</h1>Kann Datei modules/moddir.txt, die das Modulverzeichnis identifiziert, nicht finden. Ist diese vorhanden, sind die Zugriffsberechtigungen der Dateien falsch. Empfohlen: Ordner CHMOD 755, Dateien CHMOD 644.');
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// KOMPATIBILITÄT                                                           //
+// KOMPATIBILITÃ„T                                                           //
 //////////////////////////////////////////////////////////////////////////////
-// Hier werden Einstellunen von PHP lokal verändert oder Variablen          //
-// bearbeitet, sodass IronBASE möglichst unabhängig von fremden             //
+// Hier werden Einstellunen von PHP lokal verÃ¤ndert oder Variablen          //
+// bearbeitet, sodass Personal WebBase mÃ¶glichst unabhÃ¤ngig von fremden             //
 // Konfigurationen wird und funktionell bleibt!                             //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -35,7 +38,10 @@ if (!file_exists('modules/moddir.txt'))
 @ini_set('magic_quotes_sybase', 'Off');
 
 // 2. Magic Quotes Runtime abschalten
-set_magic_quotes_runtime(0);
+if (function_exists('set_magic_quotes_runtime'))
+{
+  @set_magic_quotes_runtime(0);
+}
 
 // 3. variables_order / gpc_order ersetzen
 @ini_set('register_long_arrays', '1');
@@ -43,23 +49,19 @@ $types_to_register = array('ENV', 'GET', 'POST', 'COOKIE', 'SERVER'); // SESSION
 foreach ($types_to_register as $rtype)
 {
   // 4. Funktion von "Register Globals" ersetzen, wenn es ausgeschaltet ist
-  if ((!ini_get('register_globals')) && (@count(${'HTTP_'.$rtype.'_VARS'}) > 0))
-    extract(${'HTTP_'.$rtype.'_VARS'}, EXTR_OVERWRITE);
+  if ((!ini_get('register_globals')) && isset(${'_'.$rtype}) && (@count(${'_'.$rtype}) > 0))
+    extract(${'_'.$rtype}, EXTR_OVERWRITE);
 
   // Workaround, wenn register_long_arrays nicht auf 1 gesetzt werden konnte
-  if (ini_get('register_long_arrays') == '1')
-    $ch = 'HTTP_'.$rtype.'_VARS';
-  else
-    $ch = '_'.$rtype;
+  $ch = '_'.$rtype;
 
   // 5. Wenn "Magic Quotes GPC" aktiviert, dann die Aenderungen an GET/POST/COOKIE wieder rueckgaengig machen!
   // Wir haben db_escape(), um SQL-Strings vor Injektionen zu schuetzen. Wir brauchen Magic Quotes nicht!
-  if ((get_magic_quotes_gpc() == 1) && (($rtype == 'GET') || ($rtype == 'POST') || ($rtype == 'COOKIE')))
+  if (function_exists('get_magic_quotes_gpc') && (get_magic_quotes_gpc() == 1) && (($rtype == 'GET') || ($rtype == 'POST') || ($rtype == 'COOKIE')))
   {
     foreach ($$ch AS $m1 => $m2)
     {
       $$m1 = stripslashes($$m1);
-      ${'HTTP_'.$rtype.'_VARS'}[$m1] = stripslashes(${'HTTP_'.$rtype.'_VARS'}[$m1]);
       ${'_'.$rtype}[$m1] = stripslashes(${'_'.$rtype}[$m1]);
     }
 
@@ -69,13 +71,12 @@ foreach ($types_to_register as $rtype)
 
   // 6. In HTML-Zeichen translatieren
   // Wenn Benutzer z.B. &auml; in ein Formular eingeben, soll dies nicht uebersetzt werden etc!
-  // Übersetzung von < und > verhindert HTML-Code-Ausführung
+  // Ãœbersetzung von < und > verhindert HTML-Code-AusfÃ¼hrung
   if (($rtype == 'GET') || ($rtype == 'POST') || ($rtype == 'COOKIE'))
   {
     foreach ($$ch AS $m1 => $m2)
     {
       $$m1 = transamp_replace_spitze_klammern($$m1);
-      ${'HTTP_'.$rtype.'_VARS'}[$m1] = transamp_replace_spitze_klammern(${'HTTP_'.$rtype.'_VARS'}[$m1]);
       ${'_'.$rtype}[$m1] = transamp_replace_spitze_klammern(${'_'.$rtype}[$m1]);
     }
 
@@ -95,7 +96,7 @@ else
 // 8. MAX_EXECUTION_TIME
 @set_time_limit(0);
 
-// 9. Um unsauber entwickelte Module zu verhindern, höchstes Fehlerlevel aktivieren
+// 9. Um unsauber entwickelte Module zu verhindern, hÃ¶chstes Fehlerlevel aktivieren
 if ((int)$ary[0] >= 5)
   @error_reporting(E_ALL | E_STRICT);
 else
@@ -127,12 +128,16 @@ if (file_exists('includes/config.inc.php'))
 
 if ($lock)
 {
-  die('<h1>IronBASE ist gesperrt</h1>Die Variable &quot;$lock&quot; in &quot;includes/config.inc.php&quot; steht auf 1 bzw. true. Setzen Sie diese Variable erst auf 0, wenn das Hochladen der Dateien beim Installations- bzw. Updateprozess beendet ist. Wenn Sie IronBASE freigeben, bevor der Upload abgeschlossen ist, kann es zu einer Besch&auml;digung der Kundendatenbank kommen!');
+  die('<h1>Personal WebBase ist gesperrt</h1>Die Variable &quot;$lock&quot; in &quot;includes/config.inc.php&quot; steht auf 1 bzw. true. Setzen Sie diese Variable erst auf 0, wenn das Hochladen der Dateien beim Installations- bzw. Updateprozess beendet ist. Wenn Sie Personal WebBase freigeben, bevor der Upload abgeschlossen ist, kann es zu einer Besch&auml;digung der Kundendatenbank kommen!');
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // SSL-VERBINDUNG ERZWINGEN?                                                //
 //////////////////////////////////////////////////////////////////////////////
+
+// Hotfix exklusiv fÃ¼r VTS Demosystem
+//if ((isset($modul)) && ($modul == 'core_cronjob')) {
+//} else {
 
 if ($force_ssl) @ini_set('session.cookie_secure', 1);
 
@@ -142,14 +147,16 @@ if (($force_ssl) && (!isset($_SERVER['HTTPS']) || (strtolower($_SERVER['HTTPS'])
   exit();
 }
 
+//}
+
 //////////////////////////////////////////////////////////////////////////////
-// DATENBANKKONNEKTIVITÄT                                                   //
+// DATENBANKKONNEKTIVITÃ„T                                                   //
 //////////////////////////////////////////////////////////////////////////////
 
 require 'includes/database.inc.php';
 
 //////////////////////////////////////////////////////////////////////////////
-// KONSTANTEN FÜR DESIGN                                                    //
+// KONSTANTEN FÃœR DESIGN                                                    //
 //////////////////////////////////////////////////////////////////////////////
 
 $javascript = '<script language="JavaScript" type="text/javascript">
@@ -209,10 +216,10 @@ $header = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <html>
   <head>
-	<title>IronBASE</title>
+	<title>ViaThinkSoft Personal WebBase</title>
     <link href="style.css.php" rel="stylesheet" type="text/css">
     <link rel="SHORTCUT ICON" href="favicon.ico">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   </head>
 
   <body>'.$javascript;
@@ -221,8 +228,9 @@ $header_navi = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
   <html>
     <head>
-  	<title>IronBASE</title>
+  	  <title>ViaThinkSoft Personal WebBase</title>
       <link href="style.css.php" rel="stylesheet" type="text/css">
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     </head>
 
   <body class="dark">'.$javascript;
@@ -259,7 +267,7 @@ function liste_module()
 
 $module = liste_module();
 
-// 2. Modul-Autostarts ausführen
+// 2. Modul-Autostarts ausfÃ¼hren
 
 $erf = false;
 for ($st=0; true; $st++)
@@ -280,4 +288,3 @@ for ($st=0; true; $st++)
   if (!$erf) break;
 }
 
-?>

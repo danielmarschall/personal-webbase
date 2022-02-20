@@ -1,12 +1,12 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
   if ($modulueberschrift == '') $modulueberschrift = $modul;
 
-  echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+  echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
   echo '<b>Anmerkung:</b> Ereignismeldungen werden von den Modulen eingetragen. Dies funktioniert jedoch nur, wenn kein Fehler in der MySQL-Datenbank besteht!<br><br>';
 

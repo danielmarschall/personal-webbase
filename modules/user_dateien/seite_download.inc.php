@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $res = db_query("SELECT `daten`, `type`, `dateiname` FROM `".$mysql_zugangsdaten['praefix']."dateien` WHERE `id` = '".db_escape($id)."' AND `user` = '".$benutzer['id']."'");
 

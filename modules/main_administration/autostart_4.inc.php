@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // Sicherheitsabschnitt
 
@@ -9,7 +9,7 @@ $ary = explode('/', $_SERVER['PHP_SELF']);
 if (($konfiguration['main_administration']['admin_pwd'] == '') && ($ary[count($ary)-1] != 'style.css.php'))
 {
   $fehler = '';
-  if ($setapwd == '1')
+  if (isset($_REQUEST['setapwd']) && ($_REQUEST['setapwd'] == '1'))
   {
     if ($apw1 == '')
       $fehler .= '<font color="#FF0000">Fehler: Es muss ein Passwort angegeben werden!</font><br><br>';
@@ -26,13 +26,13 @@ if (($konfiguration['main_administration']['admin_pwd'] == '') && ($ary[count($a
       if (!headers_sent()) header('location:'.$_SERVER['PHP_SELF']);
     }
   }
-  die($header.'<h1>Aktivierung von IronBASE</h1>IronBASE nutzt derzeit noch das Administratorpasswort, das bei der Auslieferung gesetzt wurde. Sie <u>m&uuml;ssen</u> ein eigenes Administratorpasswort eingeben!<br><br>
+  die($header.'<h1>Aktivierung von Personal WebBase</h1>Personal WebBase nutzt derzeit noch das Administratorpasswort, das bei der Auslieferung gesetzt wurde. Sie <u>m&uuml;ssen</u> ein eigenes Administratorpasswort eingeben!<br><br>
   Bitte loggen Sie sich danach in den Administrationsbereich ein, um ggf. die Konfigurationswerte anzupassen.<br><br><form action="'.$_SERVER['PHP_SELF'].'" method="POST">
   <input type="hidden" name="setapwd" value="1">
   <table cellpadding="0" cellspacing="0" border="0">
   <tr><td width="225">Administratorpasswort festlegen auf:</td><td>&nbsp;&nbsp;&nbsp;</td><td><input type="password" name="apw1" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';"></td></tr>
   <tr><td>Eingabe wiederholen:</td><td>&nbsp;&nbsp;&nbsp;</td><td><input type="password" name="apw2" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';"></td></tr>
-  </table><br>Damit IronBASE sicherstellen kann, dass Sie derjenige sind, der IronBASE auch installiert hat, geben Sie bitte jetzt noch die MySQL-Zugangsdaten ein, das Sie in der Konfigurationsdatei <code>includes/config.inc.php</code> bei <code>$mysql_zugangsdaten[\'username\']</code> und <code>$mysql_zugangsdaten[\'passwort\']</code> eingetragen haben.<br><br>
+  </table><br>Damit Personal WebBase sicherstellen kann, dass Sie derjenige sind, der Personal WebBase auch installiert hat, geben Sie bitte jetzt noch die MySQL-Zugangsdaten ein, das Sie in der Konfigurationsdatei <code>includes/config.inc.php</code> bei <code>$mysql_zugangsdaten[\'username\']</code> und <code>$mysql_zugangsdaten[\'passwort\']</code> eingetragen haben.<br><br>
   <table cellpadding="0" cellspacing="0" border="0">
   <tr><td width="225">MySQL-Benutzername:</td><td>&nbsp;&nbsp;&nbsp;</td><td><input type="text" name="validuser" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';"></td></tr>
   <tr><td width="225">MySQL-Passwort:</td><td>&nbsp;&nbsp;&nbsp;</td><td><input type="password" name="validpass" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';"></td></tr>

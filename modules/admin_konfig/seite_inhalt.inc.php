@@ -1,11 +1,11 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
     echo 'Folgende Module enthalten eine designte Konfigurationsm&ouml;glichkeit:<br><br>';
 
@@ -48,7 +48,7 @@ echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
           echo '<img src="modules/'.$m2.'/gross.png" border="0" width="32" height="32" alt="">';
         else
           echo '<img src="design/spacer.gif" border="0" width="32" height="32" alt="">';
-        echo '<br>'.htmlentities($titel).'</a></td>';
+        echo '<br>'.my_htmlentities($titel).'</a></td>';
       }
     }
 

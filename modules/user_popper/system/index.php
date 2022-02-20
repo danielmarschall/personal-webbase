@@ -79,8 +79,8 @@ session_write_close();
 		  $types_to_register = array('GET','POST','COOKIE','SESSION','SERVER');
 		  foreach ($types_to_register as $type)
 		  {
-		    if (@count(${'HTTP_' . $type . '_VARS'}) > 0)
-		      extract(${'HTTP_' . $type . '_VARS'}, EXTR_OVERWRITE);
+		    if (@count(${'_' . $type}) > 0)
+		      extract(${'_' . $type}, EXTR_OVERWRITE);
 		  }
 }
 

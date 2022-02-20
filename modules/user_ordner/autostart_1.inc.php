@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 function gfx_zeichneordnerbox($modul, $append, $dir = 0, $einzug = 0, $auszuwaehlen = 0, $ausschluss = 0)
 {

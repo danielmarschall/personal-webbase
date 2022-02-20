@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // Server-Cronjobs sind ausgeschaltet... (Über 2 Minuten kein Cron)
 // -> Zwangsweise über HTTP-Abruf!

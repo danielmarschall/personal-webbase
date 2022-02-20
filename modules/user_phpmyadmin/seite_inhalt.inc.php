@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   if (function_exists('show_modul_search'))
     echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'suchbegriff\').focus();"', $header);
@@ -8,7 +8,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.')
     echo $header;
 
   if ($modulueberschrift == '') $modulueberschrift = $modul;
-  echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+  echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
   if (function_exists('show_modul_search')) show_modul_search($modul, $seite);
   gfx_begintable();
 

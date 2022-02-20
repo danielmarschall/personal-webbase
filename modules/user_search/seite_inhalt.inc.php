@@ -1,15 +1,15 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'suchbegriff\').focus();"', $header);
 
 if ($modulueberschrift == '') $modulueberschrift = $modul;
-echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
   if (!isset($suchbegriff)) $suchbegriff = '';
 
-  echo 'Hier k&ouml;nnen Sie Ihre IronBASE-Datenbank durchsuchen.
+  echo 'Hier k&ouml;nnen Sie Ihre Personal WebBase-Datenbank durchsuchen.
   Bitte beachten Sie, dass nur Datenbankeintr&auml;ge von Modulen gefunden werden
   k&ouml;nnen, die von den Entwicklern mit einer Suchschnittstelle ausgestattet wurden.
   Es werden in der Regel nur die Datens&auml;tze durchsucht, keine Systeme von Drittanbietern

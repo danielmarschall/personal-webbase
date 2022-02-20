@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (($aktion == 'new') || ($aktion == 'edit'))
 {
@@ -95,7 +95,7 @@ echo '<table cellspacing="0" cellpadding="0" border="0">
 <tr>
   <td valign="top">HTML-Code:<img src="design/spacer.gif" height="1" width="35" alt=""></td>
   <td valign="top" width="100%">
-  <table width="100%"><tr><td rowspan="8" style="vertical-align:top;width:100%">Verwenden Sie eine vordefinierte HTML-Seite wenn Sie z.B. ein automatisches Login-Formular erstellen, jedoch kein IronBASE-Modul schreiben m&ouml;chten.<br><br>
+  <table width="100%"><tr><td rowspan="8" style="vertical-align:top;width:100%">Verwenden Sie eine vordefinierte HTML-Seite wenn Sie z.B. ein automatisches Login-Formular erstellen, jedoch kein Personal WebBase-Modul schreiben m&ouml;chten.<br><br>
   <textarea style="width:100%; overflow:auto;" wrap="virtual" name="hcode" rows="15" cols="50">'.$hcode.'</textarea><br><br>
   Eine Vorlage kann Ihnen die Arbeit erleichtern. W&auml;hlen Sie eine Vorlage, wenn Sie dies w&uuml;nschen.
   <ul>';

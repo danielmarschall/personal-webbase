@@ -1,9 +1,9 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // Revision-Informationen
-$revision = '0.74';
-$rev_datum = '08.08.2009';
+$revision = '0.75';
+$rev_datum = '20.02.2022';
 
 ?>

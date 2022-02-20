@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (($aktion == 'new') || ($aktion == 'edit'))
 {
@@ -102,7 +102,7 @@ echo '<table cellspacing="0" cellpadding="0" border="0">
   echo '</td>
 </tr>
 <tr>
-  <td colspan="2"><br>Information: Wenn Sie keinen Linknamen angeben, wird IronBASE versuchen,
+  <td colspan="2"><br>Information: Wenn Sie keinen Linknamen angeben, wird Personal WebBase versuchen,
 den Titel der Webseite automatisch herauszufinden.<br><br><b>Update-Service</b><br><br></td>
 </tr>
 <tr>
@@ -136,7 +136,7 @@ den Titel der Webseite automatisch herauszufinden.<br><br><b>Update-Service</b><
 [<a href="javascript:subm_form(1);">Parsing testen</a>]</td>
 </tr>
 <tr>
-  <td colspan="2"><br>Information: Bei Webseiten mit dynamischen Elementen (wie z.B. ein sich st&auml;ndig aktualisierender Counter oder ein Zufallsbild) m&uuml;ssen Sie relevante Ver&auml;nderungsmuster (wie z.B. ein Aktualisierungsdatum der Webseite) parsen. Bitte bedenken Sie, dass Sie f&uuml;r die Update-Jobs, die Sie in Auftrag geben, selbst verantwortlich sind. Absichtlich herbeigef&uuml;hrte, extreme Serverauslastungen k&ouml;nnen die K&uuml;ndigung Ihres IronBASE-Accounts bewirken.</td>
+  <td colspan="2"><br>Information: Bei Webseiten mit dynamischen Elementen (wie z.B. ein sich st&auml;ndig aktualisierender Counter oder ein Zufallsbild) m&uuml;ssen Sie relevante Ver&auml;nderungsmuster (wie z.B. ein Aktualisierungsdatum der Webseite) parsen. Bitte bedenken Sie, dass Sie f&uuml;r die Update-Jobs, die Sie in Auftrag geben, selbst verantwortlich sind. Absichtlich herbeigef&uuml;hrte, extreme Serverauslastungen k&ouml;nnen die K&uuml;ndigung Ihres Personal WebBase-Accounts bewirken.</td>
 </tr>
 <tr>
   <td colspan="2"><br><b>Nach Speicherung</b><br><br></td>

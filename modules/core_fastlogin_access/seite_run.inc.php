@@ -1,13 +1,13 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (!isset($secretkey)) $secretkey = '';
 
 if (!$konfiguration[$modul]['enabled'])
 {
   echo $header;
-  echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+  echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
   echo 'Der Administrator hat die Schnellanmeldung deaktiviert.';
   echo $footer;
 }
@@ -57,7 +57,7 @@ else
   else
   {
     echo $header;
-    echo '<h1>'.htmlentities($modulueberschrift).'</h1>';
+    echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     echo 'Authentifizierung war nicht erfolgreich! M&ouml;glichweise ist die Schnellanmelde-URL abgelaufen.';
     echo $footer;
   }

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $res = db_query("SELECT `url`, `update_enabled`, `update_text_begin`, `update_text_end`, `update_checkurl` FROM `".$mysql_zugangsdaten['praefix']."links` WHERE `id` = '".db_escape($id)."' AND `user` = '".$benutzer['id']."'");
 $row = db_fetch($res);

@@ -1,12 +1,15 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $meldung = '';
 
 if ($konfiguration[$m2]['passivcron'] == '1')
 {
-  $meldung .= '<font color="#FF0000">Der serverseitige Crondienst ist auf diesem Server gest&ouml;rt oder deaktiviert!</font><br>Tipp: <a href="http://www.viathinksoft.de/info/ironbase/promoting.php';
+  $meldung .= '<font color="#FF0000">Der serverseitige Crondienst ist auf diesem Server gest&ouml;rt oder deaktiviert!</font>';
+
+  /*
+  $meldung .= '<br>Tipp: <a href="https://personal-webbase.de/promoting.html';
 
   if ($_SERVER["SERVER_ADDR"] != '127.0.0.1')
   {
@@ -18,6 +21,7 @@ if ($konfiguration[$m2]['passivcron'] == '1')
     $meldung .= $_SERVER["HTTP_HOST"].str_replace('\\', '/', dirname($_SERVER["PHP_SELF"]));
   }
   $meldung .= '" target="_blank">Jetzt ViaThinkSoft-Promoting kostenlos nutzen!</a>';
+  */
 }
 else
   $meldung .= '<font color="#00BB00">Der serverseitige Crondienst ist im Moment auf diesem Server in Ordnung!</font>';

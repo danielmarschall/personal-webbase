@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne IronBASE ausgef&uuml;hrt werden.');
+if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (($aktion == 'new') || ($aktion == 'edit'))
 {
@@ -30,7 +30,7 @@ echo '<form method="POST" name="mainform" action="'.$_SERVER['PHP_SELF'].'">
 <input type="hidden" name="aktion" value="'.$aktion.'">
 <input type="hidden" name="modul" value="'.$modul.'">';
 
-if ($HTTP_GET_VARS['aktion'] == 'edit')
+if ($_GET['aktion'] == 'edit')
   echo '<input type="hidden" name="id" value="'.$id.'">';
 
 echo '<table cellspacing="0" cellpadding="0" border="0">
