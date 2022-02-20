@@ -1,0 +1,136 @@
+POPPER
+======
+http://www.ractive.ch/gpl/popper.html
+
+Version 1
+=========
+Initial release
+
+Version 1.1
+===========
+- Faulty popper.mysql file fixed
+- Nicer layout showing the attachments
+- Implemented an own quoted-printable decoder. PHP's built-in decoder is buggy.
+
+Version 1.101
+=============
+- Wrong date field is handled better now
+- The subject listing is beautified
+
+Version 1.102
+=============
+- The decoding was buggy. Fixed
+- The member-object db_tool in the class popper got lost in some configurations. Why?
+  Now it's checked for existence and "newed" if needed.
+- Reply function get the correct reply address now
+
+Version 1.2
+===========
+- Incorrect date sorting fixed.
+- New qpopper X-UIDL header format supported now
+- The noop check for pop3 servers has been removed. Caused a lot of problems :-(
+- Case insensitive mail-header treatment. Multipart messages from Lotus-Notes etc.
+  are not recognized correctly.
+- Better MIME mail handling
+- More user options to set up the look and feel (no. of mails per page and
+  no. of lines shown at once)
+- Sender of incoming mails can be automatically added to the addressbook
+- Some other bug-fixing
+- Help page added
+
+Version 1.21
+============
+- Heavily improved handling of attachments
+- multipart/related type supported
+- message/rfc822 type supported (this is an attached mail :-)
+- Own X-UIDL implementation for POP-server that don't support that
+  This prevents that mails are downloaded multiple times
+- more bug-fixes
+
+Version 1.3
+============
+- Language support added. Currently available: English, German
+- "Delete all mails" feature added
+- Selective deletion simplified
+- Own X-UIDL implementation redesigned. Works not.
+- Deletion of mails is handled better now
+
+Version 1.31
+============
+- French language-file added (thanx to Pierre Laden for the translation)
+- Bug fixes (esp. for "Create new user")
+- New option in config.inc.php that let's you switch off the user confirmation
+
+Version 1.32
+============
+- PHP versions >= 4.0.3 were not able to send attachments. Fixed! (thanks to Kai Brandt)
+- More MIME-types are recognized and displayed with the correct icon
+- Norwegian language file added (thanx to Stian Lindhom for the translation)
+- Calendar "localized"
+- Date/Time localized
+- Grrr. update131.mysql was missing :-(
+
+Version 1.4b3
+=============
+- Russian language file added. They don't work yet :-(
+  The charset has to be choosen manually in the browser for a correct display.
+- Message-Disposition-Notification (MDN) added. You can request read notification for outging
+  mails.
+- You can send MDNs for mails that request that
+- Small bug-fixes
+
+Version 1.4b5
+=============
+- You now can sort the columns in the main view (Form, subject, date etc.)
+- X-Priority tag supported and shown
+- Get all at the beginning of the "Send and receive" list (many requests :-)
+- The print-view has clickable hyperlinks (!) and shows the name and type of attachments
+- Attention! Mails stored in a previous version won't show the from part in the main view
+  I will write an update script to fix that!!!
+- The usual bug-fixes :-)
+
+Version 1.4b6
+=============
+- New toolbar which allows to perform actions on selected mails:
+  * Delete the selected mails
+  * Add the addresses of the selected mails to the addressbook
+  * Block the senders of the selected mails
+  
+  The way, the toolbar looks like (with the radiobuttons) is ugly. But IE has a bad bug which left
+  me no other coice. IE is not capable to handle <button type="select"> buttons correctly! The sent
+  data is crap!
+  
+- Blocked sender feature! Select mails of senders you don't want to receive e-mails any more, select
+  "Block" in the new toolbar (followed by Go...) and mails from this sender will be automatically put
+  in the recycle bin.
+  You can see your blocked senders in the addressbook
+  
+- General tip! Update to MySQL 3.23! I (and others) had problems with MySQL 3.22 when deleting mails.
+  The DB crashed sometimes if one tried to delete many mails at once!
+
+Version 1.4
+===========
+- The mail-toolbar looks nice now :-)
+- The user can select different view modes. The frame view is quite cool ;-)
+- The window of opened mails looks better now
+- The "Store draft" feature now works again
+- A user can change his password
+- A useraccount can be deleted
+- "Forgot" password feature added
+- Disposition-Notification requests now work! The notification was sent to the reader itself! 
+  $to and $from is not the same ;-)
+  
+Version 1.41
+============
+- Choosing the recipients when writing a new mail works again
+- Some jerks with frame-view fixed.
+- E-Mail adresses in mails are also clickable now
+  
+Version 1.41-r1
+===============
+- Fix for reserved word collision in MySQL >4 (bug #1100222).  Thanks to kodekrash for the heads up.
+
+Version 1.41-r2
+===============
+- Fix for removal of 0's (zeros) from email addresses in headers (bug #1066379).
+

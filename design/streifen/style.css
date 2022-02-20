@@ -1,0 +1,193 @@
+body
+{
+  font-family:Tahoma;
+  font-size:13;
+  background: url(###streifen2.gif) fixed;
+  margin-right:5px;
+  margin-left:5px;
+  margin-bottom:5px;
+  margin-top:5px;
+  padding-top:0px;
+  padding-right:0px;
+  padding-bottom:0px;
+  padding-left:0px;
+  scrollbar-base-color:#EEEEEE;
+  scrollbar-arrow-color:#AAAAAA;
+}
+
+body.dark
+{
+  font-family:Tahoma;
+  font-size:13;
+  background: url(###streifen.gif) fixed;
+  margin-right:0px;
+  margin-left:0px;
+  margin-bottom:0px;
+  margin-top:0px;
+  padding-top:0px;
+  padding-right:10px;
+  padding-bottom:0px;
+  padding-left:10px;
+  scrollbar-base-color:#EEEEEE;
+  scrollbar-arrow-color:#AAAAAA;
+}
+
+body.dark2
+{
+  font-family:Tahoma;
+  font-size:13;
+  background: url(###streifen.gif) fixed;
+  margin-left:10;
+  margin-top:5;
+  margin-right:10;
+  margin-bottom:5;
+  padding-top:0px;
+  padding-right:0px;
+  padding-bottom:0px;
+  padding-left:0px;
+  scrollbar-base-color:#EEEEEE;
+  scrollbar-arrow-color:#AAAAAA;
+}
+
+p, td
+{
+  font-family:Tahoma;
+  font-size:13px;
+}
+
+a.menu:link,a.menu:visited,a.menu:hover
+{
+  color:#000080;
+  text-decoration:none;
+  font-size:13;
+  font-family:Tahoma;
+}
+
+a.menu_blk:link,a.menu_blk:visited,a.menu_blk:hover
+{
+  color:#000000;
+  text-decoration:none;
+  font-size:13;
+  font-family:Tahoma;
+}
+
+a:link
+{
+  color:#FF5500;
+}
+
+a:visited
+{
+  color:#CC5500;
+}
+
+a:hover
+{
+  color:#FFAA00;
+}
+
+h1
+{
+  font-size:22;
+}
+
+h2
+{
+  font-size:19;
+}
+
+h3
+{
+  font-size:16;
+}
+
+input.normal
+{
+  margin-top:3px;
+  margin-bottom:3px;
+  background-color:#F0EEEE;
+  font-family:Trebuchet MS;
+  font-size:11;
+  color:#000000;
+  padding:2px;
+  height:22px;
+  border:1px solid rgb(0,0,0);
+}
+
+input.highlight
+{
+  margin-top:3px;
+  margin-bottom:3px;
+  background-color:#F0EEEE;
+  font-family:Trebuchet MS;
+  font-size:11;
+  color:#000000;
+  padding:2px;
+  height:22px;
+  border:1px solid rgb(0,0,0);
+}
+
+.button
+{
+  margin-top:3px;
+  margin-bottom:3px;
+  background-color:#F0EEEE;
+  font-family:Trebuchet MS;
+  font-size:11;
+  color:#000000;
+  padding:2px;
+  height:22px;
+  width:135px;
+  border:1px solid rgb(0,0,0);
+}
+
+.button_act
+{
+  margin-top:3px;
+  margin-bottom:3px;
+  background-color:#FFC375;
+  font-family:Trebuchet MS;
+  font-size:11;
+  color:#000000;
+  padding:2px;
+  height:22px;
+  width:135px;
+  border:1px solid rgb(0,0,0);
+}
+
+tr.row_tab
+{
+  background: url(###streifen5.gif) fixed;
+}
+
+tr.row_tab_act
+{
+  background: url(###streifen4.gif) fixed;
+}
+
+tr.row_nav
+{
+  cursor:pointer;
+  cursor:hand;
+  padding:2px;
+  background: url(###streifen2.gif) fixed;
+}
+
+tr.row_nav_act
+{
+  cursor:pointer;
+  cursor:hand;
+  padding:2px;
+  background: url(###streifen4.gif) fixed;
+}
+
+tr.area_bar
+{
+  padding:2px;
+  background: url(###streifen3.gif) fixed;
+  
+  font-family:Tahoma;
+  font-size:13;
+  text-decoration:none;
+  color:#000000;
+}
