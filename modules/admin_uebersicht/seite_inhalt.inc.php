@@ -111,10 +111,10 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
 	          echo '<td valign="middle" align="center" width="14%">';
 
-	          if (file_exists('modules/'.$m2.'/gross.gif'))
-	            $g = 'modules/'.$m2.'/gross.gif';
-	          else if (file_exists('modules/'.$m2.'/gross.png'))
-	            $g = 'modules/'.$m2.'/gross.png';
+	          if (file_exists('modules/'.$m2.'/images/menu/32.png'))
+	            $g = 'modules/'.$m2.'/images/menu/32.png';
+	          else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
+	            $g = 'modules/'.$m2.'/images/menu/32.gif';
 	          else
 	            $g = 'design/spacer.gif';
 

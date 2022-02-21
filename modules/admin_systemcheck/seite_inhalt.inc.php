@@ -16,10 +16,10 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
       echo '<td align="center" valign="top">';
 
-      if (file_exists('modules/'.$m2.'/gross.gif'))
-        echo '<img src="modules/'.$m2.'/gross.gif" alt="" width="32" height="32">';
-      else if (file_exists('modules/'.$m2.'/gross.png'))
-        echo '<img src="modules/'.$m2.'/gross.png" alt="" width="32" height="32">';
+      if (file_exists('modules/'.$m2.'/images/menu/32.png'))
+        echo '<img src="modules/'.$m2.'/images/menu/32.png" alt="" width="32" height="32">';
+      else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
+        echo '<img src="modules/'.$m2.'/images/menu/32.gif" alt="" width="32" height="32">';
       else
         echo '<img src="design/spacer.gif" alt="" width="32" height="32">';
 

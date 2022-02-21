@@ -63,17 +63,17 @@ if ($menue == '')
       {
         if (($menuevisible) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
         {
-          if (file_exists('modules/'.$m2.'/gross.gif'))
-            $g = 'modules/'.$m2.'/gross.gif';
-          else if (file_exists('modules/'.$m2.'/gross.png'))
-            $g = 'modules/'.$m2.'/gross.png';
+          if (file_exists('modules/'.$m2.'/images/menu/32.png'))
+            $g = 'modules/'.$m2.'/images/menu/32.png';
+          else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
+            $g = 'modules/'.$m2.'/images/menu/32.gif';
           else
             $g = 'design/spacer.gif';
 
-          if (file_exists('modules/'.$m2.'/klein.gif'))
-            $k = 'modules/'.$m2.'/klein.gif';
-          else if (file_exists('modules/'.$m2.'/klein.png'))
-            $k = 'modules/'.$m2.'/klein.png';
+          if (file_exists('modules/'.$m2.'/images/menu/16.png'))
+            $k = 'modules/'.$m2.'/images/menu/16.png';
+          else if (file_exists('modules/'.$m2.'/images/menu/16.gif'))
+            $k = 'modules/'.$m2.'/images/menu/16.gif';
           else
             $k = 'design/spacer.gif';
 
@@ -82,10 +82,10 @@ if ($menue == '')
         }
         if (isset($prv_modul) && ($m2 == $prv_modul) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
         {
-          if (file_exists('modules/'.$m2.'/gross.gif'))
-            $g = 'modules/'.$m2.'/gross.gif';
-          else if (file_exists('modules/'.$m2.'/gross.png'))
-            $g = 'modules/'.$m2.'/gross.png';
+          if (file_exists('modules/'.$m2.'/images/menu/32.png'))
+            $g = 'modules/'.$m2.'/images/menu/32.png';
+          else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
+            $g = 'modules/'.$m2.'/images/menu/32.gif';
           else
             $g = 'design/spacer.gif';
 
@@ -100,10 +100,10 @@ if ($menue == '')
         {
           if (($modulpos == 0) && ($modulsekpos == 0) && (!$startgefunden) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
           {
-            if (file_exists('modules/'.$m2.'/gross.gif'))
-              $g = 'modules/'.$m2.'/gross.gif';
-            else if (file_exists('modules/'.$m2.'/gross.png'))
-              $g = 'modules/'.$m2.'/gross.png';
+            if (file_exists('modules/'.$m2.'/images/menu/32.png'))
+              $g = 'modules/'.$m2.'/images/menu/32.png';
+            else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
+              $g = 'modules/'.$m2.'/images/menu/32.gif';
             else
               $g = 'design/spacer.gif';
 

@@ -67,17 +67,17 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
 
           $etwas_gefunden = true;
 
-          if (file_exists('modules/'.$row['modul'].'/gross.gif'))
-            $g = 'modules/'.$row['modul'].'/gross.gif';
-          else if (file_exists('modules/'.$row['modul'].'/gross.png'))
-            $g = 'modules/'.$row['modul'].'/gross.png';
+          if (file_exists('modules/'.$row['modul'].'/images/menu/32.png'))
+            $g = 'modules/'.$row['modul'].'/images/menu/32.png';
+          else if (file_exists('modules/'.$row['modul'].'/images/menu/32.gif'))
+            $g = 'modules/'.$row['modul'].'/images/menu/32.gif';
           else
             $g = 'design/spacer.gif';
 
-          if (file_exists('modules/'.$row['modul'].'/klein.gif'))
-		    $k = 'modules/'.$row['modul'].'/klein.gif';
-		  else if (file_exists('modules/'.$row['modul'].'/klein.png'))
-		    $k = 'modules/'.$row['modul'].'/klein.png';
+		  if (file_exists('modules/'.$row['modul'].'/images/menu/16.png'))
+		    $k = 'modules/'.$row['modul'].'/images/menu/16.png';
+          else if (file_exists('modules/'.$row['modul'].'/images/menu/16.gif'))
+		    $k = 'modules/'.$row['modul'].'/images/menu/16.gif';
 		  else
 		  {
 		    if (file_exists('modules/'.$modul.'/item.gif'))

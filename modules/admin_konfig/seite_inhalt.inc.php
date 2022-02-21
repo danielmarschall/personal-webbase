@@ -42,10 +42,10 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
         echo '<td valign="middle" align="center">';
         echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul='.$m2.'&amp;vonmodul='.$modul.'&amp;vonseite='.$seite.'" class="menu">';
-        if (file_exists('modules/'.$m2.'/gross.gif'))
-          echo '<img src="modules/'.$m2.'/gross.gif" border="0" width="32" height="32" alt="">';
-        else if (file_exists('modules/'.$m2.'/gross.png'))
-          echo '<img src="modules/'.$m2.'/gross.png" border="0" width="32" height="32" alt="">';
+        if (file_exists('modules/'.$m2.'/images/menu/32.png'))
+          echo '<img src="modules/'.$m2.'/images/menu/32.png" border="0" width="32" height="32" alt="">';
+        else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
+          echo '<img src="modules/'.$m2.'/images/menu/32.gif" border="0" width="32" height="32" alt="">';
         else
           echo '<img src="design/spacer.gif" border="0" width="32" height="32" alt="">';
         echo '<br>'.my_htmlentities($titel).'</a></td>';

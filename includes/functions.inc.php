@@ -742,10 +742,10 @@ function oop_link_to_modul($modul, $seite = 'inhalt', $titelzeile_modul = '')
     $titel = $modulueberschrift;
   }
 
-  if (file_exists('modules/'.$titelzeile_modul.'/gross.gif'))
-    $g = 'modules/'.$titelzeile_modul.'/gross.gif';
-  else if (file_exists('modules/'.$titelzeile_modul.'/gross.png'))
-    $g = 'modules/'.$titelzeile_modul.'/gross.png';
+  if (file_exists('modules/'.$titelzeile_modul.'/images/menu/32.png'))
+    $g = 'modules/'.$titelzeile_modul.'/images/menu/32.png';
+  else if (file_exists('modules/'.$titelzeile_modul.'/images/menu/32.gif'))
+    $g = 'modules/'.$titelzeile_modul.'/images/menu/32.gif';
   else
     $g = 'design/spacer.gif';
 
