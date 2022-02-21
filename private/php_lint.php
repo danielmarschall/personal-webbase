@@ -1,0 +1,102 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * Personal WebBase
+ * Copyright 2022 Daniel Marschall, ViaThinkSoft
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+# Source:
+# https://svn.viathinksoft.com/cgi-bin/viewvc.cgi/vgwhois/trunk/maintenance/qa-monitor/syntax/global-syntax-check?revision=HEAD&view=markup
+
+if (PHP_OS_FAMILY == 'Windows') {
+	// TODO: Adjust to your system settings
+	chdir('C:\\php-8.0.3-nts-Win32-vs16-x64');
+}
+
+error_reporting(E_ALL | E_NOTICE | E_STRICT | E_DEPRECATED);
+
+//$silent = ($argc >= 2) && ($argv[1] == '--silent');
+$silent = true;
+
+$files = array();
+
+$rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__DIR__))); // dirname() to check the parent directory
+foreach ($rii as $file) {
+        $filename = $file->getPathname();
+        if (strpos($filename, DIRECTORY_SEPARATOR.'.') !== false) continue; # also hide ".dir" and ".file"
+        if (!file_exists($filename)) continue;
+        $files[] = $filename;
+}
+
+$baddest = 0;
+
+foreach ($files as $filename) {
+        $h = fopen($filename, 'r');
+        $headline = fgets($h);
+        fclose($h);
+
+        // Personal WebBase only: Ignore embedded phpMyAdmin/Popper/webftp
+        if (preg_match('@modules'.preg_quote(DIRECTORY_SEPARATOR,'@').'([^/]+)'.preg_quote(DIRECTORY_SEPARATOR,'@').'system@ismU', $filename)) continue;
+        // End
+
+        $scripttype = 'n/a';
+
+        if (preg_match('@#!(.+)\s@U', $headline, $m)) {
+                $interpreter = $m[1];
+
+                switch ($interpreter) {
+                        case '/usr/bin/env php':
+                        case '/usr/bin/php':
+                                $scripttype = 'PHP';
+                                break;
+                        case '/usr/bin/env perl':
+                        case '/usr/bin/perl':
+                                $scripttype = 'Perl';
+                                break;
+                }
+        } else if (strpos($filename, '.php') !== false) {
+                $scripttype = 'PHP';
+        } else if ((strpos($filename, '.pl') !== false) || (strpos($filename, '.pm') !== false)) {
+                $scripttype = 'Perl';
+        }
+
+        $cmd = '';
+        switch ($scripttype) {
+                case 'PHP':
+                        $cmd = 'php -l '.escapeshellarg($filename);
+                        break;
+                case 'Perl':
+                        $cmd = 'perl -Mstrict -Mdiagnostics -cw '.escapeshellarg($filename);
+                        break;
+        }
+
+        if ($cmd) {
+                $out = array();
+                exec($cmd." 2>&1", $out, $code);
+
+                if ($code > $baddest) $baddest = $code;
+
+                if ($code != 0) {
+                        echo "($code) $filename: ".trim(implode("\n    ", $out))."\n";
+                } else {
+                        if (!$silent) echo "OK: $filename\n";
+                }
+        }
+}
+
+echo "Done.\n";
+
+exit($baddest);

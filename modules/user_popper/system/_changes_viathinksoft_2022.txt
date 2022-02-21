@@ -1,0 +1,10 @@
+
+
+class.popper.inc.php
+
+			if ($count < 0 || $count === false) {
+				$error_head = "POP3 $strings[l_Error]<br>$strings[l_Account] $row[personenname]";
+				$error_msg = $pop3->ERROR;
+				$this->report_error($error_msg, $error_head);
+				exit; // ViaThinkSoft 22.02.2022: Changed "continue" to "exit"
+			}

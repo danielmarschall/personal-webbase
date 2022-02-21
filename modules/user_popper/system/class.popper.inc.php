@@ -1994,7 +1994,7 @@ if (true) {
 				$error_head = "POP3 $strings[l_Error]<br>$strings[l_Account] $row[personenname]";
 				$error_msg = $pop3->ERROR;
 				$this->report_error($error_msg, $error_head);
-				continue;
+				exit; // ViaThinkSoft 22.02.2022: Changed "continue" to "exit"
 			}
 
 			// Get the UIDLs from the server
