@@ -45,7 +45,7 @@ if (isset($sent) && ($sent == '1'))
 
   echo '<textarea name="eintraege" cols="70" rows="10"></textarea><br>';
 
-  echo '<br><input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintr&auml;ge Erstellen"> <input type="button" value="Abbrechen" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=inhalt\'" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';">';
+  echo '<br><input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintr&auml;ge Erstellen"> <input type="button" value="Abbrechen" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=inhalt\'" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';">';
 
   echo '</form>';
 

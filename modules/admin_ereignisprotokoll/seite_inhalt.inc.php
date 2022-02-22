@@ -19,7 +19,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
   while ($row = db_fetch($res))
   {
     $gefunden = true;
-    gfx_tablecontent('', $row['datetime'], '', $row['modul'], '', $row['message'], '75', ($row['vorkommen']-1), '75', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=kraftsetzung&amp;aktion=delete&amp;id='.$row['id'].'\');" class="menu">L&ouml;schen</a>');
+    gfx_tablecontent('', $row['datetime'], '', $row['modul'], '', $row['message'], '75', ($row['vorkommen']-1), '75', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=delete&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
   }
 
   if (!$gefunden)
@@ -28,7 +28,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
   gfx_endtable();
 
   if ($gefunden)
-    echo '<center><a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=kraftsetzung&amp;aktion=wipe\');">Alle Ereignismeldungen l&ouml;schen</a></center><br>';
+    echo '<center><a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=wipe\');">Alle Ereignismeldungen l&ouml;schen</a></center><br>';
 
   echo $footer;
 

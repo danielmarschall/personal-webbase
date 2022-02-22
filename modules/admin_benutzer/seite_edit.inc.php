@@ -61,7 +61,7 @@ echo'> Ja</td>
   if ($f_creator_ip == '')
     echo 'Unbekannt!';
   else
-    echo '<a href="http://www.ripe.net/fcgi-bin/whois?form_type=simple&amp;full_query_string=&amp;searchtext='.$f_creator_ip.'&amp;submit.x=0&amp;submit.y=0" target="_blank">'.$f_creator_ip.'</a> (DNS: '.@gethostbyaddr($f_creator_ip).')';
+    echo '<a href="http://www.ripe.net/fcgi-bin/whois?form_type=simple&amp;full_query_string=&amp;searchtext='.urlencode($f_creator_ip).'&amp;submit.x=0&amp;submit.y=0" target="_blank">'.$f_creator_ip.'</a> (DNS: '.@gethostbyaddr($f_creator_ip).')';
 
   echo '</td>
 </tr>
@@ -70,7 +70,7 @@ echo'> Ja</td>
   <td valign="top">'.de_convertmysqldatetime($f_lastlogin).'</td>
 </tr>
 </table><br>
-<a href="javascript:document.mainform.submit();">&Auml;nderungen durchf&uuml;hren</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>
+<a href="javascript:document.mainform.submit();">&Auml;nderungen durchf&uuml;hren</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>
 
 </form>';
 

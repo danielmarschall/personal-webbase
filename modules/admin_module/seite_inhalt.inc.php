@@ -5,7 +5,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 // Funktioniert FTP-Zugang?
 
 if ($konfiguration['core_directftp']['ftp-server'] == '') {
-	$fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
+	$fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
 	$verhindere_loeschen = 1;
 	$conn_id = null;
 	$login_result = false;
@@ -18,19 +18,19 @@ $fehler = '';
 
 if ((!$conn_id) || (!$login_result))
 {
-  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
+  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
   $verhindere_loeschen = 1;
 }
 
 if (($fehler == '') && ((substr($konfiguration['core_directftp']['ftp-verzeichnis'], 0, 1) != '/') || (substr($konfiguration['core_directftp']['ftp-verzeichnis'], strlen($konfiguration['core_directftp']['ftp-verzeichnis'])-1, 1) != '/')))
 {
-  $fehler = 'Die Verzeichnissyntax ist falsch. Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
+  $fehler = 'Die Verzeichnissyntax ist falsch. Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
   $verhindere_loeschen = 1;
 }
 
 if (($fehler == '') && (@ftp_size($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/moddir.txt') == -1))
 {
-  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
+  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;modules&quot;, damit Module ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
   $verhindere_loeschen = 1;
 }
 
@@ -70,8 +70,8 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
       $license = '';
       $deaktiviere_zugangspruefung = 0;
 
-      if (file_exists('modules/'.$m2.'/var.inc.php'))
-        include 'modules/'.$m2.'/var.inc.php';
+      if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
+        include 'modules/'.wb_dir_escape($m2).'/var.inc.php';
       if ($modulueberschrift == '') $modulueberschrift = 'Unbekannt';
       if ($autor == '') $autor = 'Unbekannt';
       if ($version == '') $version = 'Unbekannt';
@@ -93,15 +93,15 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
         $license = 'Personal WebBase-Enclosure';
       else
         $license = 'Unbekannt';
-      $ca = ($cdaten == 0) ? '' : '<a href="'.$_SERVER['PHP_SELF'].'?modul=admin_konfig&amp;seite=konfig&amp;only='.$m2.'&amp;vonmodul='.$modul.'&amp;vonseite='.$seite.'" class="menu">';
+      $ca = ($cdaten == 0) ? '' : '<a href="'.$_SERVER['PHP_SELF'].'?modul=admin_konfig&amp;seite=konfig&amp;only='.urlencode($m2).'&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'" class="menu">';
       $cb = ($cdaten == 0) ? '' : '</a>';
-      $ta = ($mdaten == 0) ? '' : '<a href="'.$_SERVER['PHP_SELF'].'?modul=admin_datenbank&amp;seite=inhalt&amp;only='.$m2.'&amp;vonmodul='.$modul.'&amp;vonseite='.$seite.'" class="menu">';
+      $ta = ($mdaten == 0) ? '' : '<a href="'.$_SERVER['PHP_SELF'].'?modul=admin_datenbank&amp;seite=inhalt&amp;only='.urlencode($m2).'&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'" class="menu">';
       $tb = ($mdaten == 0) ? '' : '</a>';
 
       if ((isset($verhindere_loeschen)) && ($verhindere_loeschen != ''))
         $aktionen = '<font color="#888888">Entfernen</font>';
       else
-        $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.$modul.'&amp;aktion=delete&amp;entfernen='.$m2.'\');" class="menu">Entfernen</a>';
+        $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;entfernen='.urlencode($m2).'\');" class="menu">Entfernen</a>';
 
       gfx_tablecontent('', my_htmlentities($m2), '', my_htmlentities($modulueberschrift), '', my_htmlentities($autor), '', $license, '', $menuevisible, '',  my_htmlentities($version), '', $ca.$cdaten.'C'.$cb.' / '.$ta.$mdaten.'T'.$tb, '', $aktionen);
     }

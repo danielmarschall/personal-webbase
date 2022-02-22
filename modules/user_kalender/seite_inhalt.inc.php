@@ -7,7 +7,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 if ($modulueberschrift == '') $modulueberschrift = $modul;
 echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
-  echo '<center><b>Wochenauflistung</b> - <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=auflistung"><b>Terminauflistung</b></a> - <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=edit&amp;aktion=new&amp;herkunft='.$seite.'"><b>Neuer Eintrag</b></a><br><br></center>';
+  echo '<center><b>Wochenauflistung</b> - <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=auflistung"><b>Terminauflistung</b></a> - <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=edit&amp;aktion=new&amp;herkunft='.urlencode($seite).'"><b>Neuer Eintrag</b></a><br><br></center>';
 
 // http://news.php.net/php.notes/102689
 
@@ -96,7 +96,7 @@ function wochenstat($woche)
       if ($z == 2) $verbleibend = '&Uuml;bermorgen';
       if ($z > 2) $verbleibend = $z.' Tage';
 
-      gfx_tablecontent('', $a1.$wochentag.$a2, '', $a1.$row['name'].$a2, '', $a1.de_convertmysqldatetime($wy.'-'.$wm.'-'.$wd.' '.$row['start_time']).$a2, '', $a1.$verbleibend.$a2, '', '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.$modul.'&amp;aktion=edit&amp;danach=A&amp;id='.$row['id'].'&amp;herkunft='.$seite.'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.$modul.'&amp;aktion=delete&amp;zurueck='.$seite.'&amp;id='.$row['id'].'\');" class="menu">L&ouml;schen</a>');
+      gfx_tablecontent('', $a1.$wochentag.$a2, '', $a1.$row['name'].$a2, '', $a1.de_convertmysqldatetime($wy.'-'.$wm.'-'.$wd.' '.$row['start_time']).$a2, '', $a1.$verbleibend.$a2, '', '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=edit&amp;danach=A&amp;id='.urlencode($row['id']).'&amp;herkunft='.urlencode($seite).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;zurueck='.urlencode($seite).'&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
     }
   }
   if (!$eintr)

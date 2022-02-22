@@ -28,7 +28,7 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
       $s1 = '';
       $s2 = '';
     }
-    if (is_dir('modules/'.$row['modul']))
+    if (is_dir('modules/'.wb_dir_escape($row['modul'])))
     {
       $z = '';
       $x = 'Standard herstellen';
@@ -38,11 +38,11 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
       $z = ' (Nicht mehr installiert)';
       $x = 'Wert entfernen';
     }
-    gfx_tablecontent('', $s1.my_htmlentities($row['modul']).$z.$s2, '',  $s1.my_htmlentities($row['name']).$s2, '', $s1.my_htmlentities($row['wert']).$s2, '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=edit&amp;id='.$row['id'].'" class="menu">'.$s1.'Bearbeiten'.$s2.'</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=kraftsetzung&amp;aktion=delete&amp;id='.$row['id'].'\');" class="menu">'.$s1.$x.$s2.'</a>');
+    gfx_tablecontent('', $s1.my_htmlentities($row['modul']).$z.$s2, '',  $s1.my_htmlentities($row['name']).$s2, '', $s1.my_htmlentities($row['wert']).$s2, '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=edit&amp;id='.urlencode($row['id']).'" class="menu">'.$s1.'Bearbeiten'.$s2.'</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=delete&amp;id='.urlencode($row['id']).'\');" class="menu">'.$s1.$x.$s2.'</a>');
   }
   gfx_endtable();
 
-  echo '<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.$vonmodul.'&amp;seite='.$vonseite.'\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">';
+  echo '<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($vonmodul).'&amp;seite='.urlencode($vonseite).'\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">';
 
   echo $footer;
 

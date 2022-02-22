@@ -17,8 +17,8 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
   // gfx_tablecontent('', '<b>Name</b>', '', '<b>Aktionen</b>', '', '', '', '');
   gfx_zeichneordner($modul, $mysql_zugangsdaten['praefix'].'kontakte', 'ORDER BY `name`');
   gfx_endtable();
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.$modul.'&amp;aktion=new">Neuen Kontakt hinzuf&uuml;gen</a>';
-  echo '<br><a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul=user_ordner&amp;aktion=new&amp;kategorie='.$modul.'">Einen neuen Ordner hinzuf&uuml;gen</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=new">Neuen Kontakt hinzuf&uuml;gen</a>';
+  echo '<br><a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul=user_ordner&amp;aktion=new&amp;kategorie='.urlencode($modul).'">Einen neuen Ordner hinzuf&uuml;gen</a>';
 
   echo $footer;
 

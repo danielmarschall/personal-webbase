@@ -14,7 +14,7 @@ else
   $plural_links1 = '';
 
 if ($ereignisse['links_updates'])
-  $links_weiter1 = '<div align="right"><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$m2.'&amp;onlyupdates=1" class="menu">Anzeigen &gt;&gt;</a></div>';
+  $links_weiter1 = '<div align="right"><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($m2).'&amp;onlyupdates=1" class="menu">Anzeigen &gt;&gt;</a></div>';
 else
   $links_weiter1 = '';
 
@@ -32,7 +32,7 @@ else
   $plural_links2 = '';
 
 if ($ereignisse['links_fehler'])
-  $links_weiter2 = '<div align="right"><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$m2.'&amp;onlyupdates=1" class="menu">Anzeigen &gt;&gt;</a></div>';
+  $links_weiter2 = '<div align="right"><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($m2).'&amp;onlyupdates=1" class="menu">Anzeigen &gt;&gt;</a></div>';
 else
   $links_weiter2 = '';
 

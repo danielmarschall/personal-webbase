@@ -25,10 +25,10 @@ sort($ary);
 
 foreach ($ary as $m1 => $m2)
 {
-  if (file_exists('modules/'.$m2.'/var.inc.php'))
+  if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
   {
     ob_start();
-    readfile('modules/'.$m2.'/var.inc.php');
+    readfile('modules/'.wb_dir_escape($m2).'/var.inc.php');
     $buffer = ob_get_contents();
     ob_end_clean();
 
@@ -44,7 +44,7 @@ foreach ($ary as $m1 => $m2)
       }
     }
 
-    $handle = fopen('modules/'.$m2.'/var.inc.php', 'w');
+    $handle = fopen('modules/'.wb_dir_escape($m2).'/var.inc.php', 'w');
     fwrite($handle, $buffer);
     fclose($handle);
   }
@@ -73,10 +73,10 @@ sort($ary);
 
 foreach ($ary as $m1 => $m2)
 {
-  if (file_exists('design/'.$m2.'/var.inc.php'))
+  if (file_exists('design/'.wb_dir_escape($m2).'/var.inc.php'))
   {
     ob_start();
-    readfile('design/'.$m2.'/var.inc.php');
+    readfile('design/'.wb_dir_escape($m2).'/var.inc.php');
     $buffer = ob_get_contents();
     ob_end_clean();
 
@@ -92,7 +92,7 @@ foreach ($ary as $m1 => $m2)
       }
     }
 
-    $handle = fopen('design/'.$m2.'/var.inc.php', 'w');
+    $handle = fopen('design/'.wb_dir_escape($m2).'/var.inc.php', 'w');
     fwrite($handle, $buffer);
     fclose($handle);
   }

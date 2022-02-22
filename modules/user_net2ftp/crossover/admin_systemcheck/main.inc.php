@@ -29,7 +29,7 @@ else
   }
 }
 
-if (decoct(@fileperms('modules/'.$m2.'/system/temp/')) != 40777)
-  $meldung .= '<br><br><font color="#FF0000">Die Funktionalit&auml;t dieses Modules k&ouml;nnte beeintr&auml;chtigt sein, da der Administrator folgendes Verzeichnis nicht schreibbar (CHMOD 0777) gemacht hat: modules/'.$m2.'/system/temp/</font>';
+if (decoct(@fileperms('modules/'.wb_dir_escape($m2).'/system/temp/')) != 40777)
+  $meldung .= '<br><br><font color="#FF0000">Die Funktionalit&auml;t dieses Modules k&ouml;nnte beeintr&auml;chtigt sein, da der Administrator folgendes Verzeichnis nicht schreibbar (CHMOD 0777) gemacht hat: modules/'.wb_dir_escape($m2).'/system/temp/</font>';
 
 ?>

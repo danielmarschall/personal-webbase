@@ -62,11 +62,11 @@ if (inetconn_ok())
         $license = '';
         $deaktiviere_zugangspruefung = 0;
 
-        if (file_exists('modules/'.$x2.'/var.inc.php'))
-          include 'modules/'.$x2.'/var.inc.php';
+        if (file_exists('modules/'.wb_dir_escape($x2).'/var.inc.php'))
+          include 'modules/'.wb_dir_escape($x2).'/var.inc.php';
 
-        if (file_exists('modules/'.$x2.'/crossover/'.$m2.'/notify.inc.php'))
-          include 'modules/'.$x2.'/crossover/'.$m2.'/notify.inc.php';
+        if (file_exists('modules/'.wb_dir_escape($x2).'/crossover/'.wb_dir_escape($m2).'/notify.inc.php'))
+          include 'modules/'.wb_dir_escape($x2).'/crossover/'.wb_dir_escape($m2).'/notify.inc.php';
       }
     }
   }

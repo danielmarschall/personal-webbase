@@ -41,7 +41,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     else
 	  $addr = 'Keine angegeben';
 
-	gfx_tablecontent('40%', '<b>Administrator E-Mail-Adresse</b>', '60%', $addr.' (<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul=main_ueber&amp;vonmodul='.$modul.'&amp;vonseite='.$seite.'" class="menu">&Auml;ndern</a>)');
+	gfx_tablecontent('40%', '<b>Administrator E-Mail-Adresse</b>', '60%', $addr.' (<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul=main_ueber&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'" class="menu">&Auml;ndern</a>)');
 
 	$rs = db_query("SELECT NOW()");
 	$rw = db_fetch($rs);
@@ -65,7 +65,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     if ($_SESSION['last_login_ip'] == '')
       $ueip = 'Unbekannt';
     else
-      $ueip = '<a href="http://www.ripe.net/fcgi-bin/whois?form_type=simple&amp;full_query_string=&amp;searchtext='.$_SESSION['last_login_ip'].'&amp;submit.x=0&amp;submit.y=0" target="_blank" class="menu">'.$_SESSION['last_login_ip'].'</a> (DNS: '.@gethostbyaddr($_SESSION['last_login_ip']).')';
+      $ueip = '<a href="http://www.ripe.net/fcgi-bin/whois?form_type=simple&amp;full_query_string=&amp;searchtext='.urlencode($_SESSION['last_login_ip']).'&amp;submit.x=0&amp;submit.y=0" target="_blank" class="menu">'.$_SESSION['last_login_ip'].'</a> (DNS: '.@gethostbyaddr($_SESSION['last_login_ip']).')';
 
 	gfx_tablecontent('40%', '<b>&Uuml;ber IP</b>', '60%', $ueip);
 	gfx_tablecontent('40%', '<b>Benutzer-Datens&auml;tze der Datenbank</b>', '60%', $count_ds);
@@ -79,7 +79,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 	    $i = -1;
 	    foreach ($module as $m1 => $m2)
 	    {
-	      if (file_exists('modules/'.$m2.'/seite_inhalt.inc.php'))
+	      if (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php'))
 	      {
 	        $titel = $m2;
 
@@ -93,9 +93,9 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
             $license = '';
             $deaktiviere_zugangspruefung = 0;
 
-	        if (file_exists('modules/'.$m2.'/var.inc.php'))
+	        if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
 	        {
-	          include('modules/'.$m2.'/var.inc.php');
+	          include('modules/'.wb_dir_escape($m2).'/var.inc.php');
 	          $titel = $modulueberschrift;
 	        }
 
@@ -111,10 +111,10 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
 	          echo '<td valign="middle" align="center" width="14%">';
 
-	          if (file_exists('modules/'.$m2.'/images/menu/32.png'))
-	            $g = 'modules/'.$m2.'/images/menu/32.png';
-	          else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
-	            $g = 'modules/'.$m2.'/images/menu/32.gif';
+	          if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
+	            $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';
+	          else if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.gif'))
+	            $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.gif';
 	          else
 	            $g = 'design/spacer.gif';
 

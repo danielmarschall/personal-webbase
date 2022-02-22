@@ -49,7 +49,7 @@ if (isset($sent) && ($sent == '1'))
 
   echo 'Komplettinhalt (tree x: /f /a)<br><br><textarea name="komplett" cols="70" rows="10"></textarea><br><br>';
 
-  echo '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Inhalt einf&uuml;gen"> <input type="button" value="Abbrechen" onclick="document.location.href=\'?modul='.$modul.'&amp;seite=inhalt\'" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';">';
+  echo '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Inhalt einf&uuml;gen"> <input type="button" value="Abbrechen" onclick="document.location.href=\'?modul='.urlencode($modul).'&amp;seite=inhalt\'" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';">';
 
   echo '</form>';
 

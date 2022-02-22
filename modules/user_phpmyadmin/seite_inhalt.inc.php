@@ -15,13 +15,13 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
   // gfx_tablecontent('', '<b>Name</b>', '', '<b>Aktionen</b>', '', '', '', '');
   gfx_zeichneordner($modul, $mysql_zugangsdaten['praefix'].'phpmyadmin', 'ORDER BY id');
   gfx_endtable();
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.$modul.'&amp;aktion=new">Einen neuen Server hinzuf&uuml;gen</a>';
-  echo '<br><a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul=user_ordner&amp;aktion=new&amp;kategorie='.$modul.'">Einen neuen Ordner hinzuf&uuml;gen</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=new">Einen neuen Server hinzuf&uuml;gen</a>';
+  echo '<br><a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul=user_ordner&amp;aktion=new&amp;kategorie='.urlencode($modul).'">Einen neuen Ordner hinzuf&uuml;gen</a>';
 
   echo '<br><br>Es wird folgende Websoftware verwendet: ';
-  if (file_exists('modules/'.$modul.'/system/ver.html'))
+  if (file_exists('modules/'.wb_dir_escape($modul).'/system/ver.html'))
   {
-    $handle = @fopen('modules/'.$modul.'/system/ver.html', 'r');
+    $handle = @fopen('modules/'.wb_dir_escape($modul).'/system/ver.html', 'r');
     $buffer = '';
     while (!@feof($handle))
     {
@@ -32,7 +32,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
   }
   else
   {
-    echo '<font color="#FF0000">modules/'.$modul.'/system/ver.html wurde nicht gefunden!</font>';
+    echo '<font color="#FF0000">modules/'.wb_dir_escape($modul).'/system/ver.html wurde nicht gefunden!</font>';
   }
   echo '<br><br>';
 

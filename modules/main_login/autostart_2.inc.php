@@ -226,7 +226,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
         @session_unset();
         @session_destroy();
 
-        if (!headers_sent()) header('location: index.php?prv_modul='.$m2);
+        if (!headers_sent()) header('location: index.php?prv_modul='.urlencode($m2));
       }
     }
 
@@ -265,7 +265,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
       @session_unset();
       @session_destroy();
 
-      if (!headers_sent()) header('location: index.php?prv_modul='.$m2);
+      if (!headers_sent()) header('location: index.php?prv_modul='.urlencode($m2));
     }
   }
 
@@ -364,7 +364,7 @@ else
         @session_unset();
         @session_destroy();
 
-        if (!headers_sent()) header('location: index.php?prv_modul='.$m2);
+        if (!headers_sent()) header('location: index.php?prv_modul='.urlencode($m2));
       }
     }
     else if ($_SESSION['ib_user_type'] == '1')
@@ -395,7 +395,7 @@ else
         @session_unset();
         @session_destroy();
 
-        if (!headers_sent()) header('location: index.php?prv_modul='.$m2);
+        if (!headers_sent()) header('location: index.php?prv_modul='.urlencode($m2));
       }
     }
     else if ($_SESSION['ib_user_type'] == '2')

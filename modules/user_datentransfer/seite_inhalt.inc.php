@@ -10,7 +10,7 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
 Hier k&ouml;nnen Sie eine Datensicherung durchf&uuml;hren, um beispielsweise auf einen anderen Personal WebBase-Server umzuziehen.<br><br>
 
-<input type="button" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=export\'" value="Datensicherung"><br><br>
+<input type="button" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=export\'" value="Datensicherung"><br><br>
 <b>Datensicherung importieren</b><br><br>
 Hier k&ouml;nnen Sie eine Personal WebBase-Datensicherung einf&uuml;gen.<br><br>
 

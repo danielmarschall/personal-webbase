@@ -29,13 +29,9 @@ if (($aktion == 'new') || ($aktion == 'edit'))
 
   if (isset($vorlage) && ($vorlage != ''))
   {
-    // Achtung! Ein Hacker könnte durch ../ die MySQL-Zugangsdaten statt einer Vorlage auslesen!
-	if (strpos($vorlage, '..'))
-      die($header.'<b>Fehler</b><br><br>Es ist eine Schutzverletzung aufgetreten!'.$footer);
-
     $hcode = '';
 
-    $handle = @fopen('modules/'.$modul.'/vorlagen/'.$vorlage, 'r');
+    $handle = @fopen('modules/'.wb_dir_escape($modul).'/vorlagen/'.wb_dir_escape($vorlage), 'r');
 	if ($handle)
 	{
 	  while (!@feof($handle))
@@ -105,7 +101,7 @@ function liste_vorlagen()
   global $modul;
   $ary = array();
   $i = 0;
-  $v = 'modules/'.$modul.'/vorlagen/';
+  $v = 'modules/'.wb_dir_escape($modul).'/vorlagen/';
   $verz=opendir($v);
 
   while ($file = readdir($verz))
@@ -128,7 +124,7 @@ $vorlagen = liste_vorlagen();
 foreach ($vorlagen AS $m1 => $m2)
 {
   if (!isset($id)) $id = 0;
-  echo '<li><a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&amp;modul='.$modul.'&amp;aktion='.$aktion.'&amp;id='.$id.'&amp;vorlage='.$m2.'">'.$m2.'</a></li>';
+  echo '<li><a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&amp;modul='.urlencode($modul).'&amp;aktion='.urlencode($aktion).'&amp;id='.urlencode($id).'&amp;vorlage='.urlencode($m2).'">'.$m2.'</a></li>';
 }
 
 unset($m1);
@@ -158,7 +154,7 @@ if (!isset($danach)) $danach = 'A';
 if ($aktion == 'new') echo 'Eintragung hinzuf&uuml;gen';
 if ($aktion == 'edit') echo 'Eintragung aktualisieren';
 
-echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>
+echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>
 
 </form>';
 

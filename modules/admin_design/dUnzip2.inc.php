@@ -61,9 +61,9 @@ function my_mkdir($dr)
   global $konfiguration;
   global $uid;
   global $modul;
-  $dr2 = substr($dr, strlen('modules/'.$modul.'/temp/'.$uid), strlen($dr)-strlen('modules/'.$modul.'/temp/'.$uid));
-  @ftp_mkdir($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.$dr2);
-  @ftp_site($conn_id, 'CHMOD 0755 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.$dr2);
+  $dr2 = substr($dr, strlen('modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid)), strlen($dr)-strlen('modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid)));
+  @ftp_mkdir($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid).$dr2);
+  @ftp_site($conn_id, 'CHMOD 0755 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid).$dr2);
 }
 
 function my_chmod($dr)
@@ -72,11 +72,11 @@ function my_chmod($dr)
   global $konfiguration;
   global $uid;
   global $modul;
-  $dr2 = substr($dr, strlen('modules/'.$modul.'/temp/'.$uid), strlen($dr)-strlen('modules/'.$modul.'/temp/'.$uid));
+  $dr2 = substr($dr, strlen('modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid)), strlen($dr)-strlen('modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid)));
   if (@is_dir($dr))
-    @ftp_site($conn_id, 'CHMOD 0755 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.$dr2);
+    @ftp_site($conn_id, 'CHMOD 0755 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid).$dr2);
   else
-    @ftp_site($conn_id, 'CHMOD 0644 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.$dr2);
+    @ftp_site($conn_id, 'CHMOD 0644 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid).$dr2);
 }
 
 function pre_create_file($dr)
@@ -85,9 +85,9 @@ function pre_create_file($dr)
   global $konfiguration;
   global $uid;
   global $modul;
-  $dr2 = substr($dr, strlen('modules/'.$modul.'/temp/'.$uid), strlen($dr)-strlen('modules/'.$modul.'/temp/'.$uid));
-  @ftp_put($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.$dr2, 'modules/'.$modul.'/null-file.txt', FTP_ASCII);
-  @ftp_site($conn_id, 'CHMOD 0777 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.$modul.'/temp/'.$uid.$dr2);
+  $dr2 = substr($dr, strlen('modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid)), strlen($dr)-strlen('modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid)));
+  @ftp_put($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid).$dr2, 'modules/'.wb_dir_escape($modul).'/null-file.txt', FTP_ASCII);
+  @ftp_site($conn_id, 'CHMOD 0777 '.$konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.wb_dir_escape($modul).'/temp/'.wb_dir_escape($uid).$dr2);
 }
 
 function file_put_contents_precreate($file, $data)

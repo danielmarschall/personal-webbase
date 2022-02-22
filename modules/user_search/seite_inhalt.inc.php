@@ -41,12 +41,12 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
       $license = '';
       $deaktiviere_zugangspruefung = 0;
 
-      if (file_exists('modules/'.$row['modul'].'/var.inc.php'))
-        include 'modules/'.$row['modul'].'/var.inc.php';
+      if (file_exists('modules/'.wb_dir_escape($row['modul']).'/var.inc.php'))
+        include 'modules/'.wb_dir_escape($row['modul']).'/var.inc.php';
 
       $modulueberschrift_a = $modulueberschrift;
 
-      if (($ib_user_type >= $modulrechte) && ((file_exists('modules/'.$row['modul'].'/seite_edit.inc.php')) || (file_exists('modules/'.$row['modul'].'/seite_view.inc.php'))))
+      if (($ib_user_type >= $modulrechte) && ((file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_edit.inc.php')) || (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_view.inc.php'))))
       {
         $que = generate_search_query($row['table'], 0, $suchbegriff);
         $res2 = db_query($que);
@@ -67,23 +67,23 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
 
           $etwas_gefunden = true;
 
-          if (file_exists('modules/'.$row['modul'].'/images/menu/32.png'))
-            $g = 'modules/'.$row['modul'].'/images/menu/32.png';
-          else if (file_exists('modules/'.$row['modul'].'/images/menu/32.gif'))
-            $g = 'modules/'.$row['modul'].'/images/menu/32.gif';
+          if (file_exists('modules/'.wb_dir_escape($row['modul']).'/images/menu/32.png'))
+            $g = 'modules/'.wb_dir_escape($row['modul']).'/images/menu/32.png';
+          else if (file_exists('modules/'.wb_dir_escape($row['modul']).'/images/menu/32.gif'))
+            $g = 'modules/'.wb_dir_escape($row['modul']).'/images/menu/32.gif';
           else
             $g = 'design/spacer.gif';
 
-		  if (file_exists('modules/'.$row['modul'].'/images/menu/16.png'))
-		    $k = 'modules/'.$row['modul'].'/images/menu/16.png';
-          else if (file_exists('modules/'.$row['modul'].'/images/menu/16.gif'))
-		    $k = 'modules/'.$row['modul'].'/images/menu/16.gif';
+		  if (file_exists('modules/'.wb_dir_escape($row['modul']).'/images/menu/16.png'))
+		    $k = 'modules/'.wb_dir_escape($row['modul']).'/images/menu/16.png';
+          else if (file_exists('modules/'.wb_dir_escape($row['modul']).'/images/menu/16.gif'))
+		    $k = 'modules/'.wb_dir_escape($row['modul']).'/images/menu/16.gif';
 		  else
 		  {
-		    if (file_exists('modules/'.$modul.'/item.gif'))
-              $k = 'modules/'.$modul.'/item.gif';
-		    else if (file_exists('modules/'.$modul.'/item.png'))
-              $k = 'modules/'.$modul.'/item.png';
+		    if (file_exists('modules/'.wb_dir_escape($modul).'/item.gif'))
+              $k = 'modules/'.wb_dir_escape($modul).'/item.gif';
+		    else if (file_exists('modules/'.wb_dir_escape($modul).'/item.png'))
+              $k = 'modules/'.wb_dir_escape($modul).'/item.png';
 		    else
               $k = 'design/spacer.gif';
           }
@@ -106,28 +106,28 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
 			$license = '';
 			$deaktiviere_zugangspruefung = 0;
 
-	        if (file_exists('modules/'.$row4['kategorie'].'/var.inc.php'))
-              include 'modules/'.$row4['kategorie'].'/var.inc.php';
+	        if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/var.inc.php'))
+              include 'modules/'.wb_dir_escape($row4['kategorie']).'/var.inc.php';
 
             $modulueberschrift_b = $modulueberschrift;
 
-            if (file_exists('modules/'.$row4['kategorie'].'/seite_inhalt.inc.php'))
-              $a = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$row4['kategorie'].'#ordner'.$row2['id'].'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">&Ouml;ffnen</a>';
+            if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/seite_inhalt.inc.php'))
+              $a = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($row4['kategorie']).'#ordner'.$row2['id'].'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">&Ouml;ffnen</a>';
 
-            if (file_exists('modules/'.$row4['kategorie'].'/seite_inhalt.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/seite_inhalt.inc.php'))
               $c = '<a href="'.oop_link_to_modul($row4['kategorie']).'" class="menu">'.$modulueberschrift_b.'</a> ('.$modulueberschrift_a.')';
             else
               $c = $modulueberschrift_b.' ('.$modulueberschrift_a.')';
           }
           else
           {
-            if (file_exists('modules/'.$row['modul'].'/seite_view.inc.php'))
-              $a = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=view&amp;modul='.$row['modul'].'&amp;id='.$row2['id'].'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">&Ouml;ffnen</a>';
+            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_view.inc.php'))
+              $a = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=view&amp;modul='.urlencode($row['modul']).'&amp;id='.urlencode($row2['id']).'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">&Ouml;ffnen</a>';
 
-            if (file_exists('modules/'.$row['modul'].'/seite_edit.inc.php'))
-              $b = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.$row['modul'].'&amp;aktion=edit&amp;id='.$row2['id'].'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">Bearbeiten</a>';
+            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_edit.inc.php'))
+              $b = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($row['modul']).'&amp;aktion=edit&amp;id='.urlencode($row2['id']).'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">Bearbeiten</a>';
 
-            if (file_exists('modules/'.$row['modul'].'/seite_inhalt.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_inhalt.inc.php'))
               $c = '<a href="'.oop_link_to_modul($row['modul']).'" class="menu">'.$modulueberschrift_a.'</a>';
             else
               $c = $modulueberschrift_a;

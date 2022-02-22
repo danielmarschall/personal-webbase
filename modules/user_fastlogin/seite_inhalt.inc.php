@@ -53,7 +53,7 @@ else
       $secret_key .= special_hash($ib_user_passwort);
       $secret_key  = ib_encrypt($secret_key, $benutzer['fastlogin_secret']);
 
-      echo 'Aktiviert (<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&seite=kraftsetzung&aktion=deactivate">deaktivieren</a>)<br><br>';
+      echo 'Aktiviert (<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&seite=kraftsetzung&aktion=deactivate">deaktivieren</a>)<br><br>';
 
       $ibs = '';
       if ($force_ssl)
@@ -70,8 +70,8 @@ else
       $inh = $ibs.'?modul=core_fastlogin_access&seite=run&secretkey='.urlencode($secret_key);
 
       echo '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" size="85" value="'.$inh.'" readonly><br>';
-      echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&seite=kraftsetzung&aktion=activate">Neue Schnellanmelde-URL einrichten</a><br>';
-      echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&seite=export">Als Internet-Verkn&uuml;pfung herunterladen</a><br><br>';
+      echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&seite=kraftsetzung&aktion=activate">Neue Schnellanmelde-URL einrichten</a><br>';
+      echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&seite=export">Als Internet-Verkn&uuml;pfung herunterladen</a><br><br>';
 
       echo '</td></tr><tr>
   <td valign="top">Hinweis:<img src="design/spacer.gif" height="1" width="35" alt=""></td>
@@ -79,7 +79,7 @@ else
     }
     else
     {
-      echo 'Deaktiviert (<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&seite=kraftsetzung&aktion=activate">aktivieren</a>)';
+      echo 'Deaktiviert (<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&seite=kraftsetzung&aktion=activate">aktivieren</a>)';
     }
 
     echo '</td>

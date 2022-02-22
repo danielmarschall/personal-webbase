@@ -10,7 +10,7 @@ echo 'Bitte warten...
 
 <script language="JavaScript" type="text/javascript">
 <!--
-document.location.href = "modules/'.$modul.'/system/?server='.$id.'";
+document.location.href = "modules/'.wb_dir_escape($modul).'/system/?server='.urlencode($id).'";
 // -->
 </script>';
 

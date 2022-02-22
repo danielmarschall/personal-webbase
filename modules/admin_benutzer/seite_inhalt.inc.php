@@ -48,7 +48,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 	  else
 	    $maila = 'Unbekannt';
 
-      gfx_tablecontent('', $row['username'].$status, '', $maila, '', $count_ds , '', $count_o, '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=kraftsetzung&amp;aktion=lock&amp;id='.$row['id'].'" class="menu">'.$sperr.'</a>', '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=edit&amp;id='.$row['id'].'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=kraftsetzung&amp;aktion=del&amp;id='.$row['id'].'\');" class="menu">L&ouml;schen</a>');
+      gfx_tablecontent('', $row['username'].$status, '', $maila, '', $count_ds , '', $count_o, '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=lock&amp;id='.urlencode($row['id']).'" class="menu">'.$sperr.'</a>', '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=edit&amp;id='.urlencode($row['id']).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=del&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
 
       $eintrag = true;
     }

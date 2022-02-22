@@ -20,27 +20,27 @@ echo '<center>[ ';
 if ($kategorie == 'faecher')
   echo 'Schulf&auml;cher';
 else
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie=faecher">Schulf&auml;cher</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie=faecher">Schulf&auml;cher</a>';
 echo ' | ';
 if ($kategorie == 'noten')
   echo 'Noten';
 else
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie=noten">Noten</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie=noten">Noten</a>';
 echo ' | ';
 if ($kategorie == 'auswertung')
   echo 'Auswertung';
 else
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie=auswertung">Auswertung</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie=auswertung">Auswertung</a>';
 echo ' | ';
 if ($kategorie == 'hausaufgaben')
   echo 'Hausaufgaben';
 else
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie=hausaufgaben">Hausaufgaben</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie=hausaufgaben">Hausaufgaben</a>';
 echo ' | ';
 if ($kategorie == 'striche')
   echo 'Striche';
 else
-  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie=striche">Striche</a>';
+  echo '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie=striche">Striche</a>';
 echo ' ]</center><br><br>
 
 <form method="POST" action="'.$_SERVER['PHP_SELF'].'">
@@ -65,7 +65,7 @@ if ($kategorie == 'faecher')
   gfx_begintable();
   gfx_tablecontent('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Aktionen</b>');
   while ($row = db_fetch($res))
-    gfx_tablecontent('100%', $row['name'], '', $row['wertungsfaktor'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;delete='.$row['id'].'\')">L&ouml;schen</a>');
+    gfx_tablecontent('100%', $row['name'], '', $row['wertungsfaktor'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
   gfx_tablecontent('', 'Neues Schulfach anlegen:<img src="design/spacer.gif" width="25" height="1" alt=""><input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertungsfaktor" value="1">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value)="Anlegen">');
   gfx_endtable();
 }
@@ -95,9 +95,9 @@ if ($kategorie == 'noten')
     $fach = $row2['name'];
 
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;delete='.$row['id'].'\')">L&ouml;schen</a>');
+      gfx_tablecontent('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', abschnitt_bei_stelle(6-($row['note']/15)*5, 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;delete='.$row['id'].'">L&ouml;schen</a>');
+      gfx_tablecontent('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', abschnitt_bei_stelle(6-($row['note']/15)*5, 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'">L&ouml;schen</a>');
   }
   $fach_dropdown = '<select name="fach">';
   $faecher_vorhanden = false;
@@ -118,9 +118,9 @@ if ($kategorie == 'noten')
   else
   {
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&modul='.$modul.'&kategorie=faecher&id='.$id.'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
+      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&modul='.$modul.'&kategorie=faecher&id='.$id.'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '');
+      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '');
   }
   gfx_endtable();
 }
@@ -208,9 +208,9 @@ if ($kategorie == 'auswertung')
   else
   {
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&modul='.$modul.'&kategorie=faecher&id='.$id.'">F&auml;cher anlegen</a>!', '', '', '', '', '', '');
+      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&modul='.$modul.'&kategorie=faecher&id='.$id.'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
+      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
   }
 
   gfx_endtable();
@@ -239,7 +239,7 @@ if ($kategorie == 'hausaufgaben')
     $row2 = db_fetch($res2);
     $fach = $row2['name'];
 
-    gfx_tablecontent('', $fach, '', $row['text'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;delete='.$row['id'].'\')">L&ouml;schen</a>');
+    gfx_tablecontent('', $fach, '', $row['text'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
   }
   $faecher_vorhanden = false;
   $res = db_query("SELECT `name`, `id` FROM `".$mysql_zugangsdaten['praefix']."schule_faecher` WHERE `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
@@ -253,7 +253,7 @@ if ($kategorie == 'hausaufgaben')
   if ($faecher_vorhanden)
     gfx_tablecontent('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="text">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
   else
-    gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&modul='.$modul.'&kategorie=faecher&id='.$id.'">F&auml;cher anlegen</a>!', '', '', '', '');
+    gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '');
   gfx_endtable();
 }
 
@@ -271,15 +271,15 @@ if ($kategorie == 'striche')
   while ($row = db_fetch($res))
   {
     $faecher_vorhanden = true;
-    gfx_tablecontent('', $row['name'], '', round($row['positiv'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=1&amp;what=pos">+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=0.5&amp;what=pos">+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=0.25&amp;what=pos">+0.25</a>',
-                                                                      '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=-1&amp;what=pos">-1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=-0.5&amp;what=pos">-0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=-0.25&amp;what=pos">-0.25</a>',
-                                       '', round($row['negativ'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=1&amp;what=neg">+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=0.5&amp;what=neg">+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=0.25&amp;what=neg">+0.25</a>',
-                                                                      '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=-1&amp;what=neg">-1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=-0.5&amp;what=neg">-0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite='.$seite.'&amp;id='.$id.'&amp;kategorie='.$kategorie.'&amp;plus='.$row['id'].'&amp;amount=-0.25&amp;what=neg">-0.25</a>');
+    gfx_tablecontent('', $row['name'], '', round($row['positiv'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=1&amp;what=pos" >+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.5&amp;what=pos" >+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.25&amp;what=pos" >+0.25</a>',
+                                                                      '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-1&amp;what=pos">-1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.5&amp;what=pos">-0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.25&amp;what=pos">-0.25</a>',
+                                       '', round($row['negativ'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=1&amp;what=neg" >+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.5&amp;what=neg" >+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.25&amp;what=neg" >+0.25</a>',
+                                                                      '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-1&amp;what=neg">-1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.5&amp;what=neg">-0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.25&amp;what=neg">-0.25</a>');
   }
 
   if (!$faecher_vorhanden)
   {
-    gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.$seite.'&modul='.$modul.'&kategorie=faecher&id='.$id.'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '', '', '');
+    gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '', '', '');
   }
 
   gfx_endtable();

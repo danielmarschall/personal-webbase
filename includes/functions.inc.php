@@ -736,16 +736,16 @@ function oop_link_to_modul($modul, $seite = 'inhalt', $titelzeile_modul = '')
 
   if ($titelzeile_modul == '') $titelzeile_modul = $modul;
 
-  if (file_exists('modules/'.$titelzeile_modul.'/var.inc.php'))
+  if (file_exists('modules/'.wb_dir_escape($titelzeile_modul).'/var.inc.php'))
   {
-    include('modules/'.$titelzeile_modul.'/var.inc.php');
+    include('modules/'.wb_dir_escape($titelzeile_modul).'/var.inc.php');
     $titel = $modulueberschrift;
   }
 
-  if (file_exists('modules/'.$titelzeile_modul.'/images/menu/32.png'))
-    $g = 'modules/'.$titelzeile_modul.'/images/menu/32.png';
-  else if (file_exists('modules/'.$titelzeile_modul.'/images/menu/32.gif'))
-    $g = 'modules/'.$titelzeile_modul.'/images/menu/32.gif';
+  if (file_exists('modules/'.wb_dir_escape($titelzeile_modul).'/images/menu/32.png'))
+    $g = 'modules/'.wb_dir_escape($titelzeile_modul).'/images/menu/32.png';
+  else if (file_exists('modules/'.wb_dir_escape($titelzeile_modul).'/images/menu/32.gif'))
+    $g = 'modules/'.wb_dir_escape($titelzeile_modul).'/images/menu/32.gif';
   else
     $g = 'design/spacer.gif';
 
@@ -833,8 +833,8 @@ function gfx_zeichneitems_filter($modul, $table, $append)
   {
     $durchlauf++;
 
-    if (file_exists('modules/'.$modul.'/menueeintrag.inc.php'))
-      include('modules/'.$modul.'/menueeintrag.inc.php');
+    if (file_exists('modules/'.wb_dir_escape($modul).'/menueeintrag.inc.php'))
+      include('modules/'.wb_dir_escape($modul).'/menueeintrag.inc.php');
 
     echo "\n";
   }
@@ -852,8 +852,8 @@ function gfx_zeichneitems($modul, $table, $append, $folder = 0, $einzug = 0)
   {
     $durchlauf++;
 
-    if (file_exists('modules/'.$modul.'/menueeintrag.inc.php'))
-      include('modules/'.$modul.'/menueeintrag.inc.php');
+    if (file_exists('modules/'.wb_dir_escape($modul).'/menueeintrag.inc.php'))
+      include('modules/'.wb_dir_escape($modul).'/menueeintrag.inc.php');
   }
 
   return $durchlauf;
@@ -887,4 +887,11 @@ function gfx_zeichnemenueplatzhalter()
 </tr>';
 }
 
-?>
+function wb_dir_escape($s) {
+	$s = str_replace('..', '__', $s);
+	$s = str_replace('~', '_', $s);
+	$s = str_replace('/', '_', $s);
+	$s = str_replace('\\', '_', $s);
+	$s = str_replace(chr(0), '_', $s);
+	return $s;
+}

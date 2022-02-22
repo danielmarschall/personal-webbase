@@ -10,16 +10,16 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
   foreach ($module as $m1 => $m2)
   {
-    if (file_exists('modules/'.$m2.'/crossover/admin_systemcheck/main.inc.php'))
+    if (file_exists('modules/'.wb_dir_escape($m2).'/crossover/admin_systemcheck/main.inc.php'))
     {
       echo '<tr>';
 
       echo '<td align="center" valign="top">';
 
-      if (file_exists('modules/'.$m2.'/images/menu/32.png'))
-        echo '<img src="modules/'.$m2.'/images/menu/32.png" alt="" width="32" height="32">';
-      else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
-        echo '<img src="modules/'.$m2.'/images/menu/32.gif" alt="" width="32" height="32">';
+      if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
+        echo '<img src="modules/'.wb_dir_escape($m2).'/images/menu/32.png" alt="" width="32" height="32">';
+      else if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.gif'))
+        echo '<img src="modules/'.wb_dir_escape($m2).'/images/menu/32.gif" alt="" width="32" height="32">';
       else
         echo '<img src="design/spacer.gif" alt="" width="32" height="32">';
 
@@ -35,11 +35,11 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
       $license = '';
       $deaktiviere_zugangspruefung = 0;
 
-      if (file_exists('modules/'.$m2.'/var.inc.php'))
-        include 'modules/'.$m2.'/var.inc.php';
+      if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
+        include 'modules/'.wb_dir_escape($m2).'/var.inc.php';
 
       $meldung = '';
-      include 'modules/'.$m2.'/crossover/admin_systemcheck/main.inc.php';
+      include 'modules/'.wb_dir_escape($m2).'/crossover/admin_systemcheck/main.inc.php';
       if ($meldung == '')
         echo '<b>'.$m2.'</b> gab keine R&uuml;ckmeldung.';
       else

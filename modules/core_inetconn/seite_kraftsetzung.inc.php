@@ -18,9 +18,9 @@ if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
       if (!headers_sent())
       {
         if ($check)
-          header('location: '.$_SERVER['PHP_SELF'].'?seite='.$vonseite.'&modul='.$vonmodul);
+          header('location: '.$_SERVER['PHP_SELF'].'?seite='.urlencode($vonseite).'&modul='.urlencode($vonmodul));
         else
-          header('location: '.$_SERVER['PHP_SELF'].'?seite=konfig&modul='.$modul.'&vonseite='.$vonseite.'&vonmodul='.$vonmodul);
+          header('location: '.$_SERVER['PHP_SELF'].'?seite=konfig&modul='.urlencode($modul).'&vonseite='.urlencode($vonseite).'&vonmodul='.urlencode($vonmodul));
       }
     }
 

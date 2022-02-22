@@ -63,9 +63,9 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
     // Ausführen
 	db_query("UPDATE `".$mysql_zugangsdaten['praefix']."links` SET `name` = '".db_escape($name)."', `folder` = '".db_escape($folder)."', `url` = '".db_escape($url)."', `update_enabled` = '".db_escape($update_enabled)."', `update_checkurl` = '".db_escape($update_checkurl)."', `update_text_begin` = '".db_escape($update_text_begin)."', `update_text_end` = '".db_escape($update_text_end)."'$zus WHERE `id` = '".db_escape($id)."' AND `user` = '".$benutzer['id']."'");
-    if ($danach == 'A') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul);
-    if ($danach == 'B') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.$modul.'&aktion=new&danach='.$danach);
-    if ($danach == 'C') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.$modul.'&aktion=new&folder='.$folder.'&danach='.$danach);
+    if ($danach == 'A') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul));
+    if ($danach == 'B') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.urlencode($modul).'&aktion=new&danach='.urlencode($danach));
+    if ($danach == 'C') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.urlencode($modul).'&aktion=new&folder='.urlencode($folder).'&danach='.urlencode($danach));
   }
 
   if ($aktion == 'new')
@@ -133,9 +133,9 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
     // Ausführen
     db_query("INSERT INTO `".$mysql_zugangsdaten['praefix']."links` (`name`, `url`, `folder`, `update_enabled`, `update_checkurl`, `update_text_begin`, `update_text_end`, $zus1`neu_flag`, `kaputt_flag`, `user`) VALUES ('".db_escape($lname)."', '".db_escape($url)."', '".db_escape($folder)."', '".db_escape($update_enabled)."', '".db_escape($update_checkurl)."', '".db_escape($update_text_begin)."', '".db_escape($update_text_end)."', $zus2'0', '0', '".$benutzer['id']."')");
-    if ($danach == 'A') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul);
-    if ($danach == 'B') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.$modul.'&aktion=new&danach='.$danach);
-    if ($danach == 'C') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.$modul.'&aktion=new&folder='.$folder.'&danach='.$danach);
+    if ($danach == 'A') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul));
+    if ($danach == 'B') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.urlencode($modul).'&aktion=new&danach='.urlencode($danach));
+    if ($danach == 'C') if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=edit&modul='.urlencode($modul).'&aktion=new&folder='.urlencode($folder).'&danach='.urlencode($danach));
   }
 
   if ($aktion == 'delete')
@@ -144,7 +144,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     if (db_affected_rows() > 0)
       db_query("OPTIMIZE TABLE `".$mysql_zugangsdaten['praefix']."links`");
 
-    if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul);
+    if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul));
   }
 
 if (($aktion == 'changekonfig') && ($ib_user_type >= 2))
@@ -161,7 +161,7 @@ if (($aktion == 'changekonfig') && ($ib_user_type >= 2))
     if (!isset($vonseite)) $vonseite = 'inhalt';
 
     if (!headers_sent())
-      header('location: '.$_SERVER['PHP_SELF'].'?seite='.$vonseite.'&modul='.$vonmodul);
+      header('location: '.$_SERVER['PHP_SELF'].'?seite='.urlencode($vonseite).'&modul='.urlencode($vonmodul));
   }
 }
 else

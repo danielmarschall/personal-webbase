@@ -91,7 +91,7 @@ echo '<table cellspacing="0" cellpadding="0" border="0">
 if ($aktion == 'new') echo 'Eintragung hinzuf&uuml;gen';
 if ($aktion == 'edit') echo 'Eintragung aktualisieren';
 
-echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>
+echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>
 
 </form>';
 

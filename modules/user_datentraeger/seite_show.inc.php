@@ -26,7 +26,7 @@ while ($row2 = db_fetch($res2))
   if (db_num($res3) > 0)
   {
     $row3 = db_fetch($res3);
-    $a3 = '<a href="?modul='.$modul.'&amp;seite=cdinhalt&amp;id='.$row3['id'].'">';
+    $a3 = '<a href="?modul='.urlencode($modul).'&amp;seite=cdinhalt&amp;id='.urlencode($row3['id']).'">';
     $a4 = '</a>';
   }
   else
@@ -55,16 +55,16 @@ while ($row2 = db_fetch($res2))
     $a2b = '';
   }
   if ($row2['aussortiert'] == '1')
-    $xy = ' (<a href="?modul='.$modul.'&amp;seite=show&amp;id='.$id.'&amp;ein='.$row2['nr'].'">'.$a1b.'Einsortieren'.$a2b.'</a>)';
+    $xy = ' (<a href="?modul='.urlencode($modul).'&amp;seite=show&amp;id='.urlencode($id).'&amp;ein='.urlencode($row2['nr']).'">'.$a1b.'Einsortieren'.$a2b.'</a>)';
   else
-    $xy = ' (<a href="?modul='.$modul.'&amp;seite=show&amp;id='.$id.'&amp;aus='.$row2['nr'].'">'.$a1b.'Aussortieren'.$a2b.'</a>)';
+    $xy = ' (<a href="?modul='.urlencode($modul).'&amp;seite=show&amp;id='.urlencode($id).'&amp;aus='.urlencode($row2['nr']).'">'.$a1b.'Aussortieren'.$a2b.'</a>)';
   echo $row2['nr'].'. '.$a3.$a1b.$a1.$row2['name'].$a2.$a4.$xy.$a2b.'<br>';
 }
 if (db_num($res2) == 0)
   echo 'Keine Eintr&auml;ge vorhanden!<br>';
 echo '<br>';
 
-echo '&lt;&lt; <a href="?modul='.$modul.'&amp;seite=inhalt">Zur&uuml;ck zur &Uuml;bersicht</a>';
+echo '&lt;&lt; <a href="?modul='.urlencode($modul).'&amp;seite=inhalt">Zur&uuml;ck zur &Uuml;bersicht</a>';
 
 echo $footer;
 

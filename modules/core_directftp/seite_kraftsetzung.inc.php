@@ -18,11 +18,11 @@ if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
 
     if ((isset($zwischenspeichern)) && ($zwischenspeichern == '1'))
     {
-      if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=konfig&modul='.$modul.'&vonmodul='.$vonmodul.'&vonseite='.$vonseite);
+      if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=konfig&modul='.urlencode($modul).'&vonmodul='.urlencode($vonmodul).'&vonseite='.urlencode($vonseite));
     }
     else
     {
-      if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite='.$vonseite.'&modul='.$vonmodul);
+      if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite='.urlencode($vonseite).'&modul='.urlencode($vonmodul));
     }
   }
 

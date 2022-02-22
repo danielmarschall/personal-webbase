@@ -9,7 +9,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
   echo '<h1>Konfiguration bearbeiten</h1>
 
-Sie bearbeiten den Wert &quot;'.$row['modul'].'/'.$row['name'].'&quot;<br>
+Sie bearbeiten den Wert &quot;'.wb_dir_escape($row['modul']).'/'.wb_dir_escape($row['name']).'&quot;<br>
 
 <form method="POST" action="'.$_SERVER['PHP_SELF'].'" name="mainform" id="mainform">
 <input type="hidden" name="seite" value="kraftsetzung">
@@ -20,7 +20,7 @@ Sie bearbeiten den Wert &quot;'.$row['modul'].'/'.$row['name'].'&quot;<br>
 
 <input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wert" id="wert" value="'.$row['wert'].'"><br><br>
 
-<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=konfig\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">
+<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=konfig\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">
 &nbsp;&nbsp;&nbsp;
 <input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Wert &auml;ndern">
 

@@ -12,7 +12,7 @@ if ($check)
 }
 else
 {
-  $meldung .= '<font color="#FF0000">Keine Internetkonnektivit&auml;t oder falsche <a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul='.$m2.'&amp;vonseite='.$seite.'&amp;vonmodul='.$modul.'">Konfigurationwerte</a>!</font>';
+  $meldung .= '<font color="#FF0000">Keine Internetkonnektivit&auml;t oder falsche <a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul='.urlencode($m2).'&amp;vonseite='.urlencode($seite).'&amp;vonmodul='.urlencode($modul).'">Konfigurationwerte</a>!</font>';
 }
 
 ?>

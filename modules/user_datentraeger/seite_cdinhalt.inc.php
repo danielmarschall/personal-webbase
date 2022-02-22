@@ -24,7 +24,7 @@ if ($ansicht == 'wurzel')
 }
 else
 {
-  $a1a = '<a href="?modul='.$modul.'&amp;seite=cdinhalt&amp;id='.$id.'&amp;ansicht=wurzel">';
+  $a1a = '<a href="?modul='.urlencode($modul).'&amp;seite=cdinhalt&amp;id='.urlencode($id).'&amp;ansicht=wurzel">';
   $a1b = '</a>';
 }
 
@@ -35,7 +35,7 @@ if ($ansicht == 'ordner')
 }
 else
 {
-  $a2a = '<a href="?modul='.$modul.'&amp;seite=cdinhalt&amp;id='.$id.'&amp;ansicht=ordner">';
+  $a2a = '<a href="?modul='.urlencode($modul).'&amp;seite=cdinhalt&amp;id='.urlencode($id).'&amp;ansicht=ordner">';
   $a2b = '</a>';
 }
 
@@ -46,7 +46,7 @@ if ($ansicht == 'komplett')
 }
 else
 {
-  $a3a = '<a href="?modul='.$modul.'&amp;seite=cdinhalt&amp;id='.$id.'&amp;ansicht=komplett">';
+  $a3a = '<a href="?modul='.urlencode($modul).'&amp;seite=cdinhalt&amp;id='.urlencode($id).'&amp;ansicht=komplett">';
   $a3b = '</a>';
 }
 
@@ -74,7 +74,7 @@ if ($row2['komplett'] == '') $inh = 'Kein Inhalt definiert';
 
 echo '<code>'.$inh.'</code><br>';
 
-echo '&lt;&lt; <a href="show.php?id='.$row3['kategorie'].'">Zur&uuml;ck zu den Eintr&auml;gen</a>';
+echo '&lt;&lt; <a href="show.php?id='.urlencode($row3['kategorie']).'">Zur&uuml;ck zu den Eintr&auml;gen</a>';
 
 echo $footer;
 

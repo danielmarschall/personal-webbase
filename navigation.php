@@ -12,8 +12,8 @@ echo $header_navi;
 
 $ueberschrift = '';
 $menue = '';
-if (isset($modul) && (file_exists('modules/'.$modul.'/area_'.$area.'.inc.php')))
-  include('modules/'.$modul.'/area_'.$area.'.inc.php');
+if (isset($modul) && (file_exists('modules/'.wb_dir_escape($modul).'/area_'.wb_dir_escape($area).'.inc.php')))
+  include('modules/'.wb_dir_escape($modul).'/area_'.wb_dir_escape($area).'.inc.php');
 
 if (!isset($prv_seite)) $prv_seite = 'inhalt';
 
@@ -46,7 +46,7 @@ if ($menue == '')
   $men = array();
   foreach ($module as $m1 => $m2)
   {
-    if (file_exists('modules/'.$m2.'/var.inc.php'))
+    if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
     {
       $modulueberschrift = $m2; // Wenn keine Überschrift in var.inc.php, dann wird das Modul nicht benannt
       $modulsekpos = '';
@@ -58,34 +58,34 @@ if ($menue == '')
       $license = '';
       $deaktiviere_zugangspruefung = 0;
 
-      include('modules/'.$m2.'/var.inc.php');
+      include('modules/'.wb_dir_escape($m2).'/var.inc.php');
       if (((($ib_user_type == 0) || ($ib_user_type == 1)) && ($modulrechte == 0)) || ($ib_user_type == $modulrechte))
       {
-        if (($menuevisible) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
+        if (($menuevisible) && (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php')))
         {
-          if (file_exists('modules/'.$m2.'/images/menu/32.png'))
-            $g = 'modules/'.$m2.'/images/menu/32.png';
-          else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
-            $g = 'modules/'.$m2.'/images/menu/32.gif';
+          if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
+            $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';
+          else if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.gif'))
+            $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.gif';
           else
             $g = 'design/spacer.gif';
 
-          if (file_exists('modules/'.$m2.'/images/menu/16.png'))
-            $k = 'modules/'.$m2.'/images/menu/16.png';
-          else if (file_exists('modules/'.$m2.'/images/menu/16.gif'))
-            $k = 'modules/'.$m2.'/images/menu/16.gif';
+          if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/16.png'))
+            $k = 'modules/'.wb_dir_escape($m2).'/images/menu/16.png';
+          else if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/16.gif'))
+            $k = 'modules/'.wb_dir_escape($m2).'/images/menu/16.gif';
           else
             $k = 'design/spacer.gif';
 
           if (!isset($men[$modulpos][$modulsekpos])) $men[$modulpos][$modulsekpos] = '';
           $men[$modulpos][$modulsekpos] .= gfx_zeichnemenuepunkt($m2, 'inhalt', my_htmlentities($modulueberschrift), $k, $g);
         }
-        if (isset($prv_modul) && ($m2 == $prv_modul) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
+        if (isset($prv_modul) && ($m2 == $prv_modul) && (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php')))
         {
-          if (file_exists('modules/'.$m2.'/images/menu/32.png'))
-            $g = 'modules/'.$m2.'/images/menu/32.png';
-          else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
-            $g = 'modules/'.$m2.'/images/menu/32.gif';
+          if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
+            $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';
+          else if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.gif'))
+            $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.gif';
           else
             $g = 'design/spacer.gif';
 
@@ -98,12 +98,12 @@ if ($menue == '')
         }
         else
         {
-          if (($modulpos == 0) && ($modulsekpos == 0) && (!$startgefunden) && (file_exists('modules/'.$m2.'/seite_inhalt.inc.php')))
+          if (($modulpos == 0) && ($modulsekpos == 0) && (!$startgefunden) && (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php')))
           {
-            if (file_exists('modules/'.$m2.'/images/menu/32.png'))
-              $g = 'modules/'.$m2.'/images/menu/32.png';
-            else if (file_exists('modules/'.$m2.'/images/menu/32.gif'))
-              $g = 'modules/'.$m2.'/images/menu/32.gif';
+            if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
+              $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';
+            else if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.gif'))
+              $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.gif';
             else
               $g = 'design/spacer.gif';
 

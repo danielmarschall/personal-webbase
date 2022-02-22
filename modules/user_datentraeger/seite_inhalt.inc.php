@@ -15,12 +15,12 @@ function dreinull($inp)
 if ($modulueberschrift == '') $modulueberschrift = $modul;
 echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
-echo '[<a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=newkat">Neue Kategorie</a>] [<a href="?modul='.$modul.'&amp;seite=newdisk">Neuer Eintrag</a>] [<a href="?modul='.$modul.'&amp;seite=newinhalt">Neuer Inhalt</a>]<br><br>';
+echo '[<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=newkat">Neue Kategorie</a>] [<a href="?modul='.urlencode($modul).'&amp;seite=newdisk">Neuer Eintrag</a>] [<a href="?modul='.urlencode($modul).'&amp;seite=newinhalt">Neuer Inhalt</a>]<br><br>';
 
 $res1 = db_query("SELECT `nummer`, `spalte`, `name` FROM `".$mysql_zugangsdaten['praefix']."datentraeger_kategorien` WHERE `user` = '".$benutzer['id']."' ORDER BY `spalte`, `nummer` ASC");
 while ($row1 = db_fetch($res1))
 {
-  echo '<b>'.$row1['spalte'].dreinull($row1['nummer']).' - <a href="'.$_SERVER['PHP_SELF'].'?modul='.$modul.'&amp;seite=show&amp;id='.$row1['spalte'].$row1['nummer'].'">'.$row1['name'].'</a></b><br>';
+  echo '<b>'.$row1['spalte'].dreinull($row1['nummer']).' - <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=show&amp;id='.urlencode($row1['spalte'].$row1['nummer']).'">'.$row1['name'].'</a></b><br>';
 }
 if (db_num($res1) == 0)
   echo '<b>Keine Kategorien vorhanden!</b>';

@@ -10,7 +10,7 @@ else if ($ib_user_type == 1)
 {
   if ($ib_user_passwort != $pwd)
   {
-    die($header.'<h1>Verwaltung</h1>Das Passwort zur Verifizierung ist nicht korrekt.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
+    die($header.'<h1>Verwaltung</h1>Das Passwort zur Verifizierung ist nicht korrekt.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>'.$footer);
   }
   else
   {
@@ -18,19 +18,19 @@ else if ($ib_user_type == 1)
     {
       if ($newpwd1 != $newpwd2)
       {
-        die($header.'<h1>Verwaltung</h1>Die 2 Passw&ouml;rter stimmen nicht &uuml;berein.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
+        die($header.'<h1>Verwaltung</h1>Die 2 Passw&ouml;rter stimmen nicht &uuml;berein.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>'.$footer);
       }
       else
       {
         if ($newpwd1 == '')
         {
-          die($header.'<h1>Verwaltung</h1>Sie m&uuml;ssen ein Passwort eingeben.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
+          die($header.'<h1>Verwaltung</h1>Sie m&uuml;ssen ein Passwort eingeben.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>'.$footer);
         }
         else
         {
           db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `passwort` = '".md5($newpwd1)."' WHERE `username` = '".db_escape($ib_user_username)."'");
           $_SESSION['ib_user_passwort'] = $newpwd1;
-          if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul.'&fertig=1');
+          if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul).'&fertig=1');
         }
       }
     }
@@ -41,7 +41,7 @@ else if ($ib_user_type == 1)
       {
         if (strtoupper($sic) != 'OK')
         {
-          die($header.'<h1>Verwaltung</h1>Zum L&ouml;schen m&uuml;ssen Sie die Sicherheitsfrage beantworten.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
+          die($header.'<h1>Verwaltung</h1>Zum L&ouml;schen m&uuml;ssen Sie die Sicherheitsfrage beantworten.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>'.$footer);
         }
         else
         {
@@ -70,7 +70,7 @@ else if ($ib_user_type == 1)
       }
       else
       {
-        die($header.'<h1>Verwaltung</h1>Der Administrator hat Selbstl&ouml;schungen deaktiviert.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>'.$footer);
+        die($header.'<h1>Verwaltung</h1>Der Administrator hat Selbstl&ouml;schungen deaktiviert.<br><br><a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>'.$footer);
       }
     }
   }
@@ -86,7 +86,7 @@ else if ($ib_user_type == 2)
       if (!isset($vonmodul)) $vonmodul = 'admin_konfig';
   if (!isset($vonseite)) $vonseite = 'inhalt';
 
-    if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite='.$vonseite.'&modul='.$vonmodul);
+    if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite='.urlencode($vonseite).'&modul='.urlencode($vonmodul));
   }
 }
 

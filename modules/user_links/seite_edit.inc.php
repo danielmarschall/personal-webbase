@@ -155,7 +155,7 @@ den Titel der Webseite automatisch herauszufinden.<br><br><b>Update-Service</b><
 if ($aktion == 'new') echo 'Eintragung hinzuf&uuml;gen';
 if ($aktion == 'edit') echo 'Eintragung aktualisieren';
 
-echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$modul.'">Zur&uuml;ck</a>
+echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($modul).'">Zur&uuml;ck</a>
 
 </form>';
 

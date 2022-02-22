@@ -41,7 +41,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
 
   echo '<br>';
 
-  echo '<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.$vonmodul.'&amp;seite='.$vonseite.'\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">';
+  echo '<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($vonmodul).'&amp;seite='.urlencode($vonseite).'\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">';
   echo '&nbsp;&nbsp;&nbsp;';
   echo '<input type="submit" value="&Auml;ndern" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';">
 

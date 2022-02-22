@@ -3,9 +3,9 @@
 if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo '<li>';
-if (file_exists('modules/'.$m2.'/system/ver.html'))
+if (file_exists('modules/'.wb_dir_escape($m2).'/system/ver.html'))
 {
-  $handle = @fopen('modules/'.$m2.'/system/ver.html', 'r');
+  $handle = @fopen('modules/'.wb_dir_escape($m2).'/system/ver.html', 'r');
   $buffer = '';
   while (!@feof($handle))
   {
@@ -16,9 +16,9 @@ if (file_exists('modules/'.$m2.'/system/ver.html'))
 }
 else
 {
-  echo '<font color="#FF0000">Unbekanntes System von '.$m2.' aufrufen';
+  echo '<font color="#FF0000">Unbekanntes System von '.my_htmlentities($m2).' aufrufen';
 }
 
-echo ' <a href="javascript:open_url(\''.$_SERVER['PHP_SELF'].'?modul='.$m2.'&amp;seite=view\');">&ouml;ffnen</a></li>';
+echo ' <a href="javascript:open_url(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($m2).'&amp;seite=view\');">&ouml;ffnen</a></li>';
 
 ?>

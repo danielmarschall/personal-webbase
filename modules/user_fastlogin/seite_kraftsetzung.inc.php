@@ -18,13 +18,13 @@ if ($aktion == 'activate')
   }
 
   db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `fastlogin_secret` = '".$new_secret_key."' WHERE `id` = '".$benutzer['id']."'");
-  if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul);
+  if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul));
 }
 
 if ($aktion == 'deactivate')
 {
   db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `fastlogin_secret` = '' WHERE `id` = '".$benutzer['id']."'");
-  if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.$modul);
+  if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul));
 }
 
 ?>

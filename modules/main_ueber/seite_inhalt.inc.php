@@ -48,7 +48,7 @@ $desi = 0;
 $handle = @opendir('design/');
 while ($file = @readdir($handle))
 {
-  if ((filetype('design/'.$file) == 'dir') && ($file <> '.') && ($file <> '..'))
+  if ((filetype('design/'.wb_dir_escape($file)) == 'dir') && ($file <> '.') && ($file <> '..'))
   {
     $des .= $file.', ';
     $desi++;

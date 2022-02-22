@@ -13,7 +13,7 @@ else
   $plural_email = 'fach';
 
 if ($ereignisse['email_neu'])
-  $email_weiter = '<div align="right"><a href="'.$_SERVER['PHP_SELF'].'?inhalt=inhalt&amp;modul='.$m2.'" class="menu">Anzeigen &gt;&gt;</a></div>';
+  $email_weiter = '<div align="right"><a href="'.$_SERVER['PHP_SELF'].'?inhalt=inhalt&amp;modul='.urlencode($m2).'" class="menu">Anzeigen &gt;&gt;</a></div>';
 else
   $email_weiter = '';
 

@@ -44,8 +44,8 @@ $menuevisible = '';
 $license = '';
 $deaktiviere_zugangspruefung = 0;
 
-if (file_exists('modules/'.$kategorie.'/var.inc.php'))
-  include 'modules/'.$kategorie.'/var.inc.php';
+if (file_exists('modules/'.wb_dir_escape($kategorie).'/var.inc.php'))
+  include 'modules/'.wb_dir_escape($kategorie).'/var.inc.php';
 
 echo '<table cellspacing="0" cellpadding="0" border="0">
 <tr>
@@ -84,7 +84,7 @@ echo '<table cellspacing="0" cellpadding="0" border="0">
 if ($aktion == 'new') echo 'Eintragung hinzuf&uuml;gen';
 if ($aktion == 'edit') echo 'Eintragung aktualisieren';
 
-echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.$kategorie.'">Zur&uuml;ck</a>
+echo '</a>&nbsp;|&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($kategorie).'">Zur&uuml;ck</a>
 
 </form>';
 

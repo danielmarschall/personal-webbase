@@ -275,9 +275,9 @@ for ($st=0; true; $st++)
   $erf = false;
   foreach ($module AS $m1 => $m2)
   {
-    if (file_exists('modules/'.$m2.'/autostart_'.$st.'.inc.php'))
+    if (file_exists('modules/'.wb_dir_escape($m2).'/autostart_'.wb_dir_escape($st).'.inc.php'))
     {
-      include 'modules/'.$m2.'/autostart_'.$st.'.inc.php';
+      include 'modules/'.wb_dir_escape($m2).'/autostart_'.wb_dir_escape($st).'.inc.php';
       $erf = true;
     }
   }

@@ -5,7 +5,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 // Funktioniert FTP-Zugang?
 
 if ($konfiguration['core_directftp']['ftp-server'] == '') {
-	$fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;design&quot;, damit Designs ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
+	$fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;design&quot;, damit Designs ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
 	$verhindere_loeschen = 1;
 	$conn_id = null;
 	$login_result = false;
@@ -18,19 +18,19 @@ $fehler = '';
 
 if ((!$conn_id) || (!$login_result))
 {
-  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;design&quot;, damit Designs ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
+  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf das Verzeichnis &quot;design&quot;, damit Designs ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Server/Benutzername/Passwort falsch.';
   $verhindere_loeschen = 1;
 }
 
 if (($fehler == '') && ((substr($konfiguration['core_directftp']['ftp-verzeichnis'], 0, 1) != '/') || (substr($konfiguration['core_directftp']['ftp-verzeichnis'], strlen($konfiguration['core_directftp']['ftp-verzeichnis'])-1, 1) != '/')))
 {
-  $fehler = 'Die Verzeichnissyntax ist falsch. Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
+  $fehler = 'Die Verzeichnissyntax ist falsch. Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf Personal WebBase-Verzeichnis oder Datei &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
   $verhindere_loeschen = 1;
 }
 
 if (($fehler == '') && ((@ftp_size($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'design/'.'desdir.txt') == -1) || (@ftp_size($conn_id, $konfiguration['core_directftp']['ftp-verzeichnis'].'modules/'.'moddir.txt') == -1)))
 {
-  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf die Verzeichnisse &quot;design&quot; und &quot;modules&quot;, damit Designs ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.$modul.'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf das Personal WebBase-Verzeichnis oder Datei &quot;desdir.txt&quot; bzw. &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
+  $fehler = 'Personal WebBase ben&ouml;tigt FTP-Zugriff auf die Verzeichnisse &quot;design&quot; und &quot;modules&quot;, damit Designs ordnungsgem&auml;&szlig; (de)installiert werden k&ouml;nnen.<br>Bitte bearbeiten Sie die <a href="'.$_SERVER['PHP_SELF'].'?modul=core_directftp&amp;seite=konfig&amp;vonmodul='.urlencode($modul).'">Konfigurationswerte</a> und tragen Sie dort korrekte Werte ein.<br><br>M&ouml;gliche Ursache: Verzeichnis zeigt nicht auf das Personal WebBase-Verzeichnis oder Datei &quot;desdir.txt&quot; bzw. &quot;moddir.txt&quot; ist nicht mehr vorhanden.';
   $verhindere_loeschen = 1;
 }
 
@@ -48,15 +48,15 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
     $handle = @opendir('design/');
     while ($file = @readdir($handle))
     {
-      if ((filetype('design/'.$file) == 'dir') && ($file <> '.') && ($file <> '..'))
+      if ((filetype('design/'.wb_dir_escape($file)) == 'dir') && ($file <> '.') && ($file <> '..'))
       {
       $name = '';
       $autor = '';
       $version = '';
       $license = '';
 
-      if (file_exists('design/'.$file.'/var.inc.php'))
-        include 'design/'.$file.'/var.inc.php';
+      if (file_exists('design/'.wb_dir_escape($file).'/var.inc.php'))
+        include 'design/'.wb_dir_escape($file).'/var.inc.php';
 
       if ($license == '1')
         $license = 'Offizielles Produkt';
@@ -68,7 +68,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
       if (isset($verhindere_loeschen) && ($verhindere_loeschen != ''))
         $aktionen = '<font color="#888888">Entfernen</font>';
       else
-        $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.$modul.'&amp;aktion=delete&amp;entfernen='.$file.'\');" class="menu">Entfernen</a>';
+        $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;entfernen='.urlencode($file).'\');" class="menu">Entfernen</a>';
 
       gfx_tablecontent('', my_htmlentities($file), '', my_htmlentities($name), '', my_htmlentities($autor), '', $version, '', $license, '', $aktionen);
       }
@@ -77,7 +77,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
 
     gfx_endtable();
 
-    echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul='.$modul.'&amp;vonmodul='.$modul.'&amp;vonseite='.$seite.'">Aktuelles Design &auml;ndern</a><br><br>';
+    echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul='.urlencode($modul).'&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'">Aktuelles Design &auml;ndern</a><br><br>';
 
     echo '<b>Design installieren</b><br><br>';
 

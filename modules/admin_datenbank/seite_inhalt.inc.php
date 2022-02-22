@@ -25,7 +25,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
       }
       $ars = db_query("SELECT COUNT(*) AS `ct` FROM `".$mysql_zugangsdaten['praefix'].$row['table']."`");
       $arw = db_fetch($ars);
-      if (!is_dir('modules/'.$row['modul']))
+      if (!is_dir('modules/'.wb_dir_escape($row['modul'])))
       {
         $z = ' (Nicht mehr installiert)';
         $x = 'Tabelle entfernen';
@@ -35,7 +35,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
         $z = '';
         $x = 'Tabelle neu anlegen';
       }
-      gfx_tablecontent('', $s1.$mysql_zugangsdaten['praefix'].$row['table'].$s2, '', $s1.$row['modul'].$z.$s2, '', $s1.$arw['ct'].$s2, '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.$modul.'&amp;aktion=delete&amp;id='.$row['id'].'\');" class="menu">'.$x.'</a>');
+      gfx_tablecontent('', $s1.$mysql_zugangsdaten['praefix'].$row['table'].$s2, '', $s1.$row['modul'].$z.$s2, '', $s1.$arw['ct'].$s2, '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;id='.urlencode($row['id']).'\');" class="menu">'.$x.'</a>');
     }
     gfx_endtable();
 
@@ -54,13 +54,13 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
 	  $deaktiviere_zugangspruefung = 0;
 
 	  // Damit die Modulseiten auch auf ihre eigenen Modulvariablen zugreifen können, var.inc.php einbinden
-	  if (file_exists('modules/'.$m2.'/var.inc.php'))
-	    include('modules/'.$m2.'/var.inc.php');
+	  if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
+	    include('modules/'.wb_dir_escape($m2).'/var.inc.php');
 
 	  // Nun die Modulcrons laden
-	  if (file_exists('modules/'.$m2.'/crossover/'.$modul.'/main.inc.php'))
+	  if (file_exists('modules/'.wb_dir_escape($m2).'/crossover/'.wb_dir_escape($modul).'/main.inc.php'))
 	  {
-	    include('modules/'.$m2.'/crossover/'.$modul.'/main.inc.php');
+	    include('modules/'.wb_dir_escape($m2).'/crossover/'.wb_dir_escape($modul).'/main.inc.php');
 	    $welchegefunden = true;
 	  }
     }
@@ -73,7 +73,7 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
     echo '</ul>';
 
     if ((isset($vonmodul)) && (isset($vonseite)) && ($vonmodul != '') && ($vonseite != ''))
-      echo '<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.$vonmodul.'&amp;seite='.$vonseite.'\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">';
+      echo '<input type="button" onclick="document.location.href=\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($vonmodul).'&amp;seite='.urlencode($vonseite).'\';" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Zur&uuml;ck">';
 
     echo '<br>';
 

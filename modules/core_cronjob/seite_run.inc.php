@@ -57,12 +57,12 @@ if (db_num($rsc) > 0)
     // Info: eval() statt include(), damit Parsing-Fehler gemeldet werden können, die der Admin nicht sehen würde!
 
     // Damit die Modulseiten auch auf ihre eigenen Modulvariablen zugreifen können, var.inc.php einbinden
-    if (file_exists('modules/'.$m2.'/var.inc.php'))
-      eval('?>' . trim(implode("\n", file('modules/'.$m2.'/var.inc.php'))));
+    if (file_exists('modules/'.wb_dir_escape($m2).'/var.inc.php'))
+      eval('?>' . trim(implode("\n", file('modules/'.wb_dir_escape($m2).'/var.inc.php'))));
 
     // Nun die Modulcrons laden
-    if (file_exists('modules/'.$m2.'/crossover/'.$modul.'/main.inc.php'))
-      eval('?>' . trim(implode("\n", file('modules/'.$m2.'/crossover/'.$modul.'/main.inc.php'))));
+    if (file_exists('modules/'.wb_dir_escape($m2).'/crossover/'.wb_dir_escape($modul).'/main.inc.php'))
+      eval('?>' . trim(implode("\n", file('modules/'.wb_dir_escape($m2).'/crossover/'.wb_dir_escape($modul).'/main.inc.php'))));
   }
 
   unset($m1);
