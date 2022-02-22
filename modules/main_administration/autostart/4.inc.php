@@ -22,7 +22,7 @@ if (($konfiguration['main_administration']['admin_pwd'] == '') && ($ary[count($a
 
     if ($fehler == '')
     {
-      ib_change_config('admin_pwd', md5($apw1), 'main_administration');
+      ib_change_config('admin_pwd', md5($apw1), 'main_administration');// TODO: use sha3 hash, salted and peppered
       if (!headers_sent()) header('location:'.$_SERVER['PHP_SELF']);
     }
   }

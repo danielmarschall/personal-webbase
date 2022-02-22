@@ -22,7 +22,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     else
       $f_gesp = '0';
     db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `username` = '".db_escape($f_username)."', `personenname` = '".db_escape($f_personenname)."', `gesperrt` = '".db_escape($f_gesp)."', `email` = '".db_escape($f_email)."' WHERE `id` = '".db_escape($id)."'");
-    if ($f_neupwd) db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `passwort` = '".md5($f_passwort)."' WHERE `id` = '".db_escape($id)."'");
+    if ($f_neupwd) db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `passwort` = '".md5($f_passwort)."' WHERE `id` = '".db_escape($id)."'"); // TODO: use sha3 hash, salted and peppered
 
     if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&seite=inhalt');
   }

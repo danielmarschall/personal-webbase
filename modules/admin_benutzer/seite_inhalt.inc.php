@@ -15,7 +15,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     $eintrag = false;
     while ($row = db_fetch($res))
     {
-      if (($konfiguration['main_gastzugang']['enable_gast'] == '1') && ($row['username'] == $konfiguration['main_gastzugang']['gast_username']) && ($row['passwort'] == md5($konfiguration['main_gastzugang']['gast_passwort'])))
+      if (($konfiguration['main_gastzugang']['enable_gast'] == '1') && ($row['username'] == $konfiguration['main_gastzugang']['gast_username']) && ($row['passwort'] == md5($konfiguration['main_gastzugang']['gast_passwort']))) // TODO: use sha3 hash, salted and peppered
         $status = ' (Gast)';
       else
         $status = '';

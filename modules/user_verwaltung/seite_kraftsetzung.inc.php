@@ -28,7 +28,7 @@ else if ($ib_user_type == 1)
         }
         else
         {
-          db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `passwort` = '".md5($newpwd1)."' WHERE `username` = '".db_escape($ib_user_username)."'");
+          db_query("UPDATE `".$mysql_zugangsdaten['praefix']."users` SET `passwort` = '".md5($newpwd1)."' WHERE `username` = '".db_escape($ib_user_username)."'");// TODO: use sha3 hash, salted and peppered
           $_SESSION['ib_user_passwort'] = $newpwd1;
           if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul).'&fertig=1');
         }

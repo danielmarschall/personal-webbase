@@ -23,7 +23,8 @@
 
 if (PHP_OS_FAMILY == 'Windows') {
 	// TODO: Adjust to your system settings
-	chdir('C:\\php-8.0.3-nts-Win32-vs16-x64');
+	//chdir('C:\\php-8.0.3-nts-Win32-vs16-x64');
+	chdir('D:\\xampp\\php\\');
 }
 
 error_reporting(E_ALL | E_NOTICE | E_STRICT | E_DEPRECATED);

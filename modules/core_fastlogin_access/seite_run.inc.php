@@ -19,7 +19,7 @@ else
   while ($row = db_fetch($res))
   {
     // Gastzugang verbieten. Es wird nicht geprüft, ob Gastaccount aktiviert ist oder nicht. (siehe user_login)
-    if (($row['username'] != $konfiguration['main_gastzugang']['gast_username']) && ($row['passwort'] != md5($konfiguration['main_gastzugang']['gast_passwort'])))
+    if (($row['username'] != $konfiguration['main_gastzugang']['gast_username']) && ($row['passwort'] != md5($konfiguration['main_gastzugang']['gast_passwort']))) // TODO: use sha3 hash, salted and peppered
     {
       $dec = ib_decrypt($secretkey, $row['fastlogin_secret']);
       $ary = explode("\n", $dec);
@@ -27,7 +27,7 @@ else
       if ((count($ary) == 4))
       {
         if ((    $ary[0]  == $row['username']) && ($ary[1] == special_hash($ary[0])) &&
-            (md5($ary[2]) == $row['passwort']) && ($ary[3] == special_hash($ary[2]))    )
+            (md5($ary[2]) == $row['passwort']) && ($ary[3] == special_hash($ary[2]))    ) // TODO: use sha3 hash, salted and peppered
         {
           $erfolg = 1;
           break;

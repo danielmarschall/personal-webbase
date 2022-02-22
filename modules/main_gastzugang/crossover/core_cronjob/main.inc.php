@@ -4,7 +4,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
 if (($konfiguration[$m2]['enable_gast'] == '1') && ($konfiguration[$m2]['wipe_gastkonto']))
 {
-  $rs = db_query("SELECT `id` FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".$konfiguration[$m2]['gast_username']."' AND MD5('".$konfiguration[$m2]['gast_passwort']."') = `passwort`");
+  $rs = db_query("SELECT `id` FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".$konfiguration[$m2]['gast_username']."' AND MD5('".$konfiguration[$m2]['gast_passwort']."') = `passwort`");// TODO: use sha3 hash, salted and peppered
 
   if (db_num($rs) == 1)
   {

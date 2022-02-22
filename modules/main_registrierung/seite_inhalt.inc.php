@@ -39,7 +39,7 @@ if ($konfiguration[$modul]['enable_userreg'])
         }
         else
         {
-          db_query("INSERT INTO `".$mysql_zugangsdaten['praefix']."users` (`username`, `personenname`, `passwort`, `email`, `created_database`, `creator_ip`) VALUES ('".db_escape($rusername)."', '".db_escape($rpersonenname)."', '".md5($rpasswort)."', '".db_escape($remail)."', NOW(), '".$_SERVER["REMOTE_ADDR"]."')");
+          db_query("INSERT INTO `".$mysql_zugangsdaten['praefix']."users` (`username`, `personenname`, `passwort`, `email`, `created_database`, `creator_ip`) VALUES ('".db_escape($rusername)."', '".db_escape($rpersonenname)."', '".md5($rpasswort)."', '".db_escape($remail)."', NOW(), '".$_SERVER["REMOTE_ADDR"]."')"); // TODO: use sha3 hash, salted and peppered
           echo '<b>Sie haben Ihr Konto auf diesem Personal WebBase-Server erfolgreich registriert.</b><br><br>Das Konto ist sofort verwendbar. Wir w&uuml;nschen Ihnen viel Freude mit Personal WebBase!';
         }
       }

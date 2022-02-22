@@ -193,7 +193,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
 {
   if ($ib_user_type == 2)
   {
-    if (md5($ib_user_passwort) != $konfiguration['main_administration']['admin_pwd'])
+    if (md5($ib_user_passwort) != $konfiguration['main_administration']['admin_pwd']) // TODO: use sha3 hash, salted and peppered
     {
       if (!headers_sent()) header('location: index.php?prv_modul=main_administration');
     }
@@ -230,7 +230,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
       }
     }
 
-    $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($ib_user_username)."' AND `passwort` = '".md5($ib_user_passwort)."'");
+    $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($ib_user_username)."' AND `passwort` = '".md5($ib_user_passwort)."'"); // TODO: use sha3 hash, salted and peppered
     if (db_num($res) > 0)
     {
       $row = db_fetch($res);
@@ -273,7 +273,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
   {
     if ($konfiguration['main_gastzugang']['enable_gast'])
     {
-      $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($konfiguration['main_gastzugang']['gast_username'])."' AND `passwort` = '".md5($konfiguration['main_gastzugang']['gast_passwort'])."'");
+      $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($konfiguration['main_gastzugang']['gast_username'])."' AND `passwort` = '".md5($konfiguration['main_gastzugang']['gast_passwort'])."'"); // TODO: use sha3 hash, salted and peppered
       if (db_num($res) > 0)
       {
         $row = db_fetch($res);
@@ -330,7 +330,7 @@ else
     {
       if ($konfiguration['main_gastzugang']['enable_gast'])
       {
-        $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($konfiguration['main_gastzugang']['gast_username'])."' AND `passwort` = '".md5($konfiguration['main_gastzugang']['gast_passwort'])."'");
+        $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($konfiguration['main_gastzugang']['gast_username'])."' AND `passwort` = '".md5($konfiguration['main_gastzugang']['gast_passwort'])."'"); // TODO: use sha3 hash, salted and peppered
         if (db_num($res) > 0)
         {
           $row = db_fetch($res);
@@ -369,7 +369,7 @@ else
     }
     else if ($_SESSION['ib_user_type'] == '1')
     {
-      $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($_SESSION['ib_user_username'])."' AND `passwort` = '".md5($_SESSION['ib_user_passwort'])."'");
+      $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($_SESSION['ib_user_username'])."' AND `passwort` = '".md5($_SESSION['ib_user_passwort'])."'"); // TODO: use sha3 hash, salted and peppered
       if (db_num($res) > 0)
       {
         $row = db_fetch($res);
@@ -400,7 +400,7 @@ else
     }
     else if ($_SESSION['ib_user_type'] == '2')
     {
-      if (md5($_SESSION['ib_user_passwort']) != $konfiguration['main_administration']['admin_pwd'])
+      if (md5($_SESSION['ib_user_passwort']) != $konfiguration['main_administration']['admin_pwd']) // TODO: use sha3 hash, salted and peppered
       {
         if (!headers_sent()) header('location: index.php?prv_modul=main_administration');
       }
