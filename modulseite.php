@@ -26,8 +26,8 @@ if (($ib_user_type >= $modulrechte) || ($deaktiviere_zugangspruefung))
   if (isset($konfiguration['core_debugger']['debug']) && ($konfiguration['core_debugger']['debug'])) ob_start();
 
   // Nun die Modulseite laden
-  if (file_exists('modules/'.wb_dir_escape($modul).'/seite_'.wb_dir_escape($seite).'.inc.php'))
-    include('modules/'.wb_dir_escape($modul).'/seite_'.wb_dir_escape($seite).'.inc.php');
+  if (file_exists('modules/'.wb_dir_escape($modul).'/pages/'.wb_dir_escape($seite).'.inc.php'))
+    include('modules/'.wb_dir_escape($modul).'/pages/'.wb_dir_escape($seite).'.inc.php');
   else
     echo $header.'<b>Fehler beim Laden der Seite</b><br><br>Die angefragte Seite wurde im Modulverzeichnis nicht gefunden.'.$footer;
 

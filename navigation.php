@@ -61,7 +61,7 @@ if ($menue == '')
       include('modules/'.wb_dir_escape($m2).'/var.inc.php');
       if (((($ib_user_type == 0) || ($ib_user_type == 1)) && ($modulrechte == 0)) || ($ib_user_type == $modulrechte))
       {
-        if (($menuevisible) && (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php')))
+        if (($menuevisible) && (file_exists('modules/'.wb_dir_escape($m2).'/pages/inhalt.inc.php')))
         {
           if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
             $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';
@@ -80,7 +80,7 @@ if ($menue == '')
           if (!isset($men[$modulpos][$modulsekpos])) $men[$modulpos][$modulsekpos] = '';
           $men[$modulpos][$modulsekpos] .= gfx_zeichnemenuepunkt($m2, 'inhalt', my_htmlentities($modulueberschrift), $k, $g);
         }
-        if (isset($prv_modul) && ($m2 == $prv_modul) && (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php')))
+        if (isset($prv_modul) && ($m2 == $prv_modul) && (file_exists('modules/'.wb_dir_escape($m2).'/pages/inhalt.inc.php')))
         {
           if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
             $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';
@@ -98,7 +98,7 @@ if ($menue == '')
         }
         else
         {
-          if (($modulpos == 0) && ($modulsekpos == 0) && (!$startgefunden) && (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php')))
+          if (($modulpos == 0) && ($modulsekpos == 0) && (!$startgefunden) && (file_exists('modules/'.wb_dir_escape($m2).'/pages/inhalt.inc.php')))
           {
             if (file_exists('modules/'.wb_dir_escape($m2).'/images/menu/32.png'))
               $g = 'modules/'.wb_dir_escape($m2).'/images/menu/32.png';

@@ -12,7 +12,7 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     $i = -1;
     foreach ($module as $m1 => $m2)
     {
-      if (file_exists('modules/'.wb_dir_escape($m2).'/seite_konfig.inc.php'))
+      if (file_exists('modules/'.wb_dir_escape($m2).'/pages/konfig.inc.php'))
       {
         $titel = $m2;
 

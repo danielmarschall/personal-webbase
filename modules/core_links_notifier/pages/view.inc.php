@@ -34,8 +34,8 @@ if ($erw == $skey_ary[1])
   if (file_exists('modules/user_links/var.inc.php'))
     include 'modules/user_links/var.inc.php';
 
-  if (file_exists('modules/user_links/seite_view.inc.php'))
-    include 'modules/user_links/seite_view.inc.php';
+  if (file_exists('modules/user_links/pages/view.inc.php'))
+    include 'modules/user_links/pages/view.inc.php';
 }
 else
 {

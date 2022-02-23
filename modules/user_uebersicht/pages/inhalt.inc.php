@@ -86,7 +86,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 	    $i = -1;
 	    foreach ($module as $m1 => $m2)
 	    {
-	      if (file_exists('modules/'.wb_dir_escape($m2).'/seite_inhalt.inc.php'))
+	      if (file_exists('modules/'.wb_dir_escape($m2).'/pages/inhalt.inc.php'))
 	      {
 	        $titel = $m2;
 

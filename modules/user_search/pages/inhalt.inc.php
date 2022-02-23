@@ -46,7 +46,7 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
 
       $modulueberschrift_a = $modulueberschrift;
 
-      if (($ib_user_type >= $modulrechte) && ((file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_edit.inc.php')) || (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_view.inc.php'))))
+      if (($ib_user_type >= $modulrechte) && ((file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/edit.inc.php')) || (file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/view.inc.php'))))
       {
         $que = generate_search_query($row['table'], 0, $suchbegriff);
         $res2 = db_query($que);
@@ -111,23 +111,23 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
 
             $modulueberschrift_b = $modulueberschrift;
 
-            if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/seite_inhalt.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/pages/inhalt.inc.php'))
               $a = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=inhalt&amp;modul='.urlencode($row4['kategorie']).'#ordner'.$row2['id'].'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">&Ouml;ffnen</a>';
 
-            if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/seite_inhalt.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row4['kategorie']).'/pages/inhalt.inc.php'))
               $c = '<a href="'.oop_link_to_modul($row4['kategorie']).'" class="menu">'.$modulueberschrift_b.'</a> ('.$modulueberschrift_a.')';
             else
               $c = $modulueberschrift_b.' ('.$modulueberschrift_a.')';
           }
           else
           {
-            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_view.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/view.inc.php'))
               $a = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=view&amp;modul='.urlencode($row['modul']).'&amp;id='.urlencode($row2['id']).'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">&Ouml;ffnen</a>';
 
-            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_edit.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/edit.inc.php'))
               $b = '<a href="javascript:oop2(\''.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($row['modul']).'&amp;aktion=edit&amp;id='.urlencode($row2['id']).'\', \''.$modulueberschrift_a.'\', \''.$g.'\');" class="menu">Bearbeiten</a>';
 
-            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/seite_inhalt.inc.php'))
+            if (file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/inhalt.inc.php'))
               $c = '<a href="'.oop_link_to_modul($row['modul']).'" class="menu">'.$modulueberschrift_a.'</a>';
             else
               $c = $modulueberschrift_a;
