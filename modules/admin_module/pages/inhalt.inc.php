@@ -48,8 +48,8 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     verloren gehen! In dem Feld &quot;Daten&quot; k&ouml;nnen Sie sehen, wie viele Personal WebBase-Konfigurationswerte (C) und wie viele
     MySQL-Tabellen (T) das jeweilige Modul benutzt.<br><br>';
 
-    gfx_begintable();
-    gfx_tablecontent('', '<b>Verzeichnisname</b>', '', '<b>Modulname</b>', '', '<b>Autor</b>', '', '<b>Lizenztyp</b>', '', '<b>Sichtbar</b>', '', '<b>Version</b>', '', '<b>Daten</b>', '', '<b>Aktionen</b>');
+    wb_draw_table_begin();
+    wb_draw_table_content('', '<b>Verzeichnisname</b>', '', '<b>Modulname</b>', '', '<b>Autor</b>', '', '<b>Lizenztyp</b>', '', '<b>Sichtbar</b>', '', '<b>Version</b>', '', '<b>Daten</b>', '', '<b>Aktionen</b>');
     foreach ($module as $m1 => $m2)
     {
       $res = db_query("SELECT COUNT(*) AS `cid` FROM `".$mysql_zugangsdaten['praefix']."konfig` WHERE `modul` = '".db_escape($m2)."'");
@@ -103,13 +103,13 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
       else
         $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;entfernen='.urlencode($m2).'\');" class="menu">Entfernen</a>';
 
-      gfx_tablecontent('', my_htmlentities($m2), '', my_htmlentities($modulueberschrift), '', my_htmlentities($autor), '', $license, '', $menuevisible, '',  my_htmlentities($version), '', $ca.$cdaten.'C'.$cb.' / '.$ta.$mdaten.'T'.$tb, '', $aktionen);
+      wb_draw_table_content('', my_htmlentities($m2), '', my_htmlentities($modulueberschrift), '', my_htmlentities($autor), '', $license, '', $menuevisible, '',  my_htmlentities($version), '', $ca.$cdaten.'C'.$cb.' / '.$ta.$mdaten.'T'.$tb, '', $aktionen);
     }
 
     unset($m1);
 	unset($m2);
 
-    gfx_endtable();
+    wb_draw_table_end();
     echo '<b>Modul installieren</b><br><br>';
 
     if ($fehler != '')

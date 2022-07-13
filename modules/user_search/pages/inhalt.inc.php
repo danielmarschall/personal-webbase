@@ -25,9 +25,9 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
   if ($suchbegriff != '')
   {
     echo '<b>Suchergebnisse f&uuml;r &quot;'.$suchbegriff.'&quot;:</b><br><br>';
-    gfx_begintable();
+    wb_draw_table_begin();
     $etwas_gefunden = false;
-    gfx_tablecontent('30', '', '', '<b>Modul</b>', '', '<b>ID</b>', '', '<b>Titel</b>', '', '', '', '');
+    wb_draw_table_content('30', '', '', '<b>Modul</b>', '', '<b>ID</b>', '', '<b>Titel</b>', '', '', '', '');
     $res = db_query("SELECT `modul`, `table` FROM `".$mysql_zugangsdaten['praefix']."module` WHERE `is_searchable` = '1'");
     while ($row = db_fetch($res))
     {
@@ -133,13 +133,13 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
               $c = $modulueberschrift_a;
           }
 
-          gfx_tablecontent('', '<img src="'.$k.'" alt="" width="16" height="16">', '', $c, '', $row2['id'], '', $titel, '100', $a, '100', $b);
+          wb_draw_table_content('', '<img src="'.$k.'" alt="" width="16" height="16">', '', $c, '', $row2['id'], '', $titel, '100', $a, '100', $b);
         }
       }
     }
     if (!$etwas_gefunden)
-      gfx_tablecontent('', 'Kein Datensatz gefunden!', '', '', '', '', '', '', '', '', '', '');
-    gfx_endtable();
+      wb_draw_table_content('', 'Kein Datensatz gefunden!', '', '', '', '', '', '', '', '', '', '');
+    wb_draw_table_end();
   }
 
   echo $footer;

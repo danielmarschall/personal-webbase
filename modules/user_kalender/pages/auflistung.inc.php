@@ -11,9 +11,9 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
   echo '<b>Einmalige Termine</b><br><br>';
 
-  gfx_begintable();
+  wb_draw_table_begin();
 
-  gfx_tablecontent('', '<b>Tag</b>', '', '<b>Name</b>', '', '<b>Startzeitpunkt</b>', '', '<b>Uhrzeit</b>', '', '<b>Verbleibende Zeit</b>', '', '<b>Aktionen</b>', '', '');
+  wb_draw_table_content('', '<b>Tag</b>', '', '<b>Name</b>', '', '<b>Startzeitpunkt</b>', '', '<b>Uhrzeit</b>', '', '<b>Verbleibende Zeit</b>', '', '<b>Aktionen</b>', '', '');
 
   $eingetr = false;
 
@@ -59,13 +59,13 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     if ($wten == 5) $wtag =  'Freitag';
     if ($wten == 6) $wtag =  'Samstag';
 
-    gfx_tablecontent('', $a1.$wtag.$a2, '', $a1.$row['name'].$a2, '', $a1.de_convertmysqldatetime($row['start_date']).$a2, '', $a1.$row['start_time'].' Uhr'.$a2, '', $a1.$verbleibend.$a2, '', '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=edit&amp;danach=B&amp;id='.urlencode($row['id']).'&amp;herkunft='.urlencode($seite).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;zurueck='.urlencode($seite).'&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
+    wb_draw_table_content('', $a1.$wtag.$a2, '', $a1.$row['name'].$a2, '', $a1.de_convertmysqldatetime($row['start_date']).$a2, '', $a1.$row['start_time'].' Uhr'.$a2, '', $a1.$verbleibend.$a2, '', '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=edit&amp;danach=B&amp;id='.urlencode($row['id']).'&amp;herkunft='.urlencode($seite).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;zurueck='.urlencode($seite).'&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
   }
 
   if (!$eingetr)
     gfx_tablespancontent(0, 7, 'Keine Termine vorhanden!');
 
-  gfx_endtable();
+  wb_draw_table_end();
 
   echo $footer;
 

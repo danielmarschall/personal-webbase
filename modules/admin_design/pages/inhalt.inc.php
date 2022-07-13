@@ -42,8 +42,8 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
     echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     echo 'Hier k&ouml;nnen Sie die Designs von Personal WebBase verwalten.<br><br>';
 
-    gfx_begintable();
-    gfx_tablecontent('', '<b>Verzeichnisname</b>', '', '<b>Designname</b>', '', '<b>Autor</b>', '', '<b>Version</b>', '', '<b>Lizenztyp</b>', '', '<b>Aktionen</b>');
+    wb_draw_table_begin();
+    wb_draw_table_content('', '<b>Verzeichnisname</b>', '', '<b>Designname</b>', '', '<b>Autor</b>', '', '<b>Version</b>', '', '<b>Lizenztyp</b>', '', '<b>Aktionen</b>');
 
     $handle = @opendir('design/');
     while ($file = @readdir($handle))
@@ -70,12 +70,12 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
       else
         $aktionen = '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;entfernen='.urlencode($file).'\');" class="menu">Entfernen</a>';
 
-      gfx_tablecontent('', my_htmlentities($file), '', my_htmlentities($name), '', my_htmlentities($autor), '', $version, '', $license, '', $aktionen);
+      wb_draw_table_content('', my_htmlentities($file), '', my_htmlentities($name), '', my_htmlentities($autor), '', $version, '', $license, '', $aktionen);
       }
     }
     closedir($handle);
 
-    gfx_endtable();
+    wb_draw_table_end();
 
     echo '<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul='.urlencode($modul).'&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'">Aktuelles Design &auml;ndern</a><br><br>';
 

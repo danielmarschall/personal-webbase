@@ -18,7 +18,7 @@ if ($ereignisse['links_updates'])
 else
   $links_weiter1 = '';
 
-gfx_tablecontent('30', '<b>'.$ereignisse['links_updates'].'</b>', '', 'beobachtete Webseite'.$plural_links1.' mit neuen &Auml;nderungen.', '', $links_weiter1);
+wb_draw_table_content('30', '<b>'.$ereignisse['links_updates'].'</b>', '', 'beobachtete Webseite'.$plural_links1.' mit neuen &Auml;nderungen.', '', $links_weiter1);
 
 // Link Fehler
 
@@ -36,6 +36,6 @@ if ($ereignisse['links_fehler'])
 else
   $links_weiter2 = '';
 
-gfx_tablecontent('30', '<b>'.$ereignisse['links_fehler'].'</b>', '', 'beobachtete Webseite'.$plural_links1.' mit fehlerhafter &Uuml;berpr&uuml;fung.', '', $links_weiter2);
+wb_draw_table_content('30', '<b>'.$ereignisse['links_fehler'].'</b>', '', 'beobachtete Webseite'.$plural_links1.' mit fehlerhafter &Uuml;berpr&uuml;fung.', '', $links_weiter2);
 
 ?>

@@ -62,12 +62,12 @@ if ($kategorie == 'faecher')
       db_query("OPTIMIZE TABLE `".$mysql_zugangsdaten['praefix']."schule_faecher`");
   }
   $res = db_query("SELECT `name`, `wertungsfaktor`, `id` FROM `".$mysql_zugangsdaten['praefix']."schule_faecher` WHERE `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
-  gfx_begintable();
-  gfx_tablecontent('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Aktionen</b>');
+  wb_draw_table_begin();
+  wb_draw_table_content('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Aktionen</b>');
   while ($row = db_fetch($res))
-    gfx_tablecontent('100%', $row['name'], '', $row['wertungsfaktor'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
-  gfx_tablecontent('', 'Neues Schulfach anlegen:<img src="design/spacer.gif" width="25" height="1" alt=""><input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertungsfaktor" value="1">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value)="Anlegen">');
-  gfx_endtable();
+    wb_draw_table_content('100%', $row['name'], '', $row['wertungsfaktor'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
+  wb_draw_table_content('', 'Neues Schulfach anlegen:<img src="design/spacer.gif" width="25" height="1" alt=""><input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertungsfaktor" value="1">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value)="Anlegen">');
+  wb_draw_table_end();
 }
 
 if ($kategorie == 'noten')
@@ -83,11 +83,11 @@ if ($kategorie == 'noten')
   }
 
   $res = db_query("SELECT `id`, `fach`, `name`, `wertung`, `note` FROM `".$mysql_zugangsdaten['praefix']."schule_noten` WHERE `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
-  gfx_begintable();
+  wb_draw_table_begin();
   if ($rw['notensystem'] == 0)
-    gfx_tablecontent('', '<b>Fach</b>', '', '<b>Name</b>', '', '<b>Wertung</b>', '', '<b>Note</b>', '', '<b>Aktionen</b>');
+    wb_draw_table_content('', '<b>Fach</b>', '', '<b>Name</b>', '', '<b>Wertung</b>', '', '<b>Note</b>', '', '<b>Aktionen</b>');
   if ($rw['notensystem'] == 1)
-    gfx_tablecontent('', '<b>Fach</b>', '', '<b>Name</b>', '', '<b>Wertung</b>', '', '<b>Notenpunkte</b>', '', '<b>Note</b>', '', '<b>Aktionen</b>');
+    wb_draw_table_content('', '<b>Fach</b>', '', '<b>Name</b>', '', '<b>Wertung</b>', '', '<b>Notenpunkte</b>', '', '<b>Note</b>', '', '<b>Aktionen</b>');
   while ($row = db_fetch($res))
   {
     $res2 = db_query("SELECT `name` FROM `".$mysql_zugangsdaten['praefix']."schule_faecher` WHERE `id` = '".db_escape($row['fach'])."' AND `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
@@ -95,9 +95,9 @@ if ($kategorie == 'noten')
     $fach = $row2['name'];
 
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
+      wb_draw_table_content('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', abschnitt_bei_stelle(6-($row['note']/15)*5, 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'">L&ouml;schen</a>');
+      wb_draw_table_content('', $fach, '', $row['name'], '', $row['wertung'], '', $row['note'], '', abschnitt_bei_stelle(6-($row['note']/15)*5, 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'">L&ouml;schen</a>');
   }
   $fach_dropdown = '<select name="fach">';
   $faecher_vorhanden = false;
@@ -111,28 +111,28 @@ if ($kategorie == 'noten')
   if ($faecher_vorhanden)
   {
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertung">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="note">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
+      wb_draw_table_content('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertung">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="note">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertung">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="note">', '', '<img src="design/spacer.gif" width="115" height="1" alt="">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
+      wb_draw_table_content('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="name">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="wertung">', '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="note">', '', '<img src="design/spacer.gif" width="115" height="1" alt="">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
   }
   else
   {
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
+      wb_draw_table_content('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '');
+      wb_draw_table_content('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '');
   }
-  gfx_endtable();
+  wb_draw_table_end();
 }
 
 if ($kategorie == 'auswertung')
 {
-  gfx_begintable();
+  wb_draw_table_begin();
 
   if ($rw['notensystem'] == 0)
-    gfx_tablecontent('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Bewertungen</b>', '', '<b>Durchschnitt</b>');
+    wb_draw_table_content('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Bewertungen</b>', '', '<b>Durchschnitt</b>');
   if ($rw['notensystem'] == 1)
-    gfx_tablecontent('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Bewertungen</b>', '', '<b>Durchschnitt</b>', '', '<b>Note</b>');
+    wb_draw_table_content('', '<b>Fach</b>', '', '<b>Wertungsfaktor</b>', '', '<b>Bewertungen</b>', '', '<b>Durchschnitt</b>', '', '<b>Note</b>');
 
   $sum_c = 0;
   $sum = 0;
@@ -169,9 +169,9 @@ if ($kategorie == 'auswertung')
     if ($sum_wertung <> 0)
     {
       if ($rw['notensystem'] == 0)
-        gfx_tablecontent('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', round($sum_note/$sum_wertung, 2));
+        wb_draw_table_content('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', round($sum_note/$sum_wertung, 2));
       if ($rw['notensystem'] == 1)
-        gfx_tablecontent('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', round($sum_note/$sum_wertung, 2), '', abschnitt_bei_stelle(6-(($sum_note/$sum_wertung)/15)*5, 2));
+        wb_draw_table_content('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', round($sum_note/$sum_wertung, 2), '', abschnitt_bei_stelle(6-(($sum_note/$sum_wertung)/15)*5, 2));
       $sum2 += $c_id;
       $sum_c += $row['wertungsfaktor'];
       $sum += $row['wertungsfaktor']*($sum_note/$sum_wertung);
@@ -179,9 +179,9 @@ if ($kategorie == 'auswertung')
     else
     {
       if ($rw['notensystem'] == 0)
-        gfx_tablecontent('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', '-');
+        wb_draw_table_content('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', '-');
       if ($rw['notensystem'] == 1)
-        gfx_tablecontent('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', '-', '', '-');
+        wb_draw_table_content('', $row['name'], '', $row['wertungsfaktor'], '', $c_id, '', '-', '', '-');
     }
   }
 
@@ -201,19 +201,19 @@ if ($kategorie == 'auswertung')
     }
 
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', '<b>Gesamtdurchschnitt</b>', '', '', '', '<b>'.$sum2.'</b>', '', '<b>'.$durchschnitt.'</b>');
+      wb_draw_table_content('', '<b>Gesamtdurchschnitt</b>', '', '', '', '<b>'.$sum2.'</b>', '', '<b>'.$durchschnitt.'</b>');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', '<b>Gesamtdurchschnitt</b>', '', '', '', '<b>'.$sum2.'</b>', '', '<b>'.$durchschnitt.'</b>', '', '<b>'.$transform.'</b>');
+      wb_draw_table_content('', '<b>Gesamtdurchschnitt</b>', '', '', '', '<b>'.$sum2.'</b>', '', '<b>'.$durchschnitt.'</b>', '', '<b>'.$transform.'</b>');
   }
   else
   {
     if ($rw['notensystem'] == 0)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '');
+      wb_draw_table_content('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '');
     if ($rw['notensystem'] == 1)
-      gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
+      wb_draw_table_content('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '');
   }
 
-  gfx_endtable();
+  wb_draw_table_end();
 }
 
 if ($kategorie == 'hausaufgaben')
@@ -230,8 +230,8 @@ if ($kategorie == 'hausaufgaben')
 
   $res = db_query("SELECT `id`, `fach`, `text` FROM `".$mysql_zugangsdaten['praefix']."schule_hausaufgaben` WHERE `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
 
-  gfx_begintable();
-  gfx_tablecontent('', '<b>Fach</b>', '', '<b>Text</b>', '', '<b>Aktionen</b>');
+  wb_draw_table_begin();
+  wb_draw_table_content('', '<b>Fach</b>', '', '<b>Text</b>', '', '<b>Aktionen</b>');
 
   while ($row = db_fetch($res))
   {
@@ -239,7 +239,7 @@ if ($kategorie == 'hausaufgaben')
     $row2 = db_fetch($res2);
     $fach = $row2['name'];
 
-    gfx_tablecontent('', $fach, '', $row['text'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
+    wb_draw_table_content('', $fach, '', $row['text'], '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;delete='.urlencode($row['id']).'\')">L&ouml;schen</a>');
   }
   $faecher_vorhanden = false;
   $res = db_query("SELECT `name`, `id` FROM `".$mysql_zugangsdaten['praefix']."schule_faecher` WHERE `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
@@ -251,10 +251,10 @@ if ($kategorie == 'hausaufgaben')
   }
   $fach_dropdown .= '</select>';
   if ($faecher_vorhanden)
-    gfx_tablecontent('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="text">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
+    wb_draw_table_content('', $fach_dropdown, '', '<input type="text" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="text">', '', '<input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" value="Eintragen">');
   else
-    gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '');
-  gfx_endtable();
+    wb_draw_table_content('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '');
+  wb_draw_table_end();
 }
 
 if ($kategorie == 'striche')
@@ -266,12 +266,12 @@ if ($kategorie == 'striche')
 
   $faecher_vorhanden = false;
   $res = db_query("SELECT `name`, `positiv`, `negativ`, `id` FROM `".$mysql_zugangsdaten['praefix']."schule_faecher` WHERE `user` = '".$benutzer['id']."' AND `jahrgang` = '".db_escape($id)."'");
-  gfx_begintable();
-  gfx_tablecontent('', '<b>Fach</b>', '', '<b>Positiv</b>', '', '', '', '', '', '<b>Negativ</b>', '', '', '', '');
+  wb_draw_table_begin();
+  wb_draw_table_content('', '<b>Fach</b>', '', '<b>Positiv</b>', '', '', '', '', '', '<b>Negativ</b>', '', '', '', '');
   while ($row = db_fetch($res))
   {
     $faecher_vorhanden = true;
-    gfx_tablecontent('', $row['name'], '', round($row['positiv'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=1&amp;what=pos" >+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.5&amp;what=pos" >+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.25&amp;what=pos" >+0.25</a>',
+    wb_draw_table_content('', $row['name'], '', round($row['positiv'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=1&amp;what=pos" >+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.5&amp;what=pos" >+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.25&amp;what=pos" >+0.25</a>',
                                                                       '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-1&amp;what=pos">-1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.5&amp;what=pos">-0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.25&amp;what=pos">-0.25</a>',
                                        '', round($row['negativ'], 2), '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=1&amp;what=neg" >+1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.5&amp;what=neg" >+0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=0.25&amp;what=neg" >+0.25</a>',
                                                                       '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-1&amp;what=neg">-1.00</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.5&amp;what=neg">-0.50</a> <a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite='.urlencode($seite).'&amp;id='.urlencode($id).'&amp;kategorie='.urlencode($kategorie).'&amp;plus='.urlencode($row['id']).'&amp;amount=-0.25&amp;what=neg">-0.25</a>');
@@ -279,10 +279,10 @@ if ($kategorie == 'striche')
 
   if (!$faecher_vorhanden)
   {
-    gfx_tablecontent('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '', '', '');
+    wb_draw_table_content('', 'Bitte zuerst <a href="'.$_SERVER['PHP_SELF'].'?seite='.urlencode($seite).'&modul='.urlencode($modul).'&kategorie=faecher&id='.urlencode($id).'">F&auml;cher anlegen</a>!', '', '', '', '', '', '', '', '', '', '', '', '');
   }
 
-  gfx_endtable();
+  wb_draw_table_end();
 }
 
 echo '</form>';

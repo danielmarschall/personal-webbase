@@ -8,9 +8,9 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
     echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     echo 'Hier sind alle Datenbanken der Module aufgelistet.<br><br>';
 
-    gfx_begintable();
+    wb_draw_table_begin();
     $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."module` ORDER BY `id`");
-    gfx_tablecontent('', '<b>Tabellenname</b>', '', '<b>Modul</b>', '', '<b>Datens&auml;tze</b>', '', '<b>Aktionen</b>');
+    wb_draw_table_content('', '<b>Tabellenname</b>', '', '<b>Modul</b>', '', '<b>Datens&auml;tze</b>', '', '<b>Aktionen</b>');
     while ($row = db_fetch($res))
     {
       if (isset($only) && ($row['modul'] == $only))
@@ -35,9 +35,9 @@ if ($modulueberschrift == '') $modulueberschrift = $modul;
         $z = '';
         $x = 'Tabelle neu anlegen';
       }
-      gfx_tablecontent('', $s1.$mysql_zugangsdaten['praefix'].$row['table'].$s2, '', $s1.$row['modul'].$z.$s2, '', $s1.$arw['ct'].$s2, '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;id='.urlencode($row['id']).'\');" class="menu">'.$x.'</a>');
+      wb_draw_table_content('', $s1.$mysql_zugangsdaten['praefix'].$row['table'].$s2, '', $s1.$row['modul'].$z.$s2, '', $s1.$arw['ct'].$s2, '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;id='.urlencode($row['id']).'\');" class="menu">'.$x.'</a>');
     }
-    gfx_endtable();
+    wb_draw_table_end();
 
     echo '<b>Schnittstellen</b><ul>';
     $welchegefunden = false;

@@ -8,8 +8,8 @@ if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
     echo 'Hier sind alle Benutzer aufgelistet.<br><br>';
 
-    gfx_begintable();
-    gfx_tablecontent('', '<b>Benutzername</b>', '', '<b>E-Mail-Adresse</b>', '100', '<b>Datens&auml;tze</b>', '100', '<b>Ordner</b>', '100', '<b>Aktionen</b>', '100', '', '100', '');
+    wb_draw_table_begin();
+    wb_draw_table_content('', '<b>Benutzername</b>', '', '<b>E-Mail-Adresse</b>', '100', '<b>Datens&auml;tze</b>', '100', '<b>Ordner</b>', '100', '<b>Aktionen</b>', '100', '', '100', '');
 
     $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` ORDER BY `id`");
     $eintrag = false;
@@ -48,14 +48,14 @@ if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 	  else
 	    $maila = 'Unbekannt';
 
-      gfx_tablecontent('', $row['username'].$status, '', $maila, '', $count_ds , '', $count_o, '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=lock&amp;id='.urlencode($row['id']).'" class="menu">'.$sperr.'</a>', '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=edit&amp;id='.urlencode($row['id']).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=del&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
+      wb_draw_table_content('', $row['username'].$status, '', $maila, '', $count_ds , '', $count_o, '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=lock&amp;id='.urlencode($row['id']).'" class="menu">'.$sperr.'</a>', '', '<a href="'.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=edit&amp;id='.urlencode($row['id']).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?modul='.urlencode($modul).'&amp;seite=kraftsetzung&amp;aktion=del&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
 
       $eintrag = true;
     }
 
     if (!$eintrag)
-      gfx_tablecontent('', 'Keine Benutzer vorhanden!', '', '', '', '', '', '', '', '', '', '', '', '');
-    gfx_endtable();
+      wb_draw_table_content('', 'Keine Benutzer vorhanden!', '', '', '', '', '', '', '', '', '', '', '', '');
+    wb_draw_table_end();
 
     echo $footer;
 

@@ -44,7 +44,7 @@ function gfx_zeichneordner($modul, $table, $append, $dir = 0, $einzug = 0)
   {
     $durchlauf += gfx_zeichneitems($modul, $table, $append, $dir);
     if ($durchlauf == 0)
-    gfx_tablecontent('100%', 'Es sind keine Elemente in dieser Sektion vorhanden.', '', '', '', '', '', '');
+    wb_draw_table_content('100%', 'Es sind keine Elemente in dieser Sektion vorhanden.', '', '', '', '', '', '');
   }
 }
 

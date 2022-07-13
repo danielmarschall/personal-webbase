@@ -783,17 +783,17 @@ function liste_items_filter($modul, $table, $append)
   return $erg;
 }
 
-function gfx_begintable()
+function wb_draw_table_begin()
 {
   echo '<div align="center"><table cellspacing="0" cellpadding="2" border="0" width="90%">';
 }
 
-function gfx_endtable()
+function wb_draw_table_end()
 {
   echo '</table></div><br>';
 }
 
-function gfx_tablecontent()
+function wb_draw_table_content()
 {
   echo '<tr class="row_tab" onmouseover="this.className=\'row_tab_act\';" onmouseout="this.className=\'row_tab\';">';
   $j = 0;

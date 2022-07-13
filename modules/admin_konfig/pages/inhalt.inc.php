@@ -65,7 +65,9 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
       echo '</tr></table><br></center>';
     }
     else
+    {
       echo 'Keine entsprechenden Module gefunden!<br><br>';
+	}
 
       echo $footer;
 

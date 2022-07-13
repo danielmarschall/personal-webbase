@@ -33,15 +33,15 @@ if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
 
     echo '<span style="font-size:1.2em"><b>Serverdaten</b></span><br><br>';
-    gfx_begintable();
-	gfx_tablecontent('40%', '<b>Anmeldeserver</b>', '60%', $mysql_zugangsdaten['server']);
+    wb_draw_table_begin();
+	wb_draw_table_content('40%', '<b>Anmeldeserver</b>', '60%', $mysql_zugangsdaten['server']);
 
 	if ($konfiguration['main_ueber']['admin_mail'] != '')
 	  $addr = '<a href="mailto:'.$konfiguration['main_ueber']['admin_mail'].'" class="menu">'.$konfiguration['main_ueber']['admin_mail'].'</a>';
     else
 	  $addr = 'Keine angegeben';
 
-	gfx_tablecontent('40%', '<b>Administrator E-Mail-Adresse</b>', '60%', $addr.' (<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul=main_ueber&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'" class="menu">&Auml;ndern</a>)');
+	wb_draw_table_content('40%', '<b>Administrator E-Mail-Adresse</b>', '60%', $addr.' (<a href="'.$_SERVER['PHP_SELF'].'?seite=konfig&amp;modul=main_ueber&amp;vonmodul='.urlencode($modul).'&amp;vonseite='.urlencode($seite).'" class="menu">&Auml;ndern</a>)');
 
 	$rs = db_query("SELECT NOW()");
 	$rw = db_fetch($rs);
@@ -49,30 +49,30 @@ if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 	if (date('Y-m-d H:i:s') != $rw[0])
     {
       // Kann vorkommen, wenn MySQL-Server sich auf einem anderen System befindet
-	  gfx_tablecontent('40%', '<b>PHP-Zeit</b>', '60%', de_convertmysqldatetime(date('Y-m-d, H:i:s'), true));
-	  gfx_tablecontent('40%', '<b>MySQL-Zeit</b>', '60%', de_convertmysqldatetime($rw[0], true));
+	  wb_draw_table_content('40%', '<b>PHP-Zeit</b>', '60%', de_convertmysqldatetime(date('Y-m-d, H:i:s'), true));
+	  wb_draw_table_content('40%', '<b>MySQL-Zeit</b>', '60%', de_convertmysqldatetime($rw[0], true));
 	}
 	else
-	  gfx_tablecontent('40%', '<b>Serverzeit</b>', '60%', de_convertmysqldatetime(date('Y-m-d, H:i:s'), true));
+	  wb_draw_table_content('40%', '<b>Serverzeit</b>', '60%', de_convertmysqldatetime(date('Y-m-d, H:i:s'), true));
 
-    gfx_endtable();
+    wb_draw_table_end();
 
     echo '<span style="font-size:1.2em"><b>Datenbankstatistik</b></span><br><br>';
-    gfx_begintable();
+    wb_draw_table_begin();
 
-	gfx_tablecontent('40%', '<b>Letzter Login</b>', '60%', de_convertmysqldatetime($_SESSION['last_login']));
+	wb_draw_table_content('40%', '<b>Letzter Login</b>', '60%', de_convertmysqldatetime($_SESSION['last_login']));
 
     if ($_SESSION['last_login_ip'] == '')
       $ueip = 'Unbekannt';
     else
       $ueip = '<a href="http://www.ripe.net/fcgi-bin/whois?form_type=simple&amp;full_query_string=&amp;searchtext='.urlencode($_SESSION['last_login_ip']).'&amp;submit.x=0&amp;submit.y=0" target="_blank" class="menu">'.$_SESSION['last_login_ip'].'</a> (DNS: '.@gethostbyaddr($_SESSION['last_login_ip']).')';
 
-	gfx_tablecontent('40%', '<b>&Uuml;ber IP</b>', '60%', $ueip);
-	gfx_tablecontent('40%', '<b>Benutzer-Datens&auml;tze der Datenbank</b>', '60%', $count_ds);
-	gfx_tablecontent('40%', '<b>Benutzer-Ordner der Datenbank</b>', '60%', $count_o);
-	gfx_tablecontent('40%', '<b>Installierte Module</b>', '60%', count($module).' (<a href="'.oop_link_to_modul('admin_module').'" class="menu">Verwalten</a>)');
-    gfx_tablecontent('40%', '<b>Angelegte Tabellen</b>', '60%', count($tabellen).' (<a href="'.oop_link_to_modul('admin_datenbank').'" class="menu">Verwalten</a>)');
-	gfx_endtable();
+	wb_draw_table_content('40%', '<b>&Uuml;ber IP</b>', '60%', $ueip);
+	wb_draw_table_content('40%', '<b>Benutzer-Datens&auml;tze der Datenbank</b>', '60%', $count_ds);
+	wb_draw_table_content('40%', '<b>Benutzer-Ordner der Datenbank</b>', '60%', $count_o);
+	wb_draw_table_content('40%', '<b>Installierte Module</b>', '60%', count($module).' (<a href="'.oop_link_to_modul('admin_module').'" class="menu">Verwalten</a>)');
+    wb_draw_table_content('40%', '<b>Angelegte Tabellen</b>', '60%', count($tabellen).' (<a href="'.oop_link_to_modul('admin_datenbank').'" class="menu">Verwalten</a>)');
+	wb_draw_table_end();
 
     echo '<span style="font-size:1.2em"><b>Installierte Module</b></span><br><br>';
 

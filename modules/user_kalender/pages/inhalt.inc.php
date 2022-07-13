@@ -45,9 +45,9 @@ function wochenstat($woche)
 {
   global $mysql_zugangsdaten, $benutzer, $modul, $seite;
 
-  gfx_begintable();
+  wb_draw_table_begin();
 
-  gfx_tablecontent('100', '<b>Tag</b>', '', '<b>Name</b>', '190', '<b>Startzeitpunkt</b>', '130', '<b>Verbleibende Zeit</b>', '100', '<b>Aktionen</b>', '100', '');
+  wb_draw_table_content('100', '<b>Tag</b>', '', '<b>Name</b>', '190', '<b>Startzeitpunkt</b>', '130', '<b>Verbleibende Zeit</b>', '100', '<b>Aktionen</b>', '100', '');
 
   $current_week = get_week_boundaries(time()+$woche*60*60*24*7);
 
@@ -96,7 +96,7 @@ function wochenstat($woche)
       if ($z == 2) $verbleibend = '&Uuml;bermorgen';
       if ($z > 2) $verbleibend = $z.' Tage';
 
-      gfx_tablecontent('', $a1.$wochentag.$a2, '', $a1.$row['name'].$a2, '', $a1.de_convertmysqldatetime($wy.'-'.$wm.'-'.$wd.' '.$row['start_time']).$a2, '', $a1.$verbleibend.$a2, '', '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=edit&amp;danach=A&amp;id='.urlencode($row['id']).'&amp;herkunft='.urlencode($seite).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;zurueck='.urlencode($seite).'&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
+      wb_draw_table_content('', $a1.$wochentag.$a2, '', $a1.$row['name'].$a2, '', $a1.de_convertmysqldatetime($wy.'-'.$wm.'-'.$wd.' '.$row['start_time']).$a2, '', $a1.$verbleibend.$a2, '', '<a href="'.$_SERVER['PHP_SELF'].'?seite=edit&amp;modul='.urlencode($modul).'&amp;aktion=edit&amp;danach=A&amp;id='.urlencode($row['id']).'&amp;herkunft='.urlencode($seite).'" class="menu">Bearbeiten</a>', '', '<a href="javascript:abfrage(\''.$_SERVER['PHP_SELF'].'?seite=kraftsetzung&amp;modul='.urlencode($modul).'&amp;aktion=delete&amp;zurueck='.urlencode($seite).'&amp;id='.urlencode($row['id']).'\');" class="menu">L&ouml;schen</a>');
     }
   }
   if (!$eintr)
@@ -104,7 +104,7 @@ function wochenstat($woche)
     gfx_tablespancontent(0, 6, 'Keine Termine vorhanden!');
   }
 
-  gfx_endtable();
+  wb_draw_table_end();
 }
 
 $d = date('j');

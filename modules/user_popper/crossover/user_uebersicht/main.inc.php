@@ -28,6 +28,6 @@ else
   $a2 = '';
 }
 
-gfx_tablecontent('30', $a1.'<b>'.$ereignisse['email_neu'].'</b>'.$a2, $a1.''.$a2, $a1.'Post'.$plural_email.' mit neuen Nachrichten.'.$a2, $a1.''.$a2, $a1.$email_weiter.$a2);
+wb_draw_table_content('30', $a1.'<b>'.$ereignisse['email_neu'].'</b>'.$a2, $a1.''.$a2, $a1.'Post'.$plural_email.' mit neuen Nachrichten.'.$a2, $a1.''.$a2, $a1.$email_weiter.$a2);
 
 ?>
