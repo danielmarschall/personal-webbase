@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (($ary[$i]['kaputt_flag'] == '1') && ($ary[$i]['neu_flag'] == '1') && ($ary[$i]['update_enabled'] == '1'))
 {

@@ -23,11 +23,11 @@ if ($ueberschrift != '')
 }
 else
 {
-  if ($ib_user_type == '0')
+  if ($wb_user_type == '0')
 	echo 'Gastzugang';
-  else if ($ib_user_type == '1')
+  else if ($wb_user_type == '1')
 	echo 'Benutzermen&uuml;';
-  else if ($ib_user_type == '2')
+  else if ($wb_user_type == '2')
 	echo 'Verwaltung';
   else
 	echo 'Hauptmen&uuml;';
@@ -59,7 +59,7 @@ if ($menue == '')
       $deaktiviere_zugangspruefung = 0;
 
       include('modules/'.wb_dir_escape($m2).'/var.inc.php');
-      if (((($ib_user_type == 0) || ($ib_user_type == 1)) && ($modulrechte == 0)) || ($ib_user_type == $modulrechte))
+      if (((($wb_user_type == 0) || ($wb_user_type == 1)) && ($modulrechte == 0)) || ($wb_user_type == $modulrechte))
       {
         if (($menuevisible) && (file_exists('modules/'.wb_dir_escape($m2).'/pages/inhalt.inc.php')))
         {

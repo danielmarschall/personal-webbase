@@ -66,7 +66,7 @@
       return preg_replace('/\\x13\\x00*$/', '', $plain_text);
   }
 
-  define('IBLEGAL', '1');
+  define('WBLEGAL', '1');
   global $mysql_zugangsdaten;
   include '../../../includes/config.inc.php';
 
@@ -192,7 +192,7 @@
   @session_name($ib_session_name);
   @session_start();
 
-  if ((isset($_SESSION['ib_user_type'])) &&  ($_SESSION['ib_user_type'] == ''))
+  if ((isset($_SESSION['wb_user_type'])) &&  ($_SESSION['wb_user_type'] == ''))
   {
   die('<script language="JavaScript">
   <!--

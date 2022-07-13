@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
@@ -12,7 +12,7 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>';
   }
   else
   {
-	if ($ib_user_type == '0')
+	if ($wb_user_type == '0')
 	{
 	  echo 'In diesem Bereich k&ouml;nnen Benutzer ihr Passwort &auml;ndern bzw. das Konto l&ouml;schen, sofern der Administrator dies erlaubt.<br><br><font color="#FF0000">Diese Funktion ist im Gastzugang nicht verf&uuml;gbar.</font>';
 	}

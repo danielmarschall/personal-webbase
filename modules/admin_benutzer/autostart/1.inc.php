@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 ib_newdatabasetable('users', $m2, 'username', "varchar(255) NOT NULL default ''",
                                   'email', "varchar(255) NOT NULL default ''",

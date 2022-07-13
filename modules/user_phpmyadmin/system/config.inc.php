@@ -60,7 +60,7 @@ $cfg['blowfish_secret'] = md5($mysql_zugangsdaten['passwort']);
 $c = @mysql_connect($mysql_zugangsdaten['server'], $mysql_zugangsdaten['username'], $mysql_zugangsdaten['passwort']);
 @mysql_select_db($mysql_zugangsdaten['datenbank'], $c);
 
-if ($_SESSION['ib_user_type'] == '2')
+if ($_SESSION['wb_user_type'] == '2')
 {
 
 $res = @mysql_query("SELECT `wert` FROM `".$mysql_zugangsdaten['praefix']."konfig` WHERE `name` = 'admin_pwd' AND `modul` = 'main_administration'");
@@ -134,16 +134,16 @@ $cfg['Servers'][$i]['AllowDeny']['rules']           // Host authentication rules
 }
 
 }
-else if (($_SESSION['ib_user_type'] == '0') || ($_SESSION['ib_user_type'] == '1'))
+else if (($_SESSION['wb_user_type'] == '0') || ($_SESSION['wb_user_type'] == '1'))
 {
 
-if ($_SESSION['ib_user_type'] == '0')
+if ($_SESSION['wb_user_type'] == '0')
 {
   $res = @mysql_query("SELECT `wert` FROM `".$mysql_zugangsdaten["praefix"]."konfig` WHERE `name` = 'gast_username'");
   $row = @mysql_fetch_array($res);
   $usnm = $row['wert'];
 }
-else if ($_SESSION['ib_user_type'] == '1')
+else if ($_SESSION['wb_user_type'] == '1')
 {
   $usnm = $_SESSION['ib_user_username'];
 }

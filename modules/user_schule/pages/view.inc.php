@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 function abschnitt_bei_stelle($zahl, $stelle)
 {

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
@@ -30,7 +30,7 @@ Bitte Beachten Sie: Wenn Sie Datens&auml;tze hochladen, die die selbe ID-Nummer 
   <td><img src="design/spacer.gif" alt="" width="5" height="1"></td>
   <td>';
 
-  if ($ib_user_type == 0)
+  if ($wb_user_type == 0)
     echo 'Im Gastkonto wird kein Passwort ben&ouml;tigt.';
   else
     echo '<input type="password" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="pwd" value="">';
@@ -62,7 +62,7 @@ Mit dieser Funktion k&ouml;nnen Sie <i>alle Datens&auml;tze</i> aus Ihrer Person
   <td><img src="design/spacer.gif" alt="" width="5" height="1"></td>
   <td>';
 
-  if ($ib_user_type == 0)
+  if ($wb_user_type == 0)
     echo 'Im Gastkonto wird kein Passwort ben&ouml;tigt.';
   else
     echo '<input type="password" class="normal" onmouseover="this.className=\'highlight\';" onmouseout="this.className=\'normal\';" name="pwd" value="">';

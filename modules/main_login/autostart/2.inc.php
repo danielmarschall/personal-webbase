@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 /* if (!@is_writable('includes/session/'))
 {
@@ -187,11 +187,11 @@ if ((isset($_SESSION['session_secured'])) && ($_SESSION['session_secured']))
 
 $gesperrt = $header.'<h1>Fehler</h1>Sie wurden als Benutzer von Personal WebBase gesperrt. Bitte wenden Sie sich an den Serveradministrator.<br><br><a href="index.php">Zur&uuml;ck zum Webinterface</a>'.$footer;
 
-if (!isset($ib_user_type)) $ib_user_type = -1;
+if (!isset($wb_user_type)) $wb_user_type = -1;
 
 if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
 {
-  if ($ib_user_type == 2)
+  if ($wb_user_type == 2)
   {
     if (md5($ib_user_passwort) != $konfiguration['main_administration']['admin_pwd']) // TODO: use sha3 hash, salted and peppered
     {
@@ -208,18 +208,18 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
       ib_change_config('last_login', $row[0], 'main_administration');
       ib_change_config('last_login_ip', $_SERVER['REMOTE_ADDR'], 'main_administration');
 
-      $_SESSION['ib_user_type'] = $ib_user_type;
+      $_SESSION['wb_user_type'] = $wb_user_type;
       $_SESSION['ib_user_passwort'] = $ib_user_passwort;
     }
   }
 
-  if ($ib_user_type == '1')
+  if ($wb_user_type == '1')
   {
     if (($ib_user_username == $konfiguration['main_gastzugang']['gast_username']) && ($ib_user_passwort == $konfiguration['main_gastzugang']['gast_passwort']))
     {
       if ($konfiguration['main_gastzugang']['enable_gast'])
       {
-        $ib_user_type = '0';
+        $wb_user_type = '0';
       }
       else
       {
@@ -255,7 +255,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
         $benutzer['last_login'] = $rw[0];
         $benutzer['last_login_ip'] = $_SERVER['REMOTE_ADDR'];
 
-        $_SESSION['ib_user_type'] = $ib_user_type;
+        $_SESSION['wb_user_type'] = $wb_user_type;
         $_SESSION['ib_user_username'] = $ib_user_username;
         $_SESSION['ib_user_passwort'] = $ib_user_passwort;
       }
@@ -269,7 +269,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
     }
   }
 
-  if ($ib_user_type == '0')
+  if ($wb_user_type == '0')
   {
     if ($konfiguration['main_gastzugang']['enable_gast'])
     {
@@ -298,7 +298,7 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
           $benutzer['last_login'] = $rw[0];
           $benutzer['last_login_ip'] = $_SERVER['REMOTE_ADDR'];
 
-          $_SESSION['ib_user_type'] = $ib_user_type;
+          $_SESSION['wb_user_type'] = $wb_user_type;
         }
       }
       else
@@ -320,13 +320,13 @@ if (isset($_POST['login_process']) && ($_POST['login_process'] == '1'))
 }
 else
 {
-  if ((!isset($_SESSION['ib_user_type'])) || (($_SESSION['ib_user_type'] != '0') && ($_SESSION['ib_user_type'] != '1') && ($_SESSION['ib_user_type'] != '2')))
+  if ((!isset($_SESSION['wb_user_type'])) || (($_SESSION['wb_user_type'] != '0') && ($_SESSION['wb_user_type'] != '1') && ($_SESSION['wb_user_type'] != '2')))
   {
-    $ib_user_type = -1;
+    $wb_user_type = -1;
   }
   else
   {
-    if ($_SESSION['ib_user_type'] == '0')
+    if ($_SESSION['wb_user_type'] == '0')
     {
       if ($konfiguration['main_gastzugang']['enable_gast'])
       {
@@ -346,7 +346,7 @@ else
           }
           else
           {
-            $ib_user_type = $_SESSION['ib_user_type'];
+            $wb_user_type = $_SESSION['wb_user_type'];
             $ib_user_username = $konfiguration['main_gastzugang']['gast_username'];
             $ib_user_passwort = $konfiguration['main_gastzugang']['gast_passwort'];
           }
@@ -367,7 +367,7 @@ else
         if (!headers_sent()) header('location: index.php?prv_modul='.urlencode($m2));
       }
     }
-    else if ($_SESSION['ib_user_type'] == '1')
+    else if ($_SESSION['wb_user_type'] == '1')
     {
       $res = db_query("SELECT * FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `username` = '".db_escape($_SESSION['ib_user_username'])."' AND `passwort` = '".md5($_SESSION['ib_user_passwort'])."'"); // TODO: use sha3 hash, salted and peppered
       if (db_num($res) > 0)
@@ -385,7 +385,7 @@ else
         }
         else
         {
-          $ib_user_type = $_SESSION['ib_user_type'];
+          $wb_user_type = $_SESSION['wb_user_type'];
           $ib_user_username = $_SESSION['ib_user_username'];
           $ib_user_passwort = $_SESSION['ib_user_passwort'];
         }
@@ -398,7 +398,7 @@ else
         if (!headers_sent()) header('location: index.php?prv_modul='.urlencode($m2));
       }
     }
-    else if ($_SESSION['ib_user_type'] == '2')
+    else if ($_SESSION['wb_user_type'] == '2')
     {
       if (md5($_SESSION['ib_user_passwort']) != $konfiguration['main_administration']['admin_pwd']) // TODO: use sha3 hash, salted and peppered
       {
@@ -406,7 +406,7 @@ else
       }
       else
       {
-        $ib_user_type = $_SESSION['ib_user_type'];
+        $wb_user_type = $_SESSION['wb_user_type'];
         $ib_user_passwort = $_SESSION['ib_user_passwort'];
       }
     }

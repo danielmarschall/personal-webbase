@@ -1,12 +1,12 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
-if ($ib_user_type == 0)
+if ($wb_user_type == 0)
 {
   die($header.'Keine Zugriffsberechtigung'.$footer);
 }
-else if ($ib_user_type == 1)
+else if ($wb_user_type == 1)
 {
   if ($ib_user_passwort != $pwd)
   {
@@ -75,7 +75,7 @@ else if ($ib_user_type == 1)
     }
   }
 }
-else if ($ib_user_type == 2)
+else if ($wb_user_type == 2)
 {
   if ($aktion == 'changekonfig')
   {

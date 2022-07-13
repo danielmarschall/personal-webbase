@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'suchbegriff\').focus();"', $header);
 
@@ -46,7 +46,7 @@ Suchbegriff:<br><input type="text" name="suchbegriff" value="'.$suchbegriff.'" c
 
       $modulueberschrift_a = $modulueberschrift;
 
-      if (($ib_user_type >= $modulrechte) && ((file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/edit.inc.php')) || (file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/view.inc.php'))))
+      if (($wb_user_type >= $modulrechte) && ((file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/edit.inc.php')) || (file_exists('modules/'.wb_dir_escape($row['modul']).'/pages/view.inc.php'))))
       {
         $que = generate_search_query($row['table'], 0, $suchbegriff);
         $res2 = db_query($que);

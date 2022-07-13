@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo $header;
 
@@ -28,7 +28,7 @@ Aktivieren Sie diese Funktionalit&auml;t daher nur, wenn Sie die Schnellanmelde-
 
 <b>Aktueller Status</b><br><br>';
 
-if ($ib_user_type == 0)
+if ($wb_user_type == 0)
 {
   echo '<font color="#FF0000">Diese Funktion ist im Gastzugang nicht verf&uuml;gbar.</font>';
 }

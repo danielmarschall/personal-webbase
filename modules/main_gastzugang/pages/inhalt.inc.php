@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo $header;
 
@@ -15,7 +15,7 @@ Personal WebBase beliebig testen. Vielen Dank f&uuml;r das Interesse an Personal
 
 <form action="index.php" target="_parent" method="POST">
 <input type="hidden" name="login_process" value="1">
-<input type="hidden" name="ib_user_type" value="0">
+<input type="hidden" name="wb_user_type" value="0">
 
 <input type="submit" class="button" onmouseover="this.className=\'button_act\';" onmouseout="this.className=\'button\';" name="login" value="Einloggen">
 

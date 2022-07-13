@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 if (!isset($secretkey)) $secretkey = '';
 
@@ -41,7 +41,7 @@ else
     // @session_unset();
     // @session_destroy();
 
-    $_SESSION['ib_user_type'] = '1';
+    $_SESSION['wb_user_type'] = '1';
     $_SESSION['ib_user_username'] = $ary[0];
     $_SESSION['ib_user_passwort'] = $ary[2];
 

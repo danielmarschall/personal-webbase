@@ -21,7 +21,7 @@ $deaktiviere_zugangspruefung = 0;
 if (file_exists('modules/'.wb_dir_escape($modul).'/var.inc.php'))
   include('modules/'.wb_dir_escape($modul).'/var.inc.php');
 
-if (($ib_user_type >= $modulrechte) || ($deaktiviere_zugangspruefung))
+if (($wb_user_type >= $modulrechte) || ($deaktiviere_zugangspruefung))
 {
   if (isset($konfiguration['core_debugger']['debug']) && ($konfiguration['core_debugger']['debug'])) ob_start();
 

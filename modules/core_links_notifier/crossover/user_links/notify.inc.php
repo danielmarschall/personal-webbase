@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $res4 = db_query("SELECT `email` FROM `".$mysql_zugangsdaten['praefix']."users` WHERE `id` = '".db_escape($inp_user)."' AND `gesperrt` = '0'");
 $row4 = db_fetch($res4);

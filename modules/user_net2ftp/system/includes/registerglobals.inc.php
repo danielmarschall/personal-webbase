@@ -159,7 +159,7 @@ $_SESSION["net2ftp_remote_addr_new"] = $_SERVER["REMOTE_ADDR"];
      return preg_replace('/\\x13\\x00*$/', '', $plain_text);
  }
 
- define('IBLEGAL', '1');
+ define('WBLEGAL', '1');
  global $mysql_zugangsdaten;
  include '../../../includes/config.inc.php';
 
@@ -286,7 +286,7 @@ $_SESSION["net2ftp_remote_addr_new"] = $_SERVER["REMOTE_ADDR"];
  @session_name($ib_session_name);
  @session_start();
 
- if ($_SESSION['ib_user_type'] == '')
+ if ($_SESSION['wb_user_type'] == '')
  {
 
  die('<script language="JavaScript">

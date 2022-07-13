@@ -6,7 +6,7 @@
 // Ohne diese werden Modulinhalte nicht ausgeführt                          //
 //////////////////////////////////////////////////////////////////////////////
 
-define('IBLEGAL', '1');
+define('WBLEGAL', '1');
 
 header('Content-Type: text/html; charset=ISO-8859-1');
 mb_internal_encoding("ISO-8859-1");

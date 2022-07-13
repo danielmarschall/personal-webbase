@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'passwort\').focus();"', $header);
 
@@ -11,7 +11,7 @@ Kunden und die Konfiguration des Servers zu bearbeiten.<br><br>
 
 <form action="index.php" target="_parent" method="POST" name="frm">
 <input type="hidden" name="login_process" value="1">
-<input type="hidden" name="ib_user_type" value="2">
+<input type="hidden" name="wb_user_type" value="2">
 
 <table cellspacing="0" cellpadding="2" border="0">';
 echo '<tr>

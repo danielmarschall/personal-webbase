@@ -1,9 +1,7 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // Revision-Informationen
 $revision = '0.75+ WIP';
-$rev_datum = '22.02.2022';
-
-?>
+$rev_datum = '14.07.2022';

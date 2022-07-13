@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'username\').focus();"', $header);
 
@@ -8,7 +8,7 @@ echo '<h1>'.my_htmlentities($modulueberschrift).'</h1>
 
 <form action="index.php" target="_parent" method="POST" name="frm">
 <input type="hidden" name="login_process" value="1">
-<input type="hidden" name="ib_user_type" value="1">
+<input type="hidden" name="wb_user_type" value="1">
 
 <b>Bitte loggen Sie sich ein.</b><br><br>
 

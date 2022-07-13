@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 $res = db_query("SELECT `port`, `server`, `username`, `passwort`, `startverzeichnis` FROM `".$mysql_zugangsdaten['praefix']."net2ftp` WHERE `id` = '".db_escape($id)."' AND `user` = '".$benutzer['id']."'");
 $row = db_fetch($res);

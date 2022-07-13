@@ -1,8 +1,8 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
-if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
+if ($wb_user_type < 2) die('Keine Zugriffsberechtigung');
 
   echo str_replace('<body', '<body onload="self.focus();document.getElementById(\'internet-check-url\').focus();"', $header);
 

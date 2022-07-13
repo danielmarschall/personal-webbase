@@ -1,5 +1,8 @@
 @echo off
 
+cd /d %~dp0
+cd ..
+
 echo WARNUNG!
 echo.
 echo Dieses Script h„ngt die Drittanbietersysteme sowie die Konfiguration

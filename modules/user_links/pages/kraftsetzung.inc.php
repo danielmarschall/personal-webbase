@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   if ($aktion == 'edit')
   {
@@ -147,7 +147,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
     if (!headers_sent()) header('location: '.$_SERVER['PHP_SELF'].'?seite=inhalt&modul='.urlencode($modul));
   }
 
-if (($aktion == 'changekonfig') && ($ib_user_type >= 2))
+if (($aktion == 'changekonfig') && ($wb_user_type >= 2))
 {
   if ($aktion == 'changekonfig')
   {

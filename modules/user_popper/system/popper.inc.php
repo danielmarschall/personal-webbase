@@ -1,6 +1,6 @@
 <?php
 
-define('IBLEGAL', '1');
+define('WBLEGAL', '1');
 
 include('../../../includes/config.inc.php');
 

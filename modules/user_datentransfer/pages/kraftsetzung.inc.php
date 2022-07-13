@@ -1,10 +1,10 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
   if ($aktion == 'dest')
   {
-    if (isset($pwd) && ($pwd != $ib_user_passwort) && ($ib_user_type == 1))
+    if (isset($pwd) && ($pwd != $ib_user_passwort) && ($wb_user_type == 1))
       die($header.'<h1>Daten&uuml;bertragung</h1>Es wurde ein falsches Passwort eingegeben.'.$footer);
 
     if (strtoupper($sic) != 'OK')
@@ -28,7 +28,7 @@ if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt w
 
   if ($aktion == 'dump')
   {
-    if (isset($pwd) && ($pwd != $ib_user_passwort) && ($ib_user_type == 1))
+    if (isset($pwd) && ($pwd != $ib_user_passwort) && ($wb_user_type == 1))
     {
       echo $header.'<h1>Daten&uuml;bertragung</h1>Es wurde ein falsches Passwort eingegeben.'.$footer;
     }

@@ -1,23 +1,26 @@
 <?php
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
-if ($ib_user_type < 2) die('Keine Zugriffsberechtigung');
+if ($wb_user_type < 2) die('Keine Zugriffsberechtigung');
 
 function ftp_rmdir_rec($handle, $path)
 {
    if (!@ftp_delete($handle, $path))
    {
        $list = @ftp_nlist($handle, $path);
-       if(!empty($list))
-           foreach($list as $value)
+       if(!empty($list)) {
+           foreach($list as $value) {
                ftp_rmdir_rec($handle, $value);
+           }
+       }
    }
 
-   if(@ftp_rmdir($handle, $path))
+   if(@ftp_rmdir($handle, $path)) {
        return true;
-   else
+   } else {
        return false;
+   }
 }
 
   if (($aktion == 'delete') || ($aktion == 'install'))

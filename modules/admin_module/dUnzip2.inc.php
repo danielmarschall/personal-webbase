@@ -1,6 +1,6 @@
 <?
 
-if (!defined('IBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
+if (!defined('WBLEGAL')) die('Kann nicht ohne Personal WebBase ausgef&uuml;hrt werden.');
 
 // 15/07/2006 (2.6)
 // - Changed the algorithm to parse the ZIP file.. Now, the script will try to mount the compressed
