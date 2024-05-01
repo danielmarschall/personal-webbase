@@ -1,0 +1,4 @@
+ACHTUNG
+
+Diese Datei (desdir.txt) ist wichtig,
+da sie das Design-Verzeichnis idendifiziert.

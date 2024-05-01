@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<moduleinfo>
+	<expected_name>user_media_collection</expected_name>
+	<caption>Datenträgerarchiv</caption>
+	<primary_position>2</primary_position>
+	<secondary_position>0</secondary_position>
+	<rights>0</rights>
+	<no_security>0</no_security>
+	<menu_visible>1</menu_visible>
+	<author>Daniel Marschall</author>
+	<version>2009-08-12</version>
+	<language>de</language>
+	<license>2</license>
+</moduleinfo>

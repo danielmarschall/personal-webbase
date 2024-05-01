@@ -1,0 +1,428 @@
+<?php
+
+// ACHTUNG! Folgende Zeilen enthalten Unklarheit: 96
+
+define('WBLEGAL', '1');
+
+$mysql_access_data = array();
+$mysql_access_data['server'] = 'localhost';
+$mysql_access_data['praefix'] = 'ironbase_';
+$mysql_access_data['username'] = 'root';
+$mysql_access_data['password'] = '';
+$mysql_access_data['database'] = 'ironbase';
+
+if (file_exists('../includes/config.inc.php'))
+{
+	include '../includes/config.inc.php';
+}
+
+require '../includes/database.inc.php';
+
+?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+
+<html>
+<head>
+	 <title>ViaThinkSoft Personal WebBase</title>
+	 <meta name="robots" content="noindex">
+</head>
+
+<body>
+
+<h1>Datenbankupdate</h1>
+
+<code><?php
+
+// ******************************************************************************************************
+// *** DATENBANKUPDATE VORBEREITUNG *** DATENBANKUPDATE VORBEREITUNG *** DATENBANKUPDATE VORBEREITUNG ***
+// ******************************************************************************************************
+
+function upd_query($sql)
+{
+	if (mysql_query($sql))
+	{
+		echo '<font color="#00FF00">';
+	}
+	else
+	{
+		echo '<font color="#FF0000">';
+	}
+	echo $sql.'</font><br>';
+}
+
+$tables_database = array();
+$qs = db_query('SHOW TABLES');
+while ($qr = db_fetch($qs))
+{
+	$qs2 = db_query("SHOW FIELDS FROM `".db_escape($qr[0])."`");
+	while ($qr2 = db_fetch($qs2))
+	{
+		$tables_database[strtolower($qr[0])][strtolower($qr2[0])] = $qr2[1].'/'.$qr2[2].'/'.$qr2[3].'/'.$qr2[4].'/'.$qr2[5];
+	}
+}
+
+// *********************************************************************************************************
+// *** IRONBASE 0.53 DATENBANKUPDATE *** IRONBASE 0.53 DATENBANKUPDATE *** IRONBASE 0.53 DATENBANKUPDATE ***
+// *********************************************************************************************************
+
+if (isset($tables_database[$mysql_access_data['praefix'].'termine']['end_date']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."termine` DROP `end_date`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."termine` DROP `end_time`");
+}
+
+// *********************************************************************************************************
+// *** IRONBASE 0.56 DATENBANKUPDATE *** IRONBASE 0.56 DATENBANKUPDATE *** IRONBASE 0.56 DATENBANKUPDATE ***
+// *********************************************************************************************************
+
+if (isset($tables_database[$mysql_access_data['praefix'].'ordner']))
+{
+	// UPDATE `ironbase_module` SET `modul` = 'user_popper' WHERE `modul` = 'user_email'
+	
+	upd_query("UPDATE `".$mysql_access_data['praefix']."ordner` SET `kategorie` = 'user_popper' WHERE `kategorie` = 'user_email'");
+}
+
+// *********************************************************************************************************
+// *** IRONBASE 0.57 DATENBANKUPDATE *** IRONBASE 0.57 DATENBANKUPDATE *** IRONBASE 0.57 DATENBANKUPDATE ***
+// *********************************************************************************************************
+
+// ALTER TABLE `ironbase_konfig` DROP INDEX `name`, ADD UNIQUE `name_and_modul` (`name`, `modul`)
+
+if (isset($tables_database[$mysql_access_data['praefix'].'ftp']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."net2ftp`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."ftp` TO `".$mysql_access_data['praefix']."net2ftp`");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."module` SET `table` = 'net2ftp' WHERE `table` = 'ftp'");
+	
+	// Wurde der Modulordner auch umbenannt ???
+	upd_query("UPDATE `".$mysql_access_data['praefix']."ordner` SET `kategorie` = 'user_net2ftp' WHERE `kategorie` = 'user_ftp'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'email_konten']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."popper_konten`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."email_konten` TO `".$mysql_access_data['praefix']."popper_konten`");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."module` SET `table` = 'popper_konten' WHERE `table` = 'email_konten'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'email_messages']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."popper_messages`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."email_messages` TO `".$mysql_access_data['praefix']."popper_messages`");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."module` SET `table` = 'popper_messages' WHERE `table` = 'email_messages'");
+}
+
+// DELETE FROM `ironbase_konfig` WHERE `name` = 'cronviahttp' AND `modul` = 'core_cronjob'
+
+// *********************************************************************************************************
+// *** IRONBASE 0.59 DATENBANKUPDATE *** IRONBASE 0.59 DATENBANKUPDATE *** IRONBASE 0.59 DATENBANKUPDATE ***
+// *********************************************************************************************************
+
+if ((isset($tables_database[$mysql_access_data['praefix'].'datentraeger_kategorien'])) &&
+		(!isset($tables_database[$mysql_access_data['praefix'].'datentraeger_kategorien']['nummer'])))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."datentraeger_kategorien` ADD `nummer` bigint(21) NOT NULL default '0'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."datentraeger_kategorien` SET `nummer` = `id`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."datentraeger_kategorien` DROP `id`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."datentraeger_kategorien` ADD `id` BIGINT(21) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST");
+}
+
+if ((isset($tables_database[$mysql_access_data['praefix'].'links']['update_flag'])) &&
+		(isset($tables_database[$mysql_access_data['praefix'].'links']['neu_flag'])))
+{
+	upd_query("UPDATE `".$mysql_access_data['praefix']."links` SET `neu_flag` = '1' WHERE `update_flag` = '1'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."links` SET `kaputt_flag` = '1' WHERE `update_flag` = '2'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` DROP `update_flag`");
+}
+
+// *********************************************************************************************************
+// *** IRONBASE 0.60 DATENBANKUPDATE *** IRONBASE 0.60 DATENBANKUPDATE *** IRONBASE 0.60 DATENBANKUPDATE ***
+// *********************************************************************************************************
+
+if (isset($tables_database[$mysql_access_data['praefix'].'termine']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."kalender`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."termine` TO `".$mysql_access_data['praefix']."kalender`");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."module` SET `table` = 'kalender' WHERE `table` = 'termine'");
+}
+
+// *********************************************************************************************************
+// *** IRONBASE 0.64 DATENBANKUPDATE *** IRONBASE 0.64 DATENBANKUPDATE *** IRONBASE 0.64 DATENBANKUPDATE ***
+// *********************************************************************************************************
+
+// Wird wegen dem TRUNCATE in 0.80 nicht mehr benötigt
+// DELETE FROM `ironbase_konfig` WHERE `name` = 'ftp-server';
+// DELETE FROM `ironbase_konfig` WHERE `name` = 'ftp-username';
+// DELETE FROM `ironbase_konfig` WHERE `name` = 'ftp-passwort';
+// DELETE FROM `ironbase_konfig` WHERE `name` = 'ftp-verzeichnis';
+
+// ***************************************************************************************
+// *** PERSONAL WEBBASE 0.80 DATENBANKUPDATE *** PERSONAL WEBBASE 0.80 DATENBANKUPDATE ***
+// ***************************************************************************************
+
+if (isset($tables_database[$mysql_access_data['praefix'].'zugangsdaten']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."access_data`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."zugangsdaten` TO `".$mysql_access_data['praefix']."access_data`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."access_data` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."access_data` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'konfig']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."configuration`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."konfig` TO `".$mysql_access_data['praefix']."configuration`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."configuration` CHANGE `wert` `value` VARCHAR(255) NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."configuration` CHANGE `modul` `module` VARCHAR(255) NOT NULL");
+
+	// Es hat sich zu viel verändert - wir entfernen alles
+	upd_query("TRUNCATE TABLE `".$mysql_access_data['praefix']."configuration`");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'dokumente']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."documents`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."dokumente` TO `".$mysql_access_data['praefix']."documents`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."documents` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."documents` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'kalender']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."calendar`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."kalender` TO `".$mysql_access_data['praefix']."calendar`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."calendar` CHANGE `kommentare` `note` LONGTEXT NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."calendar` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'kontakte']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."contacts`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."kontakte` TO `".$mysql_access_data['praefix']."contacts`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."contacts` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."contacts` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'dateien']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."files`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."dateien` TO `".$mysql_access_data['praefix']."files`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."files` CHANGE `dateiname` `filename` VARCHAR(255) NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."files` CHANGE `daten` `data` LONGBLOB NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."files` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."files` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'html']['hcode']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."html` DROP `html_code`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."html` CHANGE `hcode` `html_code` LONGTEXT NOT NULL");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'module']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."modules`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."module` TO `".$mysql_access_data['praefix']."modules`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."modules` CHANGE `modul` `module` VARCHAR(255) NOT NULL");
+
+	upd_query("TRUNCATE TABLE `".$mysql_access_data['praefix']."modules`");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'ereignisprotokoll']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."recent_events`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."ereignisprotokoll` TO `".$mysql_access_data['praefix']."recent_events`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."recent_events` CHANGE `modul` `module` VARCHAR(255) NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."recent_events` CHANGE `vorkommen` `appearances` BIGINT(21) NOT NULL DEFAULT '1'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'datentraeger_eintraege']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."mediacollection_entries`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."datentraeger_eintraege` TO `".$mysql_access_data['praefix']."mediacollection_entries`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."mediacollection_entries` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'datentraeger_inhalt']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."mediacollection_content`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."datentraeger_inhalt` TO `".$mysql_access_data['praefix']."mediacollection_content`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."mediacollection_content` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'datentraeger_kategorien']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."mediacollection_categories`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."datentraeger_kategorien` TO `".$mysql_access_data['praefix']."mediacollection_categories`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."mediacollection_categories` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'ordner']))
+{
+	upd_query("DROP TABLE `".$mysql_access_data['praefix']."folders`");
+	upd_query("RENAME TABLE `".$mysql_access_data['praefix']."ordner` TO `".$mysql_access_data['praefix']."folders`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."folders` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."folders` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."folders` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."folders` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."folders` DROP `category`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."folders` CHANGE `kategorie` `category` VARCHAR(255) NOT NULL DEFAULT ''");
+	
+	upd_query("UPDATE `".$mysql_access_data['praefix']."folders` SET `category` = 'user_access_data' WHERE `category` = 'user_zugangsdaten'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."folders` SET `category` = 'user_address_book' WHERE `category` = 'user_kontakte'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."folders` SET `category` = 'user_files' WHERE `category` = 'user_dateien'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."folders` SET `category` = 'user_documents' WHERE `category` = 'user_dokumente'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."folders` SET `category` = 'user_school' WHERE `category` = 'user_schule'");
+	upd_query("UPDATE `".$mysql_access_data['praefix']."folders` SET `category` = 'user_tables' WHERE `category` = 'user_tabellen'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'fatalvortex']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` DROP `password`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` CHANGE `passwort` `password` VARCHAR(255) NOT NULL DEFAULT ''");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` DROP `username`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."fatalvortex` CHANGE `benutzername` `username` VARCHAR(255) NOT NULL DEFAULT ''");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'confixx']['passwort']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."confixx` DROP `password`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."confixx` CHANGE `passwort` `password` VARCHAR(255) NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."confixx` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."confixx` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'html']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."html` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."html` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."html` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."html` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'links']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` DROP `new_tag`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` CHANGE `neu_flag` `new_tag` ENUM('0', '1') NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` DROP `broken_tag`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."links` CHANGE `kaputt_flag` `broken_tag` ENUM('0', '1') NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'net2ftp']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` DROP `home_directory`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` CHANGE `startverzeichnis` `home_directory` VARCHAR(255) NOT NULL DEFAULT ''");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` DROP `password`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."net2ftp` CHANGE `passwort` `password` VARCHAR(255) NOT NULL DEFAULT ''");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'phpmyadmin']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."phpmyadmin` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."phpmyadmin` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."phpmyadmin` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."phpmyadmin` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."phpmyadmin` DROP `password`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."phpmyadmin` CHANGE `passwort` `password` VARCHAR(255) NOT NULL DEFAULT ''");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'popper_konten']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` DROP `password`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` CHANGE `passwort` `password` VARCHAR(255) NOT NULL DEFAULT ''");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` DROP `personal_name`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_konten` CHANGE `personenname` `personal_name` VARCHAR(255) NOT NULL DEFAULT ''");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'popper_messages']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_messages` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_messages` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_messages` DROP `konto_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."popper_messages` CHANGE `konto` `konto_cnid` INT(11) NULL DEFAULT NULL");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'schule_faecher']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_faecher` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_faecher` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_faecher` DROP `year_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_faecher` CHANGE `jahrgang` `year_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'schule_hausaufgaben']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_hausaufgaben` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_hausaufgaben` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_hausaufgaben` DROP `year_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_hausaufgaben` CHANGE `jahrgang` `year_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'schule_jahrgaenge']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_jahrgaenge` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_jahrgaenge` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_jahrgaenge` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_jahrgaenge` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'schule_noten']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_noten` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_noten` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_noten` DROP `year_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_noten` CHANGE `jahrgang` `year_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_noten` DROP `fach_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."schule_noten` CHANGE `fach` `fach_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'tabellen']['user']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."tabellen` DROP `user_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."tabellen` CHANGE `user` `user_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."tabellen` DROP `folder_cnid`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."tabellen` CHANGE `folder` `folder_cnid` BIGINT(21) NOT NULL DEFAULT '0'");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'sessions']['sessionid']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."sessions` DROP `session_id`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."sessions` CHANGE `SessionID` `session_id` VARCHAR(255) NOT NULL DEFAULT ''");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."sessions` DROP `last_updated`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."sessions` CHANGE `LastUpdated` `last_updated` DATETIME NOT NULL");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."sessions` DROP `data_value`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."sessions` CHANGE `DataValue` `data_value` TEXT NULL DEFAULT NULL");
+}
+
+if (isset($tables_database[$mysql_access_data['praefix'].'users']['passwort']))
+{
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."users` DROP `password`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."users` CHANGE `passwort` `password` VARCHAR(255) NOT NULL DEFAULT ''");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."users` DROP `personal_name`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."users` CHANGE `personenname` `personal_name` VARCHAR(255) NOT NULL DEFAULT ''");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."users` DROP `banned`");
+	upd_query("ALTER TABLE `".$mysql_access_data['praefix']."users` CHANGE `gesperrt` `banned` ENUM('0', '1') NOT NULL DEFAULT '0'");
+}
+
+?>
+
+<br><b>Ende der Prozedur</b></code>
+
+</body>
+
+</html>

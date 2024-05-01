@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<moduleinfo>
+	<expected_name>admin_designs</expected_name>
+	<caption>Designs</caption>
+	<primary_position>1</primary_position>
+	<secondary_position>0</secondary_position>
+	<rights>2</rights>
+	<no_security>0</no_security>
+	<menu_visible>1</menu_visible>
+	<author>Daniel Marschall</author>
+	<version>2009-08-09</version>
+	<language>de</language>
+	<license>3</license>
+</moduleinfo>

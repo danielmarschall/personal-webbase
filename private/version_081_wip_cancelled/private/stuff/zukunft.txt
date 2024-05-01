@@ -1,0 +1,10 @@
+checkboxen: text anklicken soll die checkbox auch beeinflussen
+vertikale farbverläufe vom design auch möglich machen
+benutzerdateien physikalisch speichern? (-> verstößt gegen ib-prinzipien)
+gradienten selbst zeichnen lassen -> dynamisches design
+captcha für registrierung
+collation: utf8_bin
+
+KOMPLETTE AJAX UNTERSTÜTZUNG!
+KOMPLETTE PHP 6 UNTERSTÜTZUNG!
+extended debug (z.b. links notifier)

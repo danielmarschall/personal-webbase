@@ -1,0 +1,25 @@
+scritptausführung wird nicht abgebrochen??
+
+
+
+MySQL-Fehler!
+
+Folgender MySQL-Fehler ist aufgetreten:
+
+MySQL server has gone away
+
+Folgende Query wurde ausgeführt:
+
+SELECT `id` FROM `ironbase_ordner`
+
+Die Scriptausführung wurde aus Sicherheitsgründen abgebrochen.MySQL-Fehler!
+
+Folgender MySQL-Fehler ist aufgetreten:
+
+MySQL server has gone away
+
+Folgende Query wurde ausgeführt:
+
+UPDATE `ironbase_sessions` SET `DataValue` = '...', `LastUpdated` = NOW() WHERE `SessionID` = 'UfRL1fxrddVIeyteMNq3BYcjlg2'
+
+Die Scriptausführung wurde aus Sicherheitsgründen abgebrochen.

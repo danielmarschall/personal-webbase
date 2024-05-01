@@ -1,0 +1,178 @@
+Globales Feld: erstellt datetime
+
+- FTP/SQL/CFX-Module: Haben kein "name"-Feld
+
+Admin_Module
+
+- FTP-Alloc benutzen?
+- Was ist, wenn zufälliger Temp-Verzeichnisname bereits in temp/ oder modules/ verwendet wird?
+
+PersonalBASE Professional mit Verschlüsselung anbieten?
+
+Finale Umbenennung: ViaThinkSoft PersonalBASE 1.0
+
+Grünes Design einführen
+
+Modulabhängigkeiten einrichten?
+
+Letzte Datenleerung: Option "Unbekannt"
+
+core_sicherheit: MySQL Globale Privilegien erkennen?
+
+*_uebersicht: symbole anordnen
+
+admin_net2ftp
+
+Dürfen Mailheader \r enthalten?
+
+termine: mail senden
+
+link mail: link soll eintrag aktualisieren -> core_links_mailupdate
+
+soll datenbank versucht werden anzulegen?
+
+IB Name ändern?
+
+IB Design Versioncheck?
+
+user_ordner -> core_ordner
+
+session sicherheit durch wechseln der session-id zusätzlich erhöhen?
+# alle versuche sind leider bisher fehlgeschlagen
+# es wird überprüft, dass die ip gleich bleibt
+  -> problem: leute, die über mehr als 2 proxys ins internet gehen, gucken hierbei in die röhre
+
+user_links -> time in datetime format
+
+name='' -> "unbenannt"
+
+E-Mail information abschaltbar?
+
+$suchergebnis bei editieren durchschleifen?
+
+Localhost
+- Session stirbt, wenn man was in PMA macht
+- Funktioniet OPTIMIZE korrekt?
+
+Prüfen, ob Config-File eine Ausgabe erzeugt (oder var.inc.php)?
+
+Mails senden -> Termine
+
+Terminsuche
+
+Melden, wenn eine Konfigurationeingabe (z.B. ungültiger numerischer Wert) falsch ist
+
+Modul für Benutzerkonfiguration oder direkte Eintragung in #_users
+
+Suchmodul:
+Nur String oder Text-Felder durchsuchen
+
+Systemcheck:
+E-Mail-Funktionalität testen?
+
+WICHTIG
+alle seiten nach mysql-fehlern checken!!!
+
+Primary Key normalisieren und ID nachsetzen?
+Erweiterte Feldnormalisierung (NOT NULL, DEFAULT...) bei ib_newdatabasetable
+
+Suche: Nach allen oder einzelnen Wörtern suchen
+
+(!) LIKE "_" ?= "x"
+(?) wird gastuser kontrolliert? (sperrung, daten korrekt, vorhanden etc)
+
+user_popper
+# Funktionell machen
+# Cronjob: E-Mail MD5 setzen, Konten abrufen
+# Sekundärsystem entwickeln, für Direktabfrage der Konten, ohne Abfangen
+# Einstellmöglichkeit für jeden Datensatz: Soll durch Cron abgeholt werden?
+# Veränderungen an Popper:
+  - Configfile nicht in Root <-- $_SESSION
+  - Kontaktefunktion später umstellen afu modul_kontakte
+  - Login/Logoff/Register unterbinden
+  - Fremdes MySQL-Präfix akzeptieren
+
+admin_uebersicht
+# JavaScript: Fortlaufende Zeit
+
+Modulvorschläge
+- netmon
+- backup
+- sendmail
+- tagebuch
+- webmin
+- uhrzeit
+
+Allgemein
+- Cookieunterstützung prüfen
+
+$tabellen verwenden statt #_module
+Darstellungsproblem im Header bei verstellter Schriftgröße
+
+main_gastzugang: definierung des gastes per id, nicht per einloggdaten?
+
+Wenn gast-user gesperrt, was dann?
+
+Wird $enable_gast abgefragt mit = 1 oder != 0 oder boolean? -> einheitlich
+
+Wenn man gesperrt ist... darf man sich dann ein neues Passwort machen?
+
+Suchmodul: Wählen zwischen exakter und ähnlicher Suchbegriff!
+
+Admin-Bereich: Link zu manuellem Cron
+
+datentr_kat ohne index
+
+mysql engine angeben? (memory bei sessions)
+
+user soll eigenes design wählen können
+
+crossover: main_ueber
+
+menueeintrag.inc.php: var.inc.php-Informationen erhalten
+ironbase css/html valid check
+
+main_ueber: copyright infos der einzelnen module zeigen?
+
+neue icons
+module und designs direkt herüberladbar? zertifizierungsmöglichkeit?
+web_get() funktion mit fsockopen machen
+cookie prüfung
+funktionieren sessions jetzt komplett? (auch keine doppelten einträge!)
+
+ibp/tut2: localhost info
+
+alle autostarts alle erstellen, auch wenn leerer inhalt
+
+test: guest-pma - web30 erreichbar?
+handbuch: module manuell installieren?
+
+
+Schreibtests durchführen:
+	admin_module
+		modules/
+		./temp/
+	admin_design
+		modules/
+		design/
+		./temp/
+
+Externe Module
+/temp Prüfung (inhalt und crossover/systemcheck) mit is_writable()
+
+Schreibtests durch null_file.txt upload... was ist, wenn als 644 vorhanden, aber Verz != schreibrechte
+
+MySQL-Query-Modul
+
+IB: Jedes Modul soll eine modulspez. Suche haben (crossover)
+IBS Promoting: Warn-Mails
+
+nach login schnell auf zurück klicken und als admin anmelden: man ist noch user  
+direktlinks deaktivierbar?
+verhindern, dass main/user modul nicht im admin-modus aufgerufen wird
+verhindern, dass main modul nicht im user-modus aufgerufen wird
+URL-Direkt-Synchron deaktivierbar machen?
+user_login/core_fastlogin_access: Ist es OK, wenn Gastaccount für manuelles Login gesperrt ist, aber gast_enabled = 0 ist?
+# Sollen Gastdaten gelöscht werden (wipe), wenn gast_enabled = 0?
+
+direktlink: checken, ob seite gerade online, ansonten fehler ausgeben!

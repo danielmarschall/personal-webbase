@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf8"?>
+
+<sectioninfo>
+	<accesscontrol>strict</accesscontrol>
+	<menuitem>
+		<caption>Ereignisprotokoll</caption>
+		<page>main</page>
+		<primary_position>1</primary_position>
+		<secondary_position>0</secondary_position>
+	</menuitem>
+</sectioninfo>

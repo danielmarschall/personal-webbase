@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf8"?>
+
+<moduleinfo>
+	<expected_name>main_login</expected_name>
+	<name>Mit Konto einloggen</name>
+	<author>Daniel Marschall</author>
+	<version>2009-08-12</version>
+	<language>de</language>
+	<license>3</license>
+</moduleinfo>

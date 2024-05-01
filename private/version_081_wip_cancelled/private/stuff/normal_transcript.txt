@@ -1,0 +1,79 @@
+SHOW TABLES
+SHOW FIELDS FROM `cache`
+SHOW FIELDS FROM `contacts`
+SHOW FIELDS FROM `identities`
+SHOW FIELDS FROM `ironbase_access_data`
+SHOW FIELDS FROM `ironbase_calendar`
+SHOW FIELDS FROM `ironbase_configuration`
+SHOW FIELDS FROM `ironbase_confixx`
+SHOW FIELDS FROM `ironbase_contacts`
+SHOW FIELDS FROM `ironbase_documents`
+SHOW FIELDS FROM `ironbase_fatalvortex`
+SHOW FIELDS FROM `ironbase_files`
+SHOW FIELDS FROM `ironbase_folders`
+SHOW FIELDS FROM `ironbase_html`
+SHOW FIELDS FROM `ironbase_links`
+SHOW FIELDS FROM `ironbase_mediacollection_categories`
+SHOW FIELDS FROM `ironbase_mediacollection_content`
+SHOW FIELDS FROM `ironbase_mediacollection_entries`
+SHOW FIELDS FROM `ironbase_modules`
+SHOW FIELDS FROM `ironbase_net2ftp`
+SHOW FIELDS FROM `ironbase_phpmyadmin`
+SHOW FIELDS FROM `ironbase_popper_konten`
+SHOW FIELDS FROM `ironbase_popper_messages`
+SHOW FIELDS FROM `ironbase_recent_events`
+SHOW FIELDS FROM `ironbase_schule_faecher`
+SHOW FIELDS FROM `ironbase_schule_hausaufgaben`
+SHOW FIELDS FROM `ironbase_schule_jahrgaenge`
+SHOW FIELDS FROM `ironbase_schule_noten`
+SHOW FIELDS FROM `ironbase_sessions`
+SHOW FIELDS FROM `ironbase_tabellen`
+SHOW FIELDS FROM `ironbase_users`
+SHOW FIELDS FROM `messages`
+SHOW FIELDS FROM `session`
+SHOW FIELDS FROM `users`
+SELECT `table` FROM `ironbase_modules` ORDER BY `id`
+SHOW INDEX FROM `ironbase_modules`
+SHOW INDEX FROM `ironbase_modules`
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'admin_configuration' AND `table` = 'configuration'
+SHOW INDEX FROM `ironbase_configuration`
+SHOW INDEX FROM `ironbase_configuration`
+SELECT * FROM `ironbase_configuration` ORDER BY `id`
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'admin_users' AND `table` = 'users'
+SHOW INDEX FROM `ironbase_users`
+SHOW INDEX FROM `ironbase_users`
+SELECT * FROM `ironbase_users` WHERE `username` = 'test'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'main_login' AND `table` = 'sessions'
+SHOW INDEX FROM `ironbase_sessions`
+SHOW INDEX FROM `ironbase_sessions`
+DELETE FROM `ironbase_sessions` WHERE UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(`last_updated`) > 1440
+SELECT `data_value` FROM `ironbase_sessions` WHERE `session_id` = '9bbe14e704e55207f5a28f28d36bc9af'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_access_data' AND `table` = 'access_data'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_address_book' AND `table` = 'contacts'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_calendar' AND `table` = 'calendar'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_confixx' AND `table` = 'confixx'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_documents' AND `table` = 'documents'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_fatalvortex' AND `table` = 'fatalvortex'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_files' AND `table` = 'files'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_folders' AND `table` = 'folders'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_html' AND `table` = 'html'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_links' AND `table` = 'links'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_media_collection' AND `table` = 'mediacollection_entries'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_media_collection' AND `table` = 'mediacollection_content'
+SHOW INDEX FROM `ironbase_mediacollection_content`
+SHOW INDEX FROM `ironbase_mediacollection_content`
+SHOW INDEX FROM `ironbase_mediacollection_categories`
+SHOW INDEX FROM `ironbase_mediacollection_categories`
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_media_collection' AND `table` = 'mediacollection_categories'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_net2ftp' AND `table` = 'net2ftp'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_phpmyadmin' AND `table` = 'phpmyadmin'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_popper' AND `table` = 'popper_konten'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_popper' AND `table` = 'popper_messages'
+SHOW INDEX FROM `ironbase_popper_messages`
+SHOW INDEX FROM `ironbase_popper_messages`
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_school' AND `table` = 'schule_jahrgaenge'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_school' AND `table` = 'schule_faecher'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_school' AND `table` = 'schule_noten'
+UPDATE `ironbase_modules` SET `is_searchable` = '0' WHERE `module` = 'user_school' AND `table` = 'schule_hausaufgaben'
+UPDATE `ironbase_modules` SET `is_searchable` = '1' WHERE `module` = 'user_tables' AND `table` = 'tabellen'
+SELECT * FROM `ironbase_configuration` WHERE `name` = 'last_cronjob' AND `value` <= DATE_SUB(NOW(), INTERVAL 2 MINUTE)

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf8"?>
+
+<sectioninfo>
+	<accesscontrol>strict</accesscontrol>
+	<menuitem>
+		<caption>Datentransfer</caption>
+		<page>main</page>
+		<primary_position>0</primary_position>
+		<secondary_position>2</secondary_position>
+	</menuitem>
+</sectioninfo>

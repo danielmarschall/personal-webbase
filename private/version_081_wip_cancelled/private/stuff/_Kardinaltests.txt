@@ -1,0 +1,16 @@
+Kardinalfragen für 0.80
+-----------------------
+
+Wurden alle Datenbankfelder übersetzt?
+
+Wie wird das Compatibility-Upgrade realisiert werden?
+
+Ist WebBase lauffähig bei
+- Frischer Installation
+- Installation ohne vorherigem Compatibility-Upgrade
+- Installation mit Compatibility-Upgrade
+
+Sind die Datenimports und Exports korrekt und kommt es auch zu keinem Fehler,
+wenn ein Import doppelt geschieht?
+
+Testen, ob alle Angriffspunkte bei Datenimport erkannt werden

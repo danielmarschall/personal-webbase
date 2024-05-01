@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf8"?>
+
+<moduleinfo>
+	<expected_name>common_cleaner</expected_name>
+	<name>Reinigungsmodul</name>
+	<author>Daniel Marschall</author>
+	<version>2009-01-30</version>
+	<language>de</language>
+	<license>4</license>
+</moduleinfo>

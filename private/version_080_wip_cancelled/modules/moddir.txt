@@ -1,0 +1,4 @@
+ACHTUNG
+
+Diese Datei (moddir.txt) ist wichtig,
+da sie das Modul-Verzeichnis idendifiziert.

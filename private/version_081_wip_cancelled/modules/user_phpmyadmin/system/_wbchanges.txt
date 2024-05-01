@@ -1,0 +1,3 @@
+config.inc.php
+libraries/session.inc.php
+ver.html

@@ -1,0 +1,7 @@
+ver.html
+modules/login/login.inc.php
+modules/login/login_small.inc.php
+modules/logout/logout.inc.php
+settings.inc.php
+includes/registerglobals.inc.php
+includes/filesystem.inc.php
